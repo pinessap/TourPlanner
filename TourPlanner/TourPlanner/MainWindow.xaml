@@ -3,10 +3,40 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:TourPlanner"
+        xmlns:viewmodels="clr-namespace:TourPlanner.ViewModels" d:DataContext="{d:DesignInstance Type=viewmodels:MediaFolderVM}"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Grid>
+        <StackPanel Orientation="Vertical">
+            <TextBlock Text="Tour Planner" Margin="5"></TextBlock>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                    <RowDefinition></RowDefinition>
 
-    </Grid>
+                </Grid.RowDefinitions>
+
+                <TextBlock Grid.Column="0" Grid.Row="0" Text="File" Margin="5,5,0,5" VerticalAlignment="Center"></TextBlock>
+                <TextBlock Grid.Column="1" Grid.Row="0" Text="Edit" Margin="5,5,0,5" VerticalAlignment="Center"></TextBlock>
+                <TextBlock Grid.Column="2" Grid.Row="0" Text="Options" Margin="5,5,0,5" VerticalAlignment="Center"></TextBlock>
+                <TextBlock Grid.Column="5" Grid.Row="0" Text="Help" Margin="5,5,0,5" VerticalAlignment="Center"></TextBlock>
+
+                <TextBox Grid.Column="0" Grid.ColumnSpan="5" Grid.Row="1" Margin="5,0,0,0" Name="TxtSearchTour" VerticalAlignment="Center" Text="{Binding SearchValue, Mode=TwoWay}"></TextBox>
+                <Button Grid.Column="5" Grid.Row="1" Margin="5,0,5,0" Command="{Binding SearchCommand}">
+                    Search
+                </Button>
+            </Grid>
+        </StackPanel>
+        <ListBox x:Name="ListTours" Grid.Column="0" Grid.ColumnSpan="5" Grid.Row="2" ItemsSource="{Binding Tours}" SelectedItem="{Binding CurrentTour}" DisplayMemberPath="Name" Margin="0,90,0,0"></ListBox>
+
+</Grid>
 </Window>
