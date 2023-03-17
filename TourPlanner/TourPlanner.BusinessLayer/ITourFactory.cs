@@ -5,7 +5,9 @@ namespace TourPlanner.BusinessLayer
 {
     public interface ITourFactory
     {
-        IEnumerable<Tour> GetTours();
-        IEnumerable<Tour> Search(string name, bool caseSensitive = false);
+        List<Tour> GetTours();
+        List<Tour> Search(string name, bool caseSensitive = false);
+        bool Add();
+        bool Delete(Tour tourToDelete);
     }
 }

@@ -1,29 +1,90 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using TourPlanner.Models;
+using Npgsql;
+using TourPlanner.DataAccessLayer.Data;
 
 namespace TourPlanner.DataAccessLayer
 {
-    public class Database : IDataAccess
+    internal sealed class Database : IDataAccess
     {
-        private string connectionString;
+        private static readonly Lazy<Database> Lazy = new(() => new Database());
+        public static Database Instance => Lazy.Value;
 
-        public Database()
+        /// <summary>
+        /// The context containing our entire DB
+        /// </summary>
+        private readonly TourPlannerContext _context;
+
+        private Database()
         {
-            //connectionString = "";
-            //establish connection with db
+            _context = new TourPlannerContext();
         }
+
+        ~Database()
+        {
+            _context.Dispose();
+        }
+        
+        /// <summary>
+        /// Get all tours from the database
+        /// </summary>
         public List<Tour> GetTours()
         {
-            //select with ORM whatever
+            // Get tours via linq syntax
+            var tours = from tour in _context.Tours select tour;
+            
+            // This does the exact same as the above, just with another syntax
+            // var tours = _context.Products.Where(p => true);
+            
+            // Convert IQueryable<Tour> to List<Tour>
+            List<Tour> allTours = new();
+            allTours.AddRange(tours);
 
-            //ZUM TESTEN
-            return new List<Tour>() //ZUM TESTEN
+            return allTours;
+        }
+        
+        /// <summary>
+        /// Adds given tour to the database
+        /// </summary>
+        /// <returns>True if successful, false on an error</returns>
+        public bool Add(Tour tourToAdd)
+        {
+            try
             {
-                new Tour() { Name = "Tour1" },
-                new Tour() { Name = "Tour2"},
-                new Tour() { Name = "Tour3" }
-            };
+                _context.Add(tourToAdd);
+                _context.SaveChanges();
+            }
+            catch (Exception ex)
+            {
+                // TODO: Write this to a log file (cuz the console logs don't actually work...)
+                Console.WriteLine("ADD EXCEPTION: " + ex.Message);
+                return false;
+            }
+
+            return true;
+        }
+
+        /// <summary>
+        /// Removes the given tour from the database
+        /// </summary>
+        /// <returns>True if successful, false on an error</returns>
+        public bool Delete(Tour tourToDelete)
+        {
+            try
+            {
+                _context.Remove(tourToDelete);
+                _context.SaveChanges();
+            }
+            catch (Exception ex)
+            {
+                // TODO: Write this to a log file (cuz the console logs don't actually work...)
+                Console.WriteLine("DELETE EXCEPTION: " + ex.Message);
+                return false;
+            }
+
+            return true;
         }
     }
 }

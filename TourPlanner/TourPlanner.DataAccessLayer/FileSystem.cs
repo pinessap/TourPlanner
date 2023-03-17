@@ -5,23 +5,33 @@ namespace TourPlanner.DataAccessLayer
 {
     internal class FileSystem : IDataAccess //for import and export of tour data (file format of your choice) ?
     {
-        private string filePath;
+        private string _filePath;
 
         public FileSystem()
         {
-            //this.filePath = "";
+            this._filePath = "";
         }
+        
         public List<Tour> GetTours()
         {
             //get media items from file system
-
-            //ZUM TESTEN
+            
             return new List<Tour>() //ZUM TESTEN
             {
-                new Tour() { Name = "Tour1" },
-                new Tour() { Name = "Tour2"},
-                new Tour() { Name = "Tour3" }
+                new() { Name = "Tour1" },
+                new() { Name = "Tour2"},
+                new() { Name = "Tour3" }
             };
+        }
+
+        public bool Add(Tour tourToAdd)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public bool Delete(Tour tourToDelete)
+        {
+            throw new System.NotImplementedException();
         }
     }
 }

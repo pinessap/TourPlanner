@@ -1,19 +1,30 @@
 using System;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace TourPlanner.Models
 {
-    //one class for tour and one for tour logs? -> comparable to MediaItem from WpfIntro Example in Moodle (bruh ich weiﬂ auch nicht psssst my tummy hurts gar nciht slay)
+    // Tour model
+    // Gets used to automatically create the table in the database (so you better not add any logic in here cuz that breaks it)
     public class Tour
     {
-        public string Name { get; set; }
-        public string Description { get; set; }
-        public string From { get; set; }
-        public string To { get; set; }
-        public string Transport { get; set; }
+        [Key]
+        public int TourId { get; set; } // Primary key
+        
+        // If a property has "= null!;", it means it is not nullable in the database
+        // If a property has "<type>?", it means it is nullable in the database
+        // If a property has to be nullable here, but not nullable in the database, we could use the "[Required]" attribute
+        // To create foreign keys, we should just watch tutorials again :)
+        public string Name { get; set; } = null!;
+        public string? Description { get; set; }
+        public string FromLocation { get; set; } = null!;
+        public string ToLocation { get; set; } = null!;
+        public string? TransportType { get; set; }
 
         //the image, the distance, and the time should be retrieved by a REST request using the MapQuest Directions and Static Map APIs
-        public double Distance { get; set; }
-        public DateTime Time { get; set; }
-        public string RouteInfo { get; set; } //string? image with the tour map
+        public float? TourDistance { get; set; }
+        public DateTime? EstimatedTime { get; set; }
+        
+        // public string RouteInfo { get; set; } //image with the tour map (We professionally ignore that for now yes? Yes.)
     }
 }

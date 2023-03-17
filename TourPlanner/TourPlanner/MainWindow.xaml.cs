@@ -24,7 +24,7 @@ namespace TourPlanner
         public MainWindow()
         {
             InitializeComponent();
-            this.DataContext = new MediaFolderVM();
+            DataContext = new MainWindowVm();
         }
     }
 }
