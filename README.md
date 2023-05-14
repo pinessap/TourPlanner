@@ -27,4 +27,4 @@ To start the database, make sure you follow these steps:
 | ---------- | -------- | ---------------------- |
 | 11/03/2023 | 3        | project and repo setup |
 | 17/03/2023 | 7        | database setup         |
-|            |          |                        |
+| 14/05/2023 | 2        | tourLog model          |
