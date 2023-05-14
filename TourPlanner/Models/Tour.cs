@@ -1,6 +1,8 @@
 using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Windows.Documents;
 
 namespace TourPlanner.Models
 {
@@ -24,6 +26,9 @@ namespace TourPlanner.Models
         //the image, the distance, and the time should be retrieved by a REST request using the MapQuest Directions and Static Map APIs
         public float? TourDistance { get; set; }
         public DateTime? EstimatedTime { get; set; }
+
+        // List of tour logs
+        public List<TourLog> Logs { get; set; } = new List<TourLog>();
         
         // public string RouteInfo { get; set; } //image with the tour map (We professionally ignore that for now yes? Yes.)
     }

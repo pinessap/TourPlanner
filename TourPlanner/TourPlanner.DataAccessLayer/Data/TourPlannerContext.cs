@@ -13,6 +13,7 @@ namespace TourPlanner.DataAccessLayer.Data;
 public class TourPlannerContext : DbContext
 {
     public DbSet<Tour> Tours { get; set; } = null!;
+    public DbSet<TourLog> TourLogs { get; set; } = null!;
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {

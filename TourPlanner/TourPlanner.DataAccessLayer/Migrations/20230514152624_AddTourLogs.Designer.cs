@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using TourPlanner.DataAccessLayer.Data;
@@ -11,9 +12,11 @@ using TourPlanner.DataAccessLayer.Data;
 namespace TourPlanner.DataAccessLayer.Migrations
 {
     [DbContext(typeof(TourPlannerContext))]
-    partial class TourPlannerContextModelSnapshot : ModelSnapshot
+    [Migration("20230514152624_AddTourLogs")]
+    partial class AddTourLogs
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -56,7 +59,7 @@ namespace TourPlanner.DataAccessLayer.Migrations
 
                     b.HasKey("TourId");
 
-                    b.ToTable("Tours");
+                    b.ToTable("Tour");
                 });
 
             modelBuilder.Entity("TourPlanner.Models.TourLog", b =>
@@ -90,7 +93,7 @@ namespace TourPlanner.DataAccessLayer.Migrations
 
                     b.HasIndex("TourId");
 
-                    b.ToTable("TourLogs");
+                    b.ToTable("TourLog");
                 });
 
             modelBuilder.Entity("TourPlanner.Models.TourLog", b =>

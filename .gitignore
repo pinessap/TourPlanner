@@ -9,8 +9,8 @@
 *.user
 *.userosscache
 *.sln.docstates
-/postgre/pgsql/
-/postgre/Data/
+pgsql/
+Data/
 
 # User-specific files (MonoDevelop/Xamarin Studio)
 *.userprefs
