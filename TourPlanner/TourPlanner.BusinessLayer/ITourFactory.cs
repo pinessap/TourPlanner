@@ -13,10 +13,10 @@ namespace TourPlanner.BusinessLayer
         /// <summary>
         /// Search for a string in all tour names
         /// </summary>
-        /// <param name="name">The string to search for</param>
-        /// <param name="caseSensitive">Default search is not case sensitive (false)</param>
-        /// <returns>List of tours which contain the search string in their name</returns>
-        List<Tour> Search(string name, bool caseSensitive = false);
+        /// <param searchValue="searchValue">The string to search for</param>
+        /// <param searchValue="caseSensitive">Default search is not case sensitive (false)</param>
+        /// <returns>List of tours which contain the search string in their searchValue</returns>
+        List<Tour> Search(string searchValue, bool caseSensitive = false);
         
         /// <summary>
         /// Adds a dummy tour to the database
@@ -33,7 +33,7 @@ namespace TourPlanner.BusinessLayer
         /// <summary>
         /// Saves the given modified tour to the database
         /// </summary>
-        /// <param name="modifiedTour">Tour object with modifications</param>
+        /// <param searchValue="modifiedTour">Tour object with modifications</param>
         /// <returns>True if successful, false if not</returns>
         bool Modify(Tour modifiedTour);
     }

@@ -18,16 +18,13 @@ namespace TourPlanner.BusinessLayer
             return _tourDao.GetTours();
         }
         
-        public List<Tour> Search(string name, bool caseSensitive = false)
+        public List<Tour> Search(string searchValue, bool caseSensitive = false)
         {
             var items = GetTours();
 
             List<Tour> foundTours = new();
 
-            foundTours.AddRange(caseSensitive ? 
-                items.Where(x => x.Name.Contains(name)) : 
-                items.Where(x => x.Name.ToLower().Contains(name.ToLower()))
-            );
+            foundTours.AddRange(items.Where(x => FullTextSearch(searchValue, x, caseSensitive)));
 
             return foundTours;
         }
@@ -60,6 +57,45 @@ namespace TourPlanner.BusinessLayer
         public bool Modify(Tour modifiedTour)
         {
             return _tourDao.Modify(modifiedTour);
+        }
+
+        /// <summary>
+        /// Searches tour for given searchValue
+        /// </summary>
+        /// <param name="searchValue">The string to search for</param>
+        /// <param name="tourToSearch">The tour in which the string gets searched</param>
+        /// <param name="caseSensitive">If true the search is case sensitive, insensitive if false</param>
+        /// <returns>True if searchValue was found, false if not</returns>
+        private bool FullTextSearch(string searchValue, Tour tourToSearch, bool caseSensitive)
+        {
+            // Fill search list with basic tour information
+            var stringsToSearch = new List<string>
+            {
+                tourToSearch.Name,
+                tourToSearch.Description ?? "",
+                tourToSearch.ToLocation,
+                tourToSearch.FromLocation,
+                tourToSearch.TransportType ?? ""
+            };
+            
+            // Fill search list with tour log information
+            foreach (var log in tourToSearch.Logs)
+            {
+                stringsToSearch.Add(log.Comment);
+            }
+            
+            // Check if searchValue is present in any added information
+            foreach (var interestingInformation in stringsToSearch)
+            {
+                var searchInformation = caseSensitive ? interestingInformation : interestingInformation.ToLower();
+                searchValue = caseSensitive ? searchValue : searchValue.ToLower();
+                
+                if (searchInformation.Contains(searchValue))
+                    return true;
+            }
+            
+            // If nothing was found, return false
+            return false;
         }
     }
 }
