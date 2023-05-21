@@ -33,5 +33,10 @@ namespace TourPlanner.DataAccessLayer
         {
             throw new System.NotImplementedException();
         }
+
+        public bool Modify(Tour modifiedTour)
+        {
+            throw new System.NotImplementedException();
+        }
     }
 }

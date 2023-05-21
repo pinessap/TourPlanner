@@ -27,5 +27,10 @@ namespace TourPlanner.DataAccessLayer.DataAccessObjects
         {
             return _dataAccess.Delete(tourToDelete);
         }
+
+        public bool Modify(Tour modifiedTour)
+        {
+            return _dataAccess.Modify(modifiedTour);
+        }
     }
 }

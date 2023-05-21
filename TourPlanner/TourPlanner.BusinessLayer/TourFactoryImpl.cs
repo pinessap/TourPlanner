@@ -13,20 +13,11 @@ namespace TourPlanner.BusinessLayer
         /// </summary>
         private readonly TourDao _tourDao = new TourDao();
         
-        /// <summary>
-        /// Get all tours in the database
-        /// </summary>
         public List<Tour> GetTours()
         {
             return _tourDao.GetTours();
         }
         
-        /// <summary>
-        /// Search for a string in all tour names
-        /// </summary>
-        /// <param name="name">The string to search for</param>
-        /// <param name="caseSensitive">Default search is not case sensitive (false)</param>
-        /// <returns>List of tours which contain the search string in their name</returns>
         public List<Tour> Search(string name, bool caseSensitive = false)
         {
             var items = GetTours();
@@ -40,11 +31,7 @@ namespace TourPlanner.BusinessLayer
 
             return foundTours;
         }
-
-        /// <summary>
-        /// Adds a dummy tour to the database
-        /// </summary>
-        /// <returns>True if successful, false if not</returns>
+        
         public bool Add()
         {
             // Get existing tours and either set the lastTourId to 0 or whatever the last id in the DB is
@@ -65,13 +52,14 @@ namespace TourPlanner.BusinessLayer
             return _tourDao.Add(tourToAdd);
         }
         
-        /// <summary>
-        /// Deletes the given tour from the database
-        /// </summary>
-        /// <returns>True if successful, false if not</returns>
         public bool Delete(Tour tourToDelete)
         {
             return _tourDao.Delete(tourToDelete);
+        }
+        
+        public bool Modify(Tour modifiedTour)
+        {
+            return _tourDao.Modify(modifiedTour);
         }
     }
 }

@@ -27,9 +27,6 @@ namespace TourPlanner.DataAccessLayer
             _context.Dispose();
         }
         
-        /// <summary>
-        /// Get all tours from the database
-        /// </summary>
         public List<Tour> GetTours()
         {
             // Get tours via linq syntax
@@ -45,10 +42,6 @@ namespace TourPlanner.DataAccessLayer
             return allTours;
         }
         
-        /// <summary>
-        /// Adds given tour to the database
-        /// </summary>
-        /// <returns>True if successful, false on an error</returns>
         public bool Add(Tour tourToAdd)
         {
             try
@@ -65,16 +58,29 @@ namespace TourPlanner.DataAccessLayer
 
             return true;
         }
-
-        /// <summary>
-        /// Removes the given tour from the database
-        /// </summary>
-        /// <returns>True if successful, false on an error</returns>
+        
         public bool Delete(Tour tourToDelete)
         {
             try
             {
                 _context.Remove(tourToDelete);
+                _context.SaveChanges();
+            }
+            catch (Exception ex)
+            {
+                // TODO: Write this to a log file (cuz the console logs don't actually work...)
+                Console.WriteLine("DELETE EXCEPTION: " + ex.Message);
+                return false;
+            }
+
+            return true;
+        }
+
+        public bool Modify(Tour modifiedTour)
+        {
+            try
+            {
+                _context.Update(modifiedTour);
                 _context.SaveChanges();
             }
             catch (Exception ex)
