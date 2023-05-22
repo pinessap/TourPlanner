@@ -8,8 +8,18 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Styles\Font Awesome 6 Free Regular.otf" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\Models\TourPlanner.Models.csproj" />
     <ProjectReference Include="..\TourPlanner.BusinessLayer\TourPlanner.BusinessLayer.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Styles\Font Awesome 6 Free Regular.otf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
   </ItemGroup>
 
 </Project>

@@ -4,7 +4,7 @@ using System.Runtime.CompilerServices;
 
 namespace TourPlanner.ViewModels
 {
-    public abstract class ViewModelBase : INotifyPropertyChanged
+    public abstract class ViewModelBase : INotifyPropertyChanged //if a property changes -> UI gets notified and passes along changes 
     {
         public event PropertyChangedEventHandler PropertyChanged;
 
@@ -15,7 +15,7 @@ namespace TourPlanner.ViewModels
                 PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
         }
 
-        protected void ValidatePropertyName(string propertyName)
+        protected void ValidatePropertyName(string propertyName) //validates if property exists
         {
             if (TypeDescriptor.GetProperties(this)[propertyName] == null)
             {

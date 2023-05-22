@@ -134,9 +134,9 @@ namespace TourPlanner.ViewModels
         /// <param name="commandParameter">Gets automatically assigned by ICommand, dunno what's in there tbh but who cares</param>
         private void Delete(object commandParameter)
         {
-            CurrentTour.Description = "Testing if this works. I should find this maybe hopefully.";
+            //CurrentTour.Description = "Testing if this works. I should find this maybe hopefully.";
             
-            if (!_tourFactory.Modify(CurrentTour))
+            if (!_tourFactory.Delete(CurrentTour))
             {
                 // TODO: Show an error when deleting didn't work for some reason
             }
