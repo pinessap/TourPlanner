@@ -30,3 +30,4 @@ To start the database, make sure you follow these steps:
 | 14/05/2023 | 2        | tourLog model          |
 | 21/05/2023 | 1        | added data modifying   |
 | 21/05/2023 | 1        | added full text search |
+21/05/2023 | 6       | ui modifications, added custom title bar |
