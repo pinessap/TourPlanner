@@ -108,8 +108,9 @@ COPY public."TourLogs" ("TourLogId", "Time", "Comment", "Difficulty", "Duration"
 --
 
 COPY public."Tours" ("TourId", "Name", "Description", "FromLocation", "ToLocation", "TransportType", "TourDistance", "EstimatedTime") FROM stdin;
-8	Tour with Database-ID 8	Mc?	Productivity	Nati's Folterkeller	\N	\N	\N
-10	Tour with Database-ID 10	Mc?	Productivity	Nati's Folterkeller	\N	\N	\N
+25	Tour with Database-ID 1	Mc?	Productivity	Nati's Folterkeller	\N	\N	\N
+26	Tour with Database-ID 26	Mc?	Productivity	Nati's Folterkeller	\N	\N	\N
+27	Tour with Database-ID 27	Mc?	Productivity	Nati's Folterkeller	\N	\N	\N
 \.
 
 
@@ -119,8 +120,6 @@ COPY public."Tours" ("TourId", "Name", "Description", "FromLocation", "ToLocatio
 
 COPY public."__EFMigrationsHistory" ("MigrationId", "ProductVersion") FROM stdin;
 20230317191358_Initial	8.0.0-preview.2.23128.3
-20230514152624_AddTourLogs	8.0.0-preview.2.23128.3
-20230514153013_FixTourLogs	8.0.0-preview.2.23128.3
 \.
 
 
@@ -135,7 +134,7 @@ SELECT pg_catalog.setval('public."TourLog_TourLogId_seq"', 1, false);
 -- Name: Tours_TourId_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('public."Tours_TourId_seq"', 10, true);
+SELECT pg_catalog.setval('public."Tours_TourId_seq"', 27, true);
 
 
 --

@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using Newtonsoft.Json;
 using TourPlanner.DataAccessLayer.DataAccessObjects;
 using TourPlanner.Models;
 
@@ -59,6 +61,50 @@ namespace TourPlanner.BusinessLayer
             return _tourDao.Modify(modifiedTour);
         }
 
+        public bool Export(List<Tour> toursToExport, string fileName)
+        {
+            var jsonArray = ConvertToursToJson(toursToExport);
+            
+            return CreateJsonFile(fileName, jsonArray);
+        }
+
+        public bool ImportOverride(string fileName)
+        {
+            var jsonString = ReadJsonFile(fileName);
+
+            var toursToOverride = ConvertJsonToTours(jsonString);
+            
+            // Delete all tours from the database
+            if (!DeleteAllTours()) return false;
+            
+            // Add new tours back
+            foreach (var tour in toursToOverride)
+            {
+                if (!_tourDao.Add(tour))
+                    return false;
+            }
+
+            return true;
+        }
+
+        public bool ImportAppend(string fileName)
+        {
+            var jsonString = ReadJsonFile(fileName);
+
+            var toursToAppend = ConvertJsonToTours(jsonString);
+            
+            foreach (var tour in toursToAppend)
+            {
+                // Reset tour-ID to make sure ef treats tour as new entry
+                tour.TourId = 0;
+
+                if (!_tourDao.Add(tour))
+                    return false;
+            }
+
+            return true;
+        }
+
         /// <summary>
         /// Searches tour for given searchValue
         /// </summary>
@@ -68,6 +114,8 @@ namespace TourPlanner.BusinessLayer
         /// <returns>True if searchValue was found, false if not</returns>
         private bool FullTextSearch(string searchValue, Tour tourToSearch, bool caseSensitive)
         {
+            searchValue = searchValue ?? "";
+            
             // Fill search list with basic tour information
             var stringsToSearch = new List<string>
             {
@@ -96,6 +144,103 @@ namespace TourPlanner.BusinessLayer
             
             // If nothing was found, return false
             return false;
+        }
+
+        /// <summary>
+        /// Converts a list of tours to a json string
+        /// </summary>
+        /// <returns>A json-string looking something like this: "[{paramName1: "paramValue", ...}, ...]"</returns>
+        private string ConvertToursToJson(List<Tour> toursToConvert)
+        {
+            // Initialize jsonArray with an opening bracket 
+            var jsonArray = "[";
+            
+            // Add all tours as json
+            foreach (var tour in toursToConvert)
+            {
+                var serializedTour = JsonConvert.SerializeObject(tour);
+                jsonArray += serializedTour + ",";
+            }
+            
+            // Remove trailing comma
+            jsonArray.TrimEnd(',');
+            
+            // Add closing bracket
+            jsonArray += "]";
+            
+            return jsonArray;
+        }
+
+        /// <summary>
+        /// Converts a json string to a List of tours
+        /// </summary>
+        /// <param name="jsonString">A json string in the following format: "[{paramName1: "paramValue", ...}, ...]"</param>
+        /// <returns></returns>
+        private List<Tour> ConvertJsonToTours(string jsonString)
+        {
+            var tours = JsonConvert.DeserializeObject<List<Tour>>(jsonString);
+
+            return tours!;
+        }
+        
+        /// <summary>
+        /// Creates a json file from a provided json string
+        /// </summary>
+        /// <param name="fileName">Filename without file-extension</param>
+        /// <param name="jsonString">A valid json string</param>
+        /// <returns>True if successful, false if not</returns>
+        private bool CreateJsonFile(string fileName, string jsonString)
+        {
+            // TODO: Replace relative path with information from config file
+            var relativePath = "TourFiles\\" + fileName + ".json";
+            var absolutePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, relativePath);
+            
+            // Create the directory if it does not already exist
+            var directoryPath = Path.GetDirectoryName(absolutePath);
+            Directory.CreateDirectory(directoryPath!);
+
+            // If File does not exist, create it, otherwise overwrite it
+            using var writer = File.CreateText(absolutePath);
+
+            writer.WriteLine(jsonString);
+
+            return true;
+        }
+
+        /// <summary>
+        /// Reads the contents of a .json file
+        /// </summary>
+        /// <param name="fileName">Filename without file-extension</param>
+        /// <returns>Content of .json file as string</returns>
+        private string ReadJsonFile(string fileName)
+        {
+            // TODO: Replace relative path with information from config file
+            var relativePath = "TourFiles\\" + fileName + ".json";
+            var absolutePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, relativePath);
+
+            if (File.Exists(absolutePath))
+            {
+                return File.ReadAllText(absolutePath);
+            }
+            
+            // TODO: Better error handling
+            return "";
+        }
+
+        /// <summary>
+        /// Delete all tours from the database
+        /// </summary>
+        /// <returns>True if successful, false if not</returns>
+        private bool DeleteAllTours()
+        {
+            var allTours = _tourDao.GetTours();
+
+            foreach (var tour in allTours)
+            {
+                if (!_tourDao.Delete(tour)) return false;
+            }
+
+            return true;
         }
     }
 }

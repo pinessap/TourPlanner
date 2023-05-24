@@ -36,5 +36,27 @@ namespace TourPlanner.BusinessLayer
         /// <param searchValue="modifiedTour">Tour object with modifications</param>
         /// <returns>True if successful, false if not</returns>
         bool Modify(Tour modifiedTour);
+
+        /// <summary>
+        /// Exports a given list of tours to a json file
+        /// </summary>
+        /// <param name="toursToExport">The tours that should get exported to a file</param>
+        /// <param name="fileName">Filename without file-extension</param>
+        /// <returns>True if successful, false if not</returns>
+        bool Export(List<Tour> toursToExport, string fileName);
+
+        /// <summary>
+        /// Imports a given json file into the database, deletes all old entries
+        /// </summary>
+        /// <param name="fileName">Filename without file-extension (file type should be .json)</param>
+        /// <returns>True if successful, false if not</returns>
+        bool ImportOverride(string fileName);
+
+        /// <summary>
+        /// Imports a given json file into the database by appending everything as a new entry
+        /// </summary>
+        /// <param name="fileName">Filename without file-extension (file type should be .json)</param>
+        /// <returns>True if successful, false if not</returns>
+        bool ImportAppend(string fileName);
     }
 }
