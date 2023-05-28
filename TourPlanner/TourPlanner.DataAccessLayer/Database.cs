@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Microsoft.EntityFrameworkCore;
 using TourPlanner.Models;
 using Npgsql;
 using TourPlanner.DataAccessLayer.Data;
@@ -30,11 +31,10 @@ namespace TourPlanner.DataAccessLayer
         public List<Tour> GetTours()
         {
             // Get tours via linq syntax
-            var tours = from tour in _context.Tours select tour;
-            
-            // This does the exact same as the above, just with another syntax
-            // var tours = _context.Products.Where(p => true);
-            
+            // Note the Include statement here, that makes sure the TourLogs are loaded too
+            // If this is removed, the TourLogs list is not populated and remains empty!
+            var tours = _context.Tours.Include(tour => tour.Logs).ToList();
+
             // Convert IQueryable<Tour> to List<Tour>
             List<Tour> allTours = new();
             allTours.AddRange(tours);

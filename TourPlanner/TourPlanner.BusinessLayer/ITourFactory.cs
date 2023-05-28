@@ -58,5 +58,12 @@ namespace TourPlanner.BusinessLayer
         /// <param name="fileName">Filename without file-extension (file type should be .json)</param>
         /// <returns>True if successful, false if not</returns>
         bool ImportAppend(string fileName);
+
+        /// <summary>
+        /// Generates a PDF report from a given tour
+        /// </summary>
+        /// <param name="tourToGenerateReportFrom">Tour used to generate the report from</param>
+        /// <returns></returns>
+        bool GenerateSingleReport(Tour tourToGenerateReportFrom);
     }
 }

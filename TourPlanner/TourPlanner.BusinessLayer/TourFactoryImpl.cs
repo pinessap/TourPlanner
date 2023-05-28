@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using Newtonsoft.Json;
+using TourPlanner.BusinessLayer.Reports;
 using TourPlanner.DataAccessLayer.DataAccessObjects;
 using TourPlanner.Models;
 
@@ -14,7 +15,12 @@ namespace TourPlanner.BusinessLayer
         /// The object containing all Tour Data information
         /// </summary>
         private readonly TourDao _tourDao = new TourDao();
-        
+
+        /// <summary>
+        /// The object containing all report generation functions
+        /// </summary>
+        private readonly IReportGenerator _reportFactory = ReportGeneratorFactory.Instance;
+
         public List<Tour> GetTours()
         {
             return _tourDao.GetTours();
@@ -45,7 +51,21 @@ namespace TourPlanner.BusinessLayer
                 Name = newTourName,
                 Description = "Mc?",
                 FromLocation = "Productivity",
-                ToLocation = "Nati's Folterkeller"
+                ToLocation = "Nati's Folterkeller",
+                EstimatedTime = new DateTime(2000, 12, 31, 0, 0, 0, DateTimeKind.Utc),
+                TourDistance = 12f,
+                TransportType = "White candy van",
+                Logs = new List<TourLog>
+                {
+                    new()
+                    {
+                        Comment = "Help me pls I am dying",
+                        Difficulty = 10,
+                        Duration = new TimeSpan(99, 5, 0),
+                        Rating = 5f,
+                        Time = new DateTime(2000, 12, 31, 0, 0, 0, DateTimeKind.Utc)
+                    }
+                }
             };
             
             return _tourDao.Add(tourToAdd);
@@ -103,6 +123,11 @@ namespace TourPlanner.BusinessLayer
             }
 
             return true;
+        }
+
+        public bool GenerateSingleReport(Tour tourToGenerateReportFrom)
+        {
+            return _reportFactory.GenerateSingleReport(tourToGenerateReportFrom);
         }
 
         /// <summary>
