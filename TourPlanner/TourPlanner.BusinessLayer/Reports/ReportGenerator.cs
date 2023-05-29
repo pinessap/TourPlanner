@@ -15,11 +15,22 @@ public class ReportGenerator : IReportGenerator
         var htmlWithTourData = ReplaceHtmlPlaceholdersWithTourData(htmlSource, tourToGenerateReportFrom);
         var htmlWithAllData = htmlWithTourData + CreateTourLogsHtml(tourToGenerateReportFrom.Logs);
         
-        SavePdfFromHtml(htmlWithAllData);
+        SavePdfFromHtml(htmlWithAllData, "SingleReport");
 
         return true;
     }
-    
+
+    public bool GenerateSummarizedReport(List<Tour> toursToGenerateFrom)
+    {
+        var htmlHeader = ReadHtmlFile("tourSummaryHeaderTemplate");
+        var tourDataHtml = CreateSummarizedToursHtml(toursToGenerateFrom);
+        var fullHtml = htmlHeader + tourDataHtml;
+        
+        SavePdfFromHtml(fullHtml, "SummarizedReport");
+
+        return true;
+    }
+
     /// <summary>
     /// Reads contents from an html file
     /// </summary>
@@ -110,14 +121,28 @@ public class ReportGenerator : IReportGenerator
         return finalHtml;
     }
 
+    private string CreateSummarizedToursHtml(List<Tour> tours)
+    {
+        var allToursHtml = "";
+        var tourHtmlWithPlaceholders = ReadHtmlFile("tourSummaryEntryTemplate");
+
+        foreach (var tour in tours)
+        {
+            allToursHtml += ReplaceHtmlPlaceholdersWithTourData(tourHtmlWithPlaceholders, tour);
+        }
+
+        return allToursHtml;
+    }
+
     /// <summary>
     /// Saves html string as pdf file
     /// </summary>
     /// <param name="htmlContent">Html string which gets converted to pdf format</param>
-    private void SavePdfFromHtml(string htmlContent)
+    /// <param name="fileName">Name of pdf file without file-extension</param>
+    private void SavePdfFromHtml(string htmlContent, string fileName)
     {
         // TODO: Replace relative path with information from config file
-        var relativePath = "Reports\\Report.pdf";
+        var relativePath = "Reports\\" + fileName + ".pdf";
         var absolutePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, relativePath);
             
         // Create the directory if it does not already exist

@@ -31,7 +31,7 @@ namespace TourPlanner.BusinessLayer
         bool Delete(Tour tourToDelete);
         
         /// <summary>
-        /// Saves the given modified tour to the database
+        /// Saves the changes in the given tour to the database
         /// </summary>
         /// <param searchValue="modifiedTour">Tour object with modifications</param>
         /// <returns>True if successful, false if not</returns>
@@ -63,7 +63,12 @@ namespace TourPlanner.BusinessLayer
         /// Generates a PDF report from a given tour
         /// </summary>
         /// <param name="tourToGenerateReportFrom">Tour used to generate the report from</param>
-        /// <returns></returns>
         bool GenerateSingleReport(Tour tourToGenerateReportFrom);
+        
+        /// <summary>
+        /// Generates a PFD report for a given list of tours
+        /// </summary>
+        /// <param name="toursToGenerateFrom">List of tours used to create the report</param>
+        bool GenerateSummarizedReport(List<Tour> toursToGenerateFrom);
     }
 }

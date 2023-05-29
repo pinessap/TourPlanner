@@ -33,3 +33,5 @@ To start the database, make sure you follow these steps:
 | 21/05/2023 | 6        | ui modifications, added custom title bar |
 | 24/05/2023 | 4        | json import/export     |
 | 28/05/2023 | 10       | single report generation |
+| 29/05/2023 | 1        | calculated tour values |
+| 29/05/2023 | 4        | summarized reports     |

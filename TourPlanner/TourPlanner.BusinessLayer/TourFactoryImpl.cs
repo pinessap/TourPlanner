@@ -130,6 +130,11 @@ namespace TourPlanner.BusinessLayer
             return _reportFactory.GenerateSingleReport(tourToGenerateReportFrom);
         }
 
+        public bool GenerateSummarizedReport(List<Tour> toursToGenerateFrom)
+        {
+            return _reportFactory.GenerateSummarizedReport(toursToGenerateFrom);
+        }
+
         /// <summary>
         /// Searches tour for given searchValue
         /// </summary>
@@ -148,7 +153,9 @@ namespace TourPlanner.BusinessLayer
                 tourToSearch.Description ?? "",
                 tourToSearch.ToLocation,
                 tourToSearch.FromLocation,
-                tourToSearch.TransportType ?? ""
+                tourToSearch.TransportType ?? "",
+                (tourToSearch.ChildFriendliness == null ? tourToSearch.ChildFriendliness.ToString() : "")!,
+                (tourToSearch.Popularity == null ? tourToSearch.Popularity.ToString() : "")!
             };
             
             // Fill search list with tour log information
