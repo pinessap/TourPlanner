@@ -2,11 +2,11 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using iText.Html2pdf;
+using TourPlanner.Configuration;
 using TourPlanner.Models;
 
 namespace TourPlanner.BusinessLayer.Reports;
 
-// TODO: Replace all hardcoded relative paths in this file with one from a config file
 public class ReportGenerator : IReportGenerator
 {
     public bool GenerateSingleReport(Tour tourToGenerateReportFrom)
@@ -38,9 +38,7 @@ public class ReportGenerator : IReportGenerator
     /// <returns>Html string</returns>
     private string ReadHtmlFile(string filename)
     {
-        // TODO: Replace relative path with information from config file
-        var relativePath = "..\\..\\..\\..\\TourPlanner.BusinessLayer\\Reports\\" + filename + ".html";
-        var absolutePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, relativePath);
+        var absolutePath = Path.Combine(AppConfig.Instance.ProgramDirectory, "TourPlanner.BusinessLayer\\Reports\\" + filename + ".html");
 
         if (File.Exists(absolutePath))
         {
@@ -52,7 +50,7 @@ public class ReportGenerator : IReportGenerator
     }
 
     /// <summary>
-    /// Replaces all {{PlaceHolderName}} placeholders inside html string
+    /// Replaces all {{TourModelPropertyName}} placeholders inside html string
     /// </summary>
     /// <param name="htmlStringWithPlaceholders">Html string containing placeholders in the following format: {{TourModelPropertyName}}</param>
     /// <param name="tourWithData">Tour which contains the data-values we want to add to the html.</param>
@@ -141,10 +139,8 @@ public class ReportGenerator : IReportGenerator
     /// <param name="fileName">Name of pdf file without file-extension</param>
     private void SavePdfFromHtml(string htmlContent, string fileName)
     {
-        // TODO: Replace relative path with information from config file
-        var relativePath = "Reports\\" + fileName + ".pdf";
-        var absolutePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, relativePath);
-            
+        var absolutePath = Path.Combine(AppConfig.Instance.OutputDirectory, fileName + ".pdf");
+        
         // Create the directory if it does not already exist
         var directoryPath = Path.GetDirectoryName(absolutePath);
         Directory.CreateDirectory(directoryPath!);

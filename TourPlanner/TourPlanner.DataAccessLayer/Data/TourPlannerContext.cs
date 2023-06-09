@@ -1,4 +1,5 @@
 using Microsoft.EntityFrameworkCore;
+using TourPlanner.Configuration;
 using TourPlanner.Models;
 
 namespace TourPlanner.DataAccessLayer.Data;
@@ -17,7 +18,6 @@ public class TourPlannerContext : DbContext
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
-        // TODO: Get connection string from config file
-        optionsBuilder.UseNpgsql("Host=localhost; Database=tourplanner; Username=postgres; Password=trust");
+        optionsBuilder.UseNpgsql(AppConfig.Instance.DbConnection);
     }
 }

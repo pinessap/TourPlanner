@@ -1,7 +1,9 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
+using System.Linq;
 using System.Windows.Controls.Primitives;
 using System.Windows.Input;
 using TourPlanner.BusinessLayer;
@@ -117,8 +119,37 @@ namespace TourPlanner.ViewModels
         /// <param name="commandParameter">Gets automatically assigned by ICommand, dunno what's in there tbh but who cares</param>
         private void Add(object commandParameter)
         {
+            // Get existing tours and either set the lastTourId to 0 or whatever the last id in the DB is
+            var existingTours = _tourFactory.GetTours();
+            var lastTourId = existingTours.Count > 0 ? _tourFactory.GetTours().Last().TourId : 0;
+            
+            // BUG: If the database is empty, but the autoincrement field is not at 0, the "new" first entry might f.ex. get the idValue 7 instead of the assumed value 1
+            var newTourName = "Tour with Database-ID " + (lastTourId + 1);
+
+            var tourToAdd = new Tour
+            {
+                Name = newTourName,
+                Description = "Mc?",
+                FromLocation = "Productivity",
+                ToLocation = "Nati's Folterkeller",
+                EstimatedTime = new DateTime(2000, 12, 31, 0, 0, 0, DateTimeKind.Utc),
+                TourDistance = 12f,
+                TransportType = "White candy van",
+                Logs = new List<TourLog>
+                {
+                    new()
+                    {
+                        Comment = "Help me pls I am dying",
+                        Difficulty = 10,
+                        Duration = new TimeSpan(99, 5, 0),
+                        Rating = 5f,
+                        Time = new DateTime(2000, 12, 31, 0, 0, 0, DateTimeKind.Utc)
+                    }
+                }
+            };
+
             // TODO: Update the UI so we can create a tour from there and then pass it as a new Tour() to the tourFactory
-            if (!_tourFactory.Add())
+            if (!_tourFactory.Add(tourToAdd))
             {
                 // TODO: Show an error when adding didn't work for some reason
             }

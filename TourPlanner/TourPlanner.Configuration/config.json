@@ -1,0 +1,5 @@
+{
+  "DbConnection" : "Host=localhost; Database=tourplanner; Username=postgres; Password=trust",
+  "ProgramDirectory": "C:\\Users\\Samuel\\Documents\\FH_Docs\\Semester_4\\SWEN2\\TourPlanner\\TourPlanner",
+  "OutputDirectory": "C:\\Users\\Samuel\\Downloads"
+}

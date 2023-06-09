@@ -17,12 +17,13 @@ namespace TourPlanner.BusinessLayer
         /// <param searchValue="caseSensitive">Default search is not case sensitive (false)</param>
         /// <returns>List of tours which contain the search string in their searchValue</returns>
         List<Tour> Search(string searchValue, bool caseSensitive = false);
-        
+
         /// <summary>
         /// Adds a dummy tour to the database
         /// </summary>
+        /// <param name="tourToAdd"></param>
         /// <returns>True if successful, false if not</returns>
-        bool Add();
+        bool Add(Tour tourToAdd);
         
         /// <summary>
         /// Deletes the given tour from the database
@@ -48,16 +49,16 @@ namespace TourPlanner.BusinessLayer
         /// <summary>
         /// Imports a given json file into the database, deletes all old entries
         /// </summary>
-        /// <param name="fileName">Filename without file-extension (file type should be .json)</param>
+        /// <param name="absoluteLocationOfFile">Absolute location of file, f.ex. "C:\\Users\\Samuel\\Downloads\\importMe.json"</param>
         /// <returns>True if successful, false if not</returns>
-        bool ImportOverride(string fileName);
+        bool ImportOverride(string absoluteLocationOfFile);
 
         /// <summary>
         /// Imports a given json file into the database by appending everything as a new entry
         /// </summary>
-        /// <param name="fileName">Filename without file-extension (file type should be .json)</param>
+        /// <param name="absoluteLocationOfFile">Absolute location of file, f.ex. "C:\\Users\\Samuel\\Downloads\\importMe.json"</param>
         /// <returns>True if successful, false if not</returns>
-        bool ImportAppend(string fileName);
+        bool ImportAppend(string absoluteLocationOfFile);
 
         /// <summary>
         /// Generates a PDF report from a given tour

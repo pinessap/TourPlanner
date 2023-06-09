@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using Newtonsoft.Json;
+using TourPlanner.Configuration;
 using TourPlanner.BusinessLayer.Reports;
 using TourPlanner.DataAccessLayer.DataAccessObjects;
 using TourPlanner.Models;
@@ -37,37 +38,8 @@ namespace TourPlanner.BusinessLayer
             return foundTours;
         }
         
-        public bool Add()
+        public bool Add(Tour tourToAdd)
         {
-            // Get existing tours and either set the lastTourId to 0 or whatever the last id in the DB is
-            var existingTours = GetTours();
-            var lastTourId = existingTours.Count > 0 ? GetTours().Last().TourId : 0;
-            
-            // BUG: If the database is empty, but the autoincrement field is not at 0, the "new" first entry might f.ex. get the idValue 7 instead of the assumed value 1
-            var newTourName = "Tour with Database-ID " + (lastTourId + 1);
-
-            var tourToAdd = new Tour
-            {
-                Name = newTourName,
-                Description = "Mc?",
-                FromLocation = "Productivity",
-                ToLocation = "Nati's Folterkeller",
-                EstimatedTime = new DateTime(2000, 12, 31, 0, 0, 0, DateTimeKind.Utc),
-                TourDistance = 12f,
-                TransportType = "White candy van",
-                Logs = new List<TourLog>
-                {
-                    new()
-                    {
-                        Comment = "Help me pls I am dying",
-                        Difficulty = 10,
-                        Duration = new TimeSpan(99, 5, 0),
-                        Rating = 5f,
-                        Time = new DateTime(2000, 12, 31, 0, 0, 0, DateTimeKind.Utc)
-                    }
-                }
-            };
-            
             return _tourDao.Add(tourToAdd);
         }
         
@@ -81,6 +53,7 @@ namespace TourPlanner.BusinessLayer
             return _tourDao.Modify(modifiedTour);
         }
 
+        // TODO: Change logic so saving of file happens in Presentation layer by letting user save file himself in filesystem
         public bool Export(List<Tour> toursToExport, string fileName)
         {
             var jsonArray = ConvertToursToJson(toursToExport);
@@ -88,9 +61,9 @@ namespace TourPlanner.BusinessLayer
             return CreateJsonFile(fileName, jsonArray);
         }
 
-        public bool ImportOverride(string fileName)
+        public bool ImportOverride(string absoluteLocationOfFile)
         {
-            var jsonString = ReadJsonFile(fileName);
+            var jsonString = ReadJsonFile(absoluteLocationOfFile);
 
             var toursToOverride = ConvertJsonToTours(jsonString);
             
@@ -107,9 +80,9 @@ namespace TourPlanner.BusinessLayer
             return true;
         }
 
-        public bool ImportAppend(string fileName)
+        public bool ImportAppend(string absoluteLocationOfFile)
         {
-            var jsonString = ReadJsonFile(fileName);
+            var jsonString = ReadJsonFile(absoluteLocationOfFile);
 
             var toursToAppend = ConvertJsonToTours(jsonString);
             
@@ -125,11 +98,13 @@ namespace TourPlanner.BusinessLayer
             return true;
         }
 
+        // TODO: Change logic so saving of file happens in Presentation layer by letting user save file himself in filesystem
         public bool GenerateSingleReport(Tour tourToGenerateReportFrom)
         {
             return _reportFactory.GenerateSingleReport(tourToGenerateReportFrom);
         }
-
+        
+        // TODO: Change logic so saving of file happens in Presentation layer by letting user save file himself in filesystem
         public bool GenerateSummarizedReport(List<Tour> toursToGenerateFrom)
         {
             return _reportFactory.GenerateSummarizedReport(toursToGenerateFrom);
@@ -223,9 +198,7 @@ namespace TourPlanner.BusinessLayer
         /// <returns>True if successful, false if not</returns>
         private bool CreateJsonFile(string fileName, string jsonString)
         {
-            // TODO: Replace relative path with information from config file
-            var relativePath = "TourFiles\\" + fileName + ".json";
-            var absolutePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, relativePath);
+            var absolutePath = Path.Combine(AppConfig.Instance.OutputDirectory, fileName + ".json");
             
             // Create the directory if it does not already exist
             var directoryPath = Path.GetDirectoryName(absolutePath);
@@ -235,6 +208,8 @@ namespace TourPlanner.BusinessLayer
             using var writer = File.CreateText(absolutePath);
 
             writer.WriteLine(jsonString);
+            
+            writer.Close();
 
             return true;
         }
@@ -242,17 +217,13 @@ namespace TourPlanner.BusinessLayer
         /// <summary>
         /// Reads the contents of a .json file
         /// </summary>
-        /// <param name="fileName">Filename without file-extension</param>
+        /// <param name="absoluteLocationOfFile">Absolute location of file, f.ex. "C:\\Users\\Samuel\\Downloads\\importMe.json"</param>
         /// <returns>Content of .json file as string</returns>
-        private string ReadJsonFile(string fileName)
+        private string ReadJsonFile(string absoluteLocationOfFile)
         {
-            // TODO: Replace relative path with information from config file
-            var relativePath = "TourFiles\\" + fileName + ".json";
-            var absolutePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, relativePath);
-
-            if (File.Exists(absolutePath))
+            if (File.Exists(absoluteLocationOfFile))
             {
-                return File.ReadAllText(absolutePath);
+                return File.ReadAllText(absoluteLocationOfFile);
             }
             
             // TODO: Better error handling

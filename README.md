@@ -23,15 +23,16 @@ To start the database, make sure you follow these steps:
 
 ## Time spent:
 
-| date       | time (h) | comment                |
-| ---------- | -------- | ---------------------- |
-| 11/03/2023 | 3        | project and repo setup |
-| 17/03/2023 | 7        | database setup         |
-| 14/05/2023 | 2        | tourLog model          |
-| 21/05/2023 | 1        | added data modifying   |
-| 21/05/2023 | 1        | added full text search |
+| date       | time (h) | comment                                  |
+|------------|----------|------------------------------------------|
+| 11/03/2023 | 3        | project and repo setup                   |
+| 17/03/2023 | 7        | database setup                           |
+| 14/05/2023 | 2        | tourLog model                            |
+| 21/05/2023 | 1        | added data modifying                     |
+| 21/05/2023 | 1        | added full text search                   |
 | 21/05/2023 | 6        | ui modifications, added custom title bar |
-| 24/05/2023 | 4        | json import/export     |
-| 28/05/2023 | 10       | single report generation |
-| 29/05/2023 | 1        | calculated tour values |
-| 29/05/2023 | 4        | summarized reports     |
+| 24/05/2023 | 4        | json import/export                       |
+| 28/05/2023 | 10       | single report generation                 |
+| 29/05/2023 | 1        | calculated tour values                   |
+| 29/05/2023 | 4        | summarized reports                       |
+| 09/06/2023 | 5        | added config file                        |
