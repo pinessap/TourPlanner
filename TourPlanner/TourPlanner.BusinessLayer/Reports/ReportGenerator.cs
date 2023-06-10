@@ -38,7 +38,7 @@ public class ReportGenerator : IReportGenerator
     /// <returns>Html string</returns>
     private string ReadHtmlFile(string filename)
     {
-        var absolutePath = Path.Combine(AppConfig.Instance.ProgramDirectory, "TourPlanner.BusinessLayer\\Reports\\" + filename + ".html");
+        var absolutePath = Path.Combine(AppConfigManager.Settings.ProgramDirectory, "TourPlanner.BusinessLayer\\Reports\\" + filename + ".html");
 
         if (File.Exists(absolutePath))
         {
@@ -139,7 +139,7 @@ public class ReportGenerator : IReportGenerator
     /// <param name="fileName">Name of pdf file without file-extension</param>
     private void SavePdfFromHtml(string htmlContent, string fileName)
     {
-        var absolutePath = Path.Combine(AppConfig.Instance.OutputDirectory, fileName + ".pdf");
+        var absolutePath = Path.Combine(AppConfigManager.Settings.OutputDirectory, fileName + ".pdf");
         
         // Create the directory if it does not already exist
         var directoryPath = Path.GetDirectoryName(absolutePath);

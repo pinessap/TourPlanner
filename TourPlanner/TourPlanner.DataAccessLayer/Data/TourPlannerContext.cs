@@ -18,6 +18,6 @@ public class TourPlannerContext : DbContext
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
-        optionsBuilder.UseNpgsql(AppConfig.Instance.DbConnection);
+        optionsBuilder.UseNpgsql(AppConfigManager.Settings.DbConnection);
     }
 }

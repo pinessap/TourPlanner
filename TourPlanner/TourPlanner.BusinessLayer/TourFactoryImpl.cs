@@ -198,7 +198,7 @@ namespace TourPlanner.BusinessLayer
         /// <returns>True if successful, false if not</returns>
         private bool CreateJsonFile(string fileName, string jsonString)
         {
-            var absolutePath = Path.Combine(AppConfig.Instance.OutputDirectory, fileName + ".json");
+            var absolutePath = Path.Combine(AppConfigManager.Settings.OutputDirectory, fileName + ".json");
             
             // Create the directory if it does not already exist
             var directoryPath = Path.GetDirectoryName(absolutePath);
