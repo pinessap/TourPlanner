@@ -7,7 +7,6 @@ using System.Linq;
 using System.Windows.Controls.Primitives;
 using System.Windows.Input;
 using TourPlanner.BusinessLayer;
-using TourPlanner.Configuration;
 using TourPlanner.Models;
 using TourPlanner.ViewModels;
 
@@ -166,18 +165,10 @@ namespace TourPlanner.ViewModels
         /// <param name="commandParameter">Gets automatically assigned by ICommand, dunno what's in there tbh but who cares</param>
         private void Delete(object commandParameter)
         {
-            // //CurrentTour.Description = "Testing if this works. I should find this maybe hopefully.";
-            //
-            // if (!_tourFactory.Delete(CurrentTour))
-            // {
-            //     // TODO: Show an error when deleting didn't work for some reason
-            // }
-
-
-            AppConfigManager.Settings.OutputDirectory = SearchValue;
-            AppConfigManager.SaveSettings();
-            
-            _tourFactory.GenerateSingleReport(CurrentTour);
+            if (!_tourFactory.Delete(CurrentTour))
+            {
+                // TODO: Show an error when deleting didn't work for some reason
+            }
             
             var remainingItems = _tourFactory.GetTours();
             
