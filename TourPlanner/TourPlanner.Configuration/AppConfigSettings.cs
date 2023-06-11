@@ -16,4 +16,15 @@ public class AppConfigSettings
      /// The directory where all output is saved
      /// </summary>
      public string OutputDirectory { get; set; }
+     
+     /// <summary>
+     /// The path to the logfile
+     /// <example>C:\Downloads\main.log</example>
+     /// </summary>
+     public string LogfilePath { get; set; }
+     
+     /// <summary>
+     /// The layout of log messages. Consult Log4Net documentation for syntax.
+     /// </summary>
+     public string LogLayout { get; set; }
 }

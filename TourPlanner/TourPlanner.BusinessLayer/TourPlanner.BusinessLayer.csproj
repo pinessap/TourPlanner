@@ -10,6 +10,7 @@
     <ProjectReference Include="..\Models\TourPlanner.Models.csproj" />
     <ProjectReference Include="..\TourPlanner.Configuration\TourPlanner.Configuration.csproj" />
     <ProjectReference Include="..\TourPlanner.DataAccessLayer\TourPlanner.DataAccessLayer.csproj" />
+    <ProjectReference Include="..\TourPlanner.Logging\TourPlanner.Logging.csproj" />
   </ItemGroup>
 
   <ItemGroup>

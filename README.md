@@ -37,3 +37,4 @@ To start the database, make sure you follow these steps:
 | 29/05/2023 | 4        | summarized reports                       |
 | 09/06/2023 | 5        | added config file                        |
 | 10/06/2023 | 3        | reworked config system                   |
+| 11/06/2023 | 5        | added logging                            |

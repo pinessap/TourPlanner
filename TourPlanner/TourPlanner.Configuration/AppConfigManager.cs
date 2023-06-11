@@ -10,9 +10,11 @@ public static class AppConfigManager
     {
         // TODO: Add proper exceptions
         // Load configuration values from App.config
-        Settings.DbConnection = ConfigurationManager.AppSettings["DbConnection"] ?? throw new Exception();
-        Settings.ProgramDirectory = ConfigurationManager.AppSettings["ProgramDirectory"] ?? throw new Exception();
-        Settings.OutputDirectory = ConfigurationManager.AppSettings["OutputDirectory"] ?? throw new Exception();
+        Settings.DbConnection = ConfigurationManager.AppSettings["DbConnection"]!;
+        Settings.ProgramDirectory = ConfigurationManager.AppSettings["ProgramDirectory"]!;
+        Settings.OutputDirectory = ConfigurationManager.AppSettings["OutputDirectory"]!;
+        Settings.LogfilePath = ConfigurationManager.AppSettings["LogfilePath"]!;
+        Settings.LogLayout = ConfigurationManager.AppSettings["LogLayout"]!;
     }
     
     /// <summary>
@@ -33,6 +35,8 @@ public static class AppConfigManager
         configuration.AppSettings.Settings["DbConnection"].Value = Settings.DbConnection;
         configuration.AppSettings.Settings["ProgramDirectory"].Value = Settings.ProgramDirectory;
         configuration.AppSettings.Settings["OutputDirectory"].Value = Settings.OutputDirectory;
+        configuration.AppSettings.Settings["LogfilePath"].Value = Settings.LogfilePath;
+        configuration.AppSettings.Settings["LogLayout"].Value = Settings.LogLayout;
 
         configuration.Save(ConfigurationSaveMode.Full, true); 
         
