@@ -20,4 +20,13 @@ public class TourPlannerContext : DbContext
     {
         optionsBuilder.UseNpgsql(AppConfigManager.Settings.DbConnection);
     }
+    
+    protected override void OnModelCreating(ModelBuilder modelBuilder)
+    {
+        // Makes sure that when a tour is deleted, all associated tourLogs are deleted too
+        modelBuilder.Entity<Tour>()
+            .HasMany(t => t.Logs)
+            .WithOne()
+            .OnDelete(DeleteBehavior.Cascade);
+    }
 }

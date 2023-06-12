@@ -22,4 +22,8 @@
       </None>
     </ItemGroup>
 
+    <ItemGroup>
+      <ProjectReference Include="..\TourPlanner.Logging\TourPlanner.Logging.csproj" />
+    </ItemGroup>
+
 </Project>

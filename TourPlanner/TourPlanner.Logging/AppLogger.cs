@@ -50,7 +50,7 @@ public static class AppLogger
     /// <summary>
     /// Logs an error message and throws the provided exception. Use when error happens, but application can continue running.
     /// </summary>
-    public static void Error(string message, Exception ex)
+    public static void ThrowError(string message, Exception ex)
     {
         Log.Error(message, ex);
         throw ex;
@@ -67,7 +67,7 @@ public static class AppLogger
     /// <summary>
     /// Logs a fatal error message and throws the provided exception. Use when error crashes application.
     /// </summary>
-    public static void Fatal(string message, Exception ex)
+    public static void ThrowFatal(string message, Exception ex)
     {
         Log.Fatal(message, ex);
         throw ex;

@@ -21,55 +21,47 @@ namespace TourPlanner.BusinessLayer
         /// <summary>
         /// Adds a dummy tour to the database
         /// </summary>
-        /// <param name="tourToAdd"></param>
-        /// <returns>True if successful, false if not</returns>
-        bool Add(Tour tourToAdd);
+        void Add(Tour tourToAdd);
         
         /// <summary>
         /// Deletes the given tour from the database
         /// </summary>
-        /// <returns>True if successful, false if not</returns>
-        bool Delete(Tour tourToDelete);
+        void Delete(Tour tourToDelete);
         
         /// <summary>
         /// Saves the changes in the given tour to the database
         /// </summary>
         /// <param searchValue="modifiedTour">Tour object with modifications</param>
-        /// <returns>True if successful, false if not</returns>
-        bool Modify(Tour modifiedTour);
+        void Modify(Tour modifiedTour);
 
         /// <summary>
-        /// Exports a given list of tours to a json file
+        /// Exports a given list of tours to a json file. File Explorer opens and lets user save file.
         /// </summary>
         /// <param name="toursToExport">The tours that should get exported to a file</param>
-        /// <param name="fileName">Filename without file-extension</param>
-        /// <returns>True if successful, false if not</returns>
-        bool Export(List<Tour> toursToExport, string fileName);
+        void Export(List<Tour> toursToExport);
 
         /// <summary>
-        /// Imports a given json file into the database, deletes all old entries
+        /// Imports a given json file into the database, deletes all old entries. If file given is not found, opens File Explorer to let user select one.
         /// </summary>
-        /// <param name="absoluteLocationOfFile">Absolute location of file, f.ex. "C:\\Users\\Samuel\\Downloads\\importMe.json"</param>
-        /// <returns>True if successful, false if not</returns>
-        bool ImportOverride(string absoluteLocationOfFile);
+        /// <param name="defaultAbsoluteLocationOfFile">Absolute location of file, f.ex. "C:\\Users\\Samuel\\Downloads\\importMe.json"</param>
+        void ImportOverride(string defaultAbsoluteLocationOfFile);
 
         /// <summary>
-        /// Imports a given json file into the database by appending everything as a new entry
+        /// Imports a given json file into the database by appending everything as a new entry. If file given is not found, opens File Explorer to let user select one.
         /// </summary>
-        /// <param name="absoluteLocationOfFile">Absolute location of file, f.ex. "C:\\Users\\Samuel\\Downloads\\importMe.json"</param>
-        /// <returns>True if successful, false if not</returns>
-        bool ImportAppend(string absoluteLocationOfFile);
+        /// <param name="defaultAbsoluteLocationOfFile">Absolute location of file, f.ex. "C:\\Users\\Samuel\\Downloads\\importMe.json"</param>
+        void ImportAppend(string defaultAbsoluteLocationOfFile);
 
         /// <summary>
         /// Generates a PDF report from a given tour
         /// </summary>
         /// <param name="tourToGenerateReportFrom">Tour used to generate the report from</param>
-        bool GenerateSingleReport(Tour tourToGenerateReportFrom);
+        void GenerateSingleReport(Tour tourToGenerateReportFrom);
         
         /// <summary>
         /// Generates a PFD report for a given list of tours
         /// </summary>
         /// <param name="toursToGenerateFrom">List of tours used to create the report</param>
-        bool GenerateSummarizedReport(List<Tour> toursToGenerateFrom);
+        void GenerateSummarizedReport(List<Tour> toursToGenerateFrom);
     }
 }

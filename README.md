@@ -38,3 +38,7 @@ To start the database, make sure you follow these steps:
 | 09/06/2023 | 5        | added config file                        |
 | 10/06/2023 | 3        | reworked config system                   |
 | 11/06/2023 | 5        | added logging                            |
+| 11/06/2023 | 2        | added log messages                       |
+| 12/06/2023 | 3        | improved error handling                  |
+| 12/06/2023 | 2        | refactor report generation               |
+| 12/06/2023 | 2        | refactor file handling                   |

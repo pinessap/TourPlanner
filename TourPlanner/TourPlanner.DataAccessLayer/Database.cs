@@ -5,6 +5,7 @@ using Microsoft.EntityFrameworkCore;
 using TourPlanner.Models;
 using Npgsql;
 using TourPlanner.DataAccessLayer.Data;
+using TourPlanner.Logging;
 
 namespace TourPlanner.DataAccessLayer
 {
@@ -42,7 +43,7 @@ namespace TourPlanner.DataAccessLayer
             return allTours;
         }
         
-        public bool Add(Tour tourToAdd)
+        public void Add(Tour tourToAdd)
         {
             try
             {
@@ -51,15 +52,11 @@ namespace TourPlanner.DataAccessLayer
             }
             catch (Exception ex)
             {
-                // TODO: Write this to a log file (cuz the console logs don't actually work...)
-                Console.WriteLine("ADD EXCEPTION: " + ex.Message);
-                return false;
+                AppLogger.ThrowError("ADD error:", ex);
             }
-
-            return true;
         }
         
-        public bool Delete(Tour tourToDelete)
+        public void Delete(Tour tourToDelete)
         {
             try
             {
@@ -68,15 +65,11 @@ namespace TourPlanner.DataAccessLayer
             }
             catch (Exception ex)
             {
-                // TODO: Write this to a log file (cuz the console logs don't actually work...)
-                Console.WriteLine("DELETE EXCEPTION: " + ex.Message);
-                return false;
+                AppLogger.ThrowError("DELETE error:", ex);
             }
-
-            return true;
         }
 
-        public bool Modify(Tour modifiedTour)
+        public void Modify(Tour modifiedTour)
         {
             try
             {
@@ -85,12 +78,18 @@ namespace TourPlanner.DataAccessLayer
             }
             catch (Exception ex)
             {
-                // TODO: Write this to a log file (cuz the console logs don't actually work...)
-                Console.WriteLine("DELETE EXCEPTION: " + ex.Message);
-                return false;
+                AppLogger.ThrowError("MODIFY error:", ex);
             }
+        }
 
-            return true;
+        public void SaveToFile(string absoluteFilePath, string fileContent, bool manualUserSave = false)
+        {
+            throw new NotImplementedException();
+        }
+
+        public string ReadFromFile(string absoluteFilePath, bool manualUserSelectWhenNotFound = false)
+        {
+            throw new NotImplementedException();
         }
     }
 }

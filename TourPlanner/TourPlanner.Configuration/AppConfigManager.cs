@@ -1,20 +1,32 @@
 using System.Configuration;
+using TourPlanner.Logging;
 
 namespace TourPlanner.Configuration;
 
 public static class AppConfigManager
 {
-    public static AppConfigSettings Settings { get; } = new AppConfigSettings();
+    public static AppConfigSettings Settings { get; } = new ();
 
     static AppConfigManager()
     {
-        // TODO: Add proper exceptions
-        // Load configuration values from App.config
-        Settings.DbConnection = ConfigurationManager.AppSettings["DbConnection"]!;
-        Settings.ProgramDirectory = ConfigurationManager.AppSettings["ProgramDirectory"]!;
-        Settings.OutputDirectory = ConfigurationManager.AppSettings["OutputDirectory"]!;
-        Settings.LogfilePath = ConfigurationManager.AppSettings["LogfilePath"]!;
-        Settings.LogLayout = ConfigurationManager.AppSettings["LogLayout"]!;
+        try
+        {
+            // Load configuration values from App.config
+            Settings.DbConnection = ConfigurationManager.AppSettings["DbConnection"]!;
+            Settings.TemplateDirectory = ConfigurationManager.AppSettings["TemplateDirectory"]!;
+            Settings.PictureDirectory = ConfigurationManager.AppSettings["PictureDirectory"]!;
+            Settings.OutputDirectory = ConfigurationManager.AppSettings["OutputDirectory"]!;
+            Settings.LogfilePath = ConfigurationManager.AppSettings["LogfilePath"]!;
+            Settings.LogLayout = ConfigurationManager.AppSettings["LogLayout"]!;
+        }
+        catch (NullReferenceException ex)
+        {
+            AppLogger.ThrowFatal("App.config error: Setting not found!", ex);
+        }
+        catch (Exception ex)
+        {
+            AppLogger.ThrowFatal("App.config error: (Probably) Syntax invalid!", ex);
+        }
     }
     
     /// <summary>
@@ -33,7 +45,8 @@ public static class AppConfigManager
         var configuration = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
         
         configuration.AppSettings.Settings["DbConnection"].Value = Settings.DbConnection;
-        configuration.AppSettings.Settings["ProgramDirectory"].Value = Settings.ProgramDirectory;
+        configuration.AppSettings.Settings["TemplateDirectory"].Value = Settings.TemplateDirectory;
+        configuration.AppSettings.Settings["PictureDirectory"].Value = Settings.PictureDirectory;
         configuration.AppSettings.Settings["OutputDirectory"].Value = Settings.OutputDirectory;
         configuration.AppSettings.Settings["LogfilePath"].Value = Settings.LogfilePath;
         configuration.AppSettings.Settings["LogLayout"].Value = Settings.LogLayout;

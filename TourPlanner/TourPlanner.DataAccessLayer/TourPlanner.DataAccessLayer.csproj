@@ -9,9 +9,11 @@
   <ItemGroup>
     <ProjectReference Include="..\Models\TourPlanner.Models.csproj" />
     <ProjectReference Include="..\TourPlanner.Configuration\TourPlanner.Configuration.csproj" />
+    <ProjectReference Include="..\TourPlanner.Logging\TourPlanner.Logging.csproj" />
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="itext7.pdfhtml" Version="5.0.0" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="8.0.0-preview.2.23128.3" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="8.0.0-preview.2.23128.3">
       <PrivateAssets>all</PrivateAssets>

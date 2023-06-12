@@ -8,9 +8,14 @@ public class AppConfigSettings
      public string DbConnection { get; set; }
      
      /// <summary>
-     /// The absolute path to the directory where the program files lie (aka the .sln file)
+     /// The absolute path to the directory where the report .html template files lie
      /// </summary>
-     public string ProgramDirectory { get; set; }
+     public string TemplateDirectory { get; set; }
+     
+     /// <summary>
+     /// The absolute path to the directory where all application pictures are saved
+     /// </summary>
+     public string PictureDirectory { get; set; }
      
      /// <summary>
      /// The directory where all output is saved

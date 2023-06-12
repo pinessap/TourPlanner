@@ -108,9 +108,15 @@ namespace TourPlanner.ViewModels
         /// <param name="commandParameter">Gets automatically assigned by ICommand, dunno what's in there tbh but who cares</param>
         private void Search(object commandParameter)
         {
-            var foundItems = _tourFactory.Search(SearchValue);
-            
-            FillListBox(foundItems);
+            try
+            {
+                var foundItems = _tourFactory.Search(SearchValue);
+                FillListBox(foundItems);
+            }
+            catch (Exception ex)
+            {
+                // TODO: Deal with different exceptions, probably display them in the UI somehow
+            }
         }
         
         /// <summary>
@@ -148,10 +154,13 @@ namespace TourPlanner.ViewModels
                 }
             };
 
-            // TODO: Update the UI so we can create a tour from there and then pass it as a new Tour() to the tourFactory
-            if (!_tourFactory.Add(tourToAdd))
+            try
             {
-                // TODO: Show an error when adding didn't work for some reason
+                _tourFactory.Add(tourToAdd);
+            }
+            catch (Exception ex)
+            {
+                // TODO: Deal with different exceptions, probably display them in the UI somehow
             }
 
             var addedItems = _tourFactory.GetTours();
@@ -165,9 +174,13 @@ namespace TourPlanner.ViewModels
         /// <param name="commandParameter">Gets automatically assigned by ICommand, dunno what's in there tbh but who cares</param>
         private void Delete(object commandParameter)
         {
-            if (!_tourFactory.Delete(CurrentTour))
+            try
             {
-                // TODO: Show an error when deleting didn't work for some reason
+                _tourFactory.Delete(CurrentTour);
+            }
+            catch (Exception ex)
+            {
+                // TODO: Deal with different exceptions, probably display them in the UI somehow
             }
             
             var remainingItems = _tourFactory.GetTours();

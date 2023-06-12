@@ -1,36 +1,93 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using TourPlanner.Logging;
 using TourPlanner.Models;
 
 namespace TourPlanner.DataAccessLayer.DataAccessObjects
 {
     public class TourDao
     {
-        private readonly IDataAccess _dataAccess;
+        private readonly IDataAccess _databaseAccess;
+        private readonly IDataAccess _filesystemAccess;
 
         public TourDao()
         {
-            //check which data source
-            _dataAccess = Database.Instance;
+            _databaseAccess = Database.Instance; // Database is a singleton to ensure only a single connection exists
+            _filesystemAccess = new FileSystem();
         }
         
         public List<Tour> GetTours()
         {
-            return _dataAccess.GetTours();
+            try
+            {
+                return _databaseAccess.GetTours();
+            }
+            catch (NotImplementedException ex)
+            {
+                AppLogger.ThrowFatal("GetTours DAO error:" , ex);
+                return null!;
+            }
         }
 
-        public bool Add(Tour tourToAdd)
+        public void Add(Tour tourToAdd)
         {
-            return _dataAccess.Add(tourToAdd);
+            try
+            {
+                _databaseAccess.Add(tourToAdd);
+            }
+            catch (NotImplementedException ex)
+            {
+                AppLogger.ThrowFatal("ADD DAO error:", ex);
+            }
         }
 
-        public bool Delete(Tour tourToDelete)
+        public void Delete(Tour tourToDelete)
         {
-            return _dataAccess.Delete(tourToDelete);
+            try
+            {
+                _databaseAccess.Delete(tourToDelete);
+            }
+            catch (NotImplementedException ex)
+            {
+                AppLogger.ThrowFatal("DELETE DAO error:", ex);
+            }
         }
 
-        public bool Modify(Tour modifiedTour)
+        public void Modify(Tour modifiedTour)
         {
-            return _dataAccess.Modify(modifiedTour);
+            try
+            {
+                _databaseAccess.Modify(modifiedTour);
+            }
+            catch (NotImplementedException ex)
+            {
+                AppLogger.ThrowFatal("MODIFY DAO error:", ex);
+            }
+        }
+        
+        public void SaveToFile(string absoluteFilePath, string fileContent, bool manualUserSave = false)
+        {
+            try
+            {
+                _filesystemAccess.SaveToFile(absoluteFilePath, fileContent, manualUserSave);
+            }
+            catch (NotImplementedException ex)
+            {
+                AppLogger.ThrowFatal("SaveToFile DAO error:", ex);
+            }
+        }
+
+        public string ReadFromFile(string absoluteFilePath, bool manualUserSelectWhenNotFound = false)
+        {
+            try 
+            {
+                return _filesystemAccess.ReadFromFile(absoluteFilePath, manualUserSelectWhenNotFound);
+            }
+            catch (NotImplementedException ex)
+            {
+                AppLogger.ThrowFatal("ReadFromFile DAO error:", ex);
+                return null!;
+            }
         }
     }
 }
