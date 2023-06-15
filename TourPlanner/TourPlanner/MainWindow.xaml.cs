@@ -16,6 +16,8 @@ using TourPlanner.ViewModels;
 using System.Runtime.InteropServices;
 using System.Runtime;
 using System.Windows.Interop;
+using TourPlanner.Models;
+using TourPlanner.Views;
 
 namespace TourPlanner
 {
@@ -58,6 +60,11 @@ namespace TourPlanner
         {
             Application.Current.Shutdown();
         }
+
+
+        
+
+
 
     }
 }

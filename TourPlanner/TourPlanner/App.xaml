@@ -3,9 +3,23 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:local="clr-namespace:TourPlanner"
              xmlns:viewModels="clr-namespace:TourPlanner.ViewModels"
+             xmlns:views="clr-namespace:TourPlanner.Views"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
-        
-         
+
+        <DataTemplate DataType="{x:Type viewModels:MainVm}">
+            <views:MainView/>
+        </DataTemplate>
+
+        <DataTemplate DataType="{x:Type viewModels:TourDetailsVm}">
+            <views:TourDetailsView/>
+        </DataTemplate>
+
+        <DataTemplate DataType="{x:Type viewModels:AddTourVm}">
+            <views:AddTourView/>
+        </DataTemplate>
     </Application.Resources>
 </Application>
+
+
+

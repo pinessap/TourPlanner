@@ -10,6 +10,235 @@
         <Setter Property="Foreground" Value="#DECCFC" />
     </Style>
 
+    <Style x:Key="AddTourCar" TargetType="RadioButton">
+        <Setter Property="Margin" Value="20,0" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="RadioButton">
+                    <Border x:Name="Border"
+                            Background="#E6D7F0"
+                            CornerRadius="10"
+                            Height="60"
+                            Width="60">
+                        <Grid Width="50" Height="50" Margin="0,0,5,10">
+                            <Viewbox Stretch="Uniform">
+                                <Path x:Name="Path"
+                                      Fill="#4C4452"
+                                      Data="M5,11L6.5,6.5H17.5L19,11M17.5,16A1.5,1.5 0 0,1 16,14.5A1.5,1.5 0 0,1 17.5,13A1.5,1.5 0 0,1 19,14.5A1.5,1.5 0 0,1 17.5,16M6.5,16A1.5,1.5 0 0,1 5,14.5A1.5,1.5 0 0,1 6.5,13A1.5,1.5 0 0,1 8,14.5A1.5,1.5 0 0,1 6.5,16M18.92,6C18.72,5.42 18.16,5 17.5,5H6.5C5.84,5 5.28,5.42 5.08,6L3,12V20A1,1 0 0,0 4,21H5A1,1 0 0,0 6,20V19H18V20A1,1 0 0,0 19,21H20A1,1 0 0,0 21,20V12L18.92,6Z" />
+                            </Viewbox>
+                        </Grid>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter TargetName="Border" Property="Background" Value="LightGray" />
+                            <Setter TargetName="Path" Property="Fill" Value="White" />
+                        </Trigger>
+                        <Trigger Property="IsChecked" Value="True">
+                            <Setter TargetName="Border" Property="Background" Value="Gray" />
+                            <Setter TargetName="Path" Property="Fill" Value="Black" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+
+
+    <Style x:Key="AddTourBicycle" TargetType="RadioButton">
+        <Setter Property="Margin" Value="20,0" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="RadioButton">
+                    <Border Background="#E6D7F0"
+                            CornerRadius="10"
+                            Height="60"
+                            Width="60">
+                        <Grid Width="50" Height="50" Margin="0,0,0,2">
+                            <Viewbox Stretch="Uniform">
+                                <Path Fill="#4C4452"  Data="M5,20.5A3.5,3.5 0 0,1 1.5,17A3.5,3.5 0 0,1 5,13.5A3.5,3.5 0 0,1 8.5,17A3.5,3.5 0 0,1 5,20.5M5,12A5,5 0 0,0 0,17A5,5 0 0,0 5,22A5,5 0 0,0 10,17A5,5 0 0,0 5,12M14.8,10H19V8.2H15.8L13.86,4.93C13.57,4.43 13,4.1 12.4,4.1C11.93,4.1 11.5,4.29 11.2,4.6L7.5,8.29C7.19,8.6 7,9 7,9.5C7,10.13 7.33,10.66 7.85,10.97L11.2,13V18H13V11.5L10.75,9.85L13.07,7.5M19,20.5A3.5,3.5 0 0,1 15.5,17A3.5,3.5 0 0,1 19,13.5A3.5,3.5 0 0,1 22.5,17A3.5,3.5 0 0,1 19,20.5M19,12A5,5 0 0,0 14,17A5,5 0 0,0 19,22A5,5 0 0,0 24,17A5,5 0 0,0 19,12M16,4.8C17,4.8 17.8,4 17.8,3C17.8,2 17,1.2 16,1.2C15,1.2 14.2,2 14.2,3C14.2,4 15,4.8 16,4.8Z" />
+                            </Viewbox>
+                        </Grid>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="AddTourWalking" TargetType="RadioButton">
+        <Setter Property="Margin" Value="20,0" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="RadioButton">
+                    <Border Background="#E6D7F0"
+                            CornerRadius="10"
+                            Height="60"
+                            Width="60">
+                        <Grid Width="50" Height="50" Margin="0,0,6,5">
+                            <Viewbox Stretch="Uniform">
+                                <Path Fill="#4C4452" Data="M10.74,11.72C11.21,12.95 11.16,14.23 9.75,14.74C6.85,15.81 6.2,13 6.16,12.86L10.74,11.72M5.71,10.91L10.03,9.84C9.84,8.79 10.13,7.74 10.13,6.5C10.13,4.82 8.8,1.53 6.68,2.06C4.26,2.66 3.91,5.35 4,6.65C4.12,7.95 5.64,10.73 5.71,10.91M17.85,19.85C17.82,20 17.16,22.8 14.26,21.74C12.86,21.22 12.8,19.94 13.27,18.71L17.85,19.85M20,13.65C20.1,12.35 19.76,9.65 17.33,9.05C15.22,8.5 13.89,11.81 13.89,13.5C13.89,14.73 14.17,15.78 14,16.83L18.3,17.9C18.38,17.72 19.89,14.94 20,13.65Z" />
+                            </Viewbox>
+                        </Grid>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+
+    <Style x:Key="AddTourInput" TargetType="TextBox">
+        <Setter Property="Background" Value="#E6D7F0" />
+        <Setter Property="MinHeight" Value="50"/>
+        <!--<Setter Property="MaxHeight" Value="50"/>-->
+        <Setter Property="Foreground" Value="#4C4452"/>
+        <Setter Property="FontWeight" Value="Bold"/>
+        <Setter Property="FontSize" Value="14"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type TextBox}">
+                    <Border Background="{TemplateBinding Background}"
+                        BorderBrush="{TemplateBinding BorderBrush}"
+                        BorderThickness="{TemplateBinding BorderThickness}"
+                        CornerRadius="10">
+                        <ScrollViewer HorizontalScrollBarVisibility="Disabled"
+                                  VerticalScrollBarVisibility="Hidden"
+                                  Padding="5" Margin="10">
+                            <Grid>
+                                <TextBlock Text="{TemplateBinding Text}"
+                                       Background="Transparent"
+                                       Foreground="{TemplateBinding Foreground}"
+                                       FontWeight="{TemplateBinding FontWeight}"
+                                       FontSize="{TemplateBinding FontSize}"
+                                       TextWrapping="Wrap"/>
+                            </Grid>
+                        </ScrollViewer>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="BorderBrush" Value="#867990" />
+                            <Setter Property="Cursor" Value="IBeam" />
+                            <!-- Add this line to set the cursor -->
+                        </Trigger>
+                        <Trigger Property="IsKeyboardFocused" Value="True">
+                            <Setter Property="BorderBrush" Value="#867990" />
+                            <Setter Property="Cursor" Value="IBeam" />
+                        </Trigger>
+                        <Trigger Property="IsFocused" Value="True">
+                            <Setter Property="Background" Value="#DDCFE7" />
+                            <Setter Property="BorderBrush" Value="#867990" />
+                            <Setter Property="Cursor" Value="IBeam" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                    <ControlTemplate.Resources>
+                        <Style TargetType="TextBox">
+                            <Setter Property="FocusVisualStyle" Value="{x:Null}" />
+                        </Style>
+                    </ControlTemplate.Resources>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+
+    <Style x:Key="AddTourName" TargetType="{x:Type TextBlock}">
+        <Setter Property="Visibility" Value="Collapsed"/>
+        <Setter Property="Padding" Value="10,3,0,3"/>
+        <Setter Property="Foreground" Value="#B2A8B8"/>
+        <Setter Property="Margin" Value="10,0,0,0"/>
+        <Setter Property="VerticalAlignment" Value="Center"/>
+        <Setter Property="HorizontalAlignment" Value="Left"/>
+        <Setter Property="IsHitTestVisible" Value="False"/>
+        <Style.Triggers>
+            <DataTrigger Binding="{Binding Text, ElementName=tourName}" Value="">
+                <Setter Property="Visibility" Value="Visible"/>
+            </DataTrigger>
+        </Style.Triggers>
+    </Style>
+
+    <Style x:Key="AddTourDescription" TargetType="{x:Type TextBlock}">
+        <Setter Property="Visibility" Value="Collapsed"/>
+        <Setter Property="Padding" Value="10,3,0,3"/>
+        <Setter Property="Foreground" Value="#B2A8B8"/>
+        <Setter Property="Margin" Value="10,0,0,0"/>
+        <Setter Property="VerticalAlignment" Value="Center"/>
+        <Setter Property="HorizontalAlignment" Value="Left"/>
+        <Setter Property="IsHitTestVisible" Value="False"/>
+        <Style.Triggers>
+            <DataTrigger Binding="{Binding Text, ElementName=tourDescription}" Value="">
+                <Setter Property="Visibility" Value="Visible"/>
+            </DataTrigger>
+        </Style.Triggers>
+    </Style>
+
+    <Style x:Key="AddTourFrom" TargetType="{x:Type TextBlock}">
+        <Setter Property="Visibility" Value="Collapsed"/>
+        <Setter Property="Padding" Value="10,3,0,3"/>
+        <Setter Property="Foreground" Value="#B2A8B8"/>
+        <Setter Property="Margin" Value="10,0,0,0"/>
+        <Setter Property="VerticalAlignment" Value="Center"/>
+        <Setter Property="HorizontalAlignment" Value="Left"/>
+        <Setter Property="IsHitTestVisible" Value="False"/>
+        <Style.Triggers>
+            <DataTrigger Binding="{Binding Text, ElementName=tourFrom}" Value="">
+                <Setter Property="Visibility" Value="Visible"/>
+            </DataTrigger>
+        </Style.Triggers>
+    </Style>
+
+    <Style x:Key="AddTourTo" TargetType="{x:Type TextBlock}">
+        <Setter Property="Visibility" Value="Collapsed"/>
+        <Setter Property="Padding" Value="10,3,0,3"/>
+        <Setter Property="Foreground" Value="#B2A8B8"/>
+        <Setter Property="Margin" Value="10,0,0,0"/>
+        <Setter Property="VerticalAlignment" Value="Center"/>
+        <Setter Property="HorizontalAlignment" Value="Left"/>
+        <Setter Property="IsHitTestVisible" Value="False"/>
+        <Style.Triggers>
+            <DataTrigger Binding="{Binding Text, ElementName=tourTo}" Value="">
+                <Setter Property="Visibility" Value="Visible"/>
+            </DataTrigger>
+        </Style.Triggers>
+    </Style>
+
+
+
+
+
+    <Style x:Key="AddTourBtn" TargetType="Button">
+        <Setter Property="Background" Value="#E0EDF2" />
+        <Setter Property="Foreground" Value="#3B889D" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <Border x:Name="Border" Width="100" Height="100" Margin="10" Background="{TemplateBinding Background}" HorizontalAlignment="Left" CornerRadius="20">
+                        <Grid>
+                            <Label x:Name="ButtonLabel" Content="&#xf0fe;" FontFamily="./#Font Awesome 6 Free Regular" FontSize="80">
+                                <Label.Style>
+                                    <Style TargetType="Label">
+                                        <Setter Property="Foreground" Value="#3B889D" />
+                                        <Setter Property="HorizontalAlignment" Value="Center" />
+                                        <Setter Property="VerticalAlignment" Value="Center" />
+                                    </Style>
+                                </Label.Style>
+                            </Label>
+                        </Grid>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter TargetName="Border" Property="Background" Value="#C1CFDB" />
+                            <Setter TargetName="ButtonLabel" Property="Foreground" Value="#5D79AC" />
+                        </Trigger>
+                        <Trigger Property="IsPressed" Value="True">
+                            <Setter TargetName="Border" Property="Background" Value="#C1CFDB" />
+                            <Setter TargetName="ButtonLabel" Property="Foreground" Value="#5D79AC" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+
     <Style x:Key="HomeBtn" TargetType="Button">
         <Setter Property="Background" Value="Transparent" />
         <Setter Property="Foreground" Value="#DECCFC" />
@@ -33,6 +262,7 @@
             </Setter.Value>
         </Setter>
     </Style>
+
 
     <Style x:Key="CtrlMinimizeBtn" TargetType="Button">
         <Setter Property="Background" Value="Transparent" />
