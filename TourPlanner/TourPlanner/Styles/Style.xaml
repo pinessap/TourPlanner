@@ -1,13 +1,264 @@
 ﻿<!-- ButtonStyles.xaml -->
 
 <ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit">
 
     <Style TargetType="TextBlock">
         <Setter Property="Foreground" Value="#DECCFC" />
     </Style>
     <Style TargetType="ListBox">
         <Setter Property="Foreground" Value="#DECCFC" />
+    </Style>
+
+    <!-- AddLogView -->
+
+    <Style x:Key="AddLogInput" TargetType="TextBox">
+        <Setter Property="Background" Value="#E6D7F0" />
+        <Setter Property="MinHeight" Value="50"/>
+        <!--<Setter Property="MaxHeight" Value="50"/>-->
+        <Setter Property="Foreground" Value="#4C4452"/>
+        <Setter Property="FontWeight" Value="Bold"/>
+        <Setter Property="FontSize" Value="14"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type TextBox}">
+                    <Border Background="{TemplateBinding Background}"
+                        BorderBrush="{TemplateBinding BorderBrush}"
+                        BorderThickness="{TemplateBinding BorderThickness}"
+                        CornerRadius="10">
+                        <ScrollViewer HorizontalScrollBarVisibility="Disabled"
+                                  VerticalScrollBarVisibility="Hidden"
+                                  Padding="5" Margin="10">
+                            <Grid>
+                                <TextBlock Text="{TemplateBinding Text}"
+                                       Background="Transparent"
+                                       Foreground="{TemplateBinding Foreground}"
+                                       FontWeight="{TemplateBinding FontWeight}"
+                                       FontSize="{TemplateBinding FontSize}"
+                                       TextWrapping="Wrap"/>
+                            </Grid>
+                        </ScrollViewer>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="BorderBrush" Value="#867990" />
+                            <Setter Property="Cursor" Value="IBeam" />
+                            <!-- Add this line to set the cursor -->
+                        </Trigger>
+                        <Trigger Property="IsKeyboardFocused" Value="True">
+                            <Setter Property="BorderBrush" Value="#867990" />
+                            <Setter Property="Cursor" Value="IBeam" />
+                        </Trigger>
+                        <Trigger Property="IsFocused" Value="True">
+                            <Setter Property="Background" Value="#DDCFE7" />
+                            <Setter Property="BorderBrush" Value="#867990" />
+                            <Setter Property="Cursor" Value="IBeam" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                    <ControlTemplate.Resources>
+                        <Style TargetType="TextBox">
+                            <Setter Property="FocusVisualStyle" Value="{x:Null}" />
+                        </Style>
+                    </ControlTemplate.Resources>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="AddLogTimeDate" TargetType="{x:Type xctk:DateTimePicker}">
+        <Setter Property="Margin" Value="10,10,10,0"/>
+        <Setter Property="Background" Value="#E6D7F0" />
+        <Setter Property="Foreground" Value="#4C4452" />
+       
+    </Style>
+
+    <Style x:Key="AddLogRating" TargetType="{x:Type Border}">
+        <Setter Property="Padding" Value="10"/>
+        <Setter Property="Background" Value="#E6D7F0"/>
+        <Setter Property="Margin" Value="10"/>
+        <Setter Property="VerticalAlignment" Value="Center"/>
+        <!--<Setter Property="IsHitTestVisible" Value="False"/>-->
+        <Setter Property="CornerRadius" Value="10"/>
+        <Setter Property="HorizontalAlignment" Value="Stretch"/>
+        <Style.Resources>
+            <Style TargetType="{x:Type Border}">
+                <Setter Property="Background" Value="#A196A7"/>
+                <Setter Property="CornerRadius" Value="7"/>
+                <Setter Property="Padding" Value="10"/>
+            </Style>
+            <Style TargetType="{x:Type Slider}">
+                <Setter Property="HorizontalAlignment" Value="Stretch"/>
+            </Style>
+            <Style TargetType="{x:Type TextBlock}">
+                <Setter Property="Foreground" Value="#4C4452"/>
+                <Setter Property="VerticalAlignment" Value="Center"/>
+                <Setter Property="FontWeight" Value="Bold"/>
+                <Setter Property="FontSize" Value="14"/>
+
+                <!-- Add any other properties you want to style -->
+            </Style>
+        </Style.Resources>
+        <Style.Triggers>
+            <DataTrigger Binding="{Binding Text, ElementName=logRating}" Value="">
+                <Setter Property="Visibility" Value="Visible"/>
+            </DataTrigger>
+        </Style.Triggers>
+    </Style>
+
+    <Style x:Key="AddLogDifficulty" TargetType="{x:Type TextBlock}">
+        <Setter Property="Visibility" Value="Collapsed"/>
+        <Setter Property="Padding" Value="10,3,0,3"/>
+        <Setter Property="Foreground" Value="#B2A8B8"/>
+        <Setter Property="Margin" Value="10,0,0,0"/>
+        <Setter Property="VerticalAlignment" Value="Center"/>
+        <Setter Property="HorizontalAlignment" Value="Left"/>
+        <!--<Setter Property="IsHitTestVisible" Value="False"/>-->
+        <Style.Triggers>
+            <DataTrigger Binding="{Binding Text, ElementName=logDifficulty}" Value="">
+                <Setter Property="Visibility" Value="Visible"/>
+            </DataTrigger>
+        </Style.Triggers>
+    </Style>
+
+
+
+    <Style x:Key="AddLogComment" TargetType="{x:Type TextBlock}">
+        <Setter Property="Visibility" Value="Collapsed"/>
+        <Setter Property="Padding" Value="10,3,0,3"/>
+        <Setter Property="Foreground" Value="#B2A8B8"/>
+        <Setter Property="Margin" Value="10,0,0,0"/>
+        <Setter Property="VerticalAlignment" Value="Center"/>
+        <Setter Property="HorizontalAlignment" Value="Left"/>
+        <Setter Property="IsHitTestVisible" Value="False"/>
+        <Style.Triggers>
+            <DataTrigger Binding="{Binding Text, ElementName=logComment}" Value="">
+                <Setter Property="Visibility" Value="Visible"/>
+            </DataTrigger>
+        </Style.Triggers>
+    </Style>
+
+    <Style x:Key="AddLogTime" TargetType="{x:Type TextBlock}">
+        <Setter Property="Visibility" Value="Collapsed"/>
+        <Setter Property="Padding" Value="10,3,0,3"/>
+        <Setter Property="Foreground" Value="#B2A8B8"/>
+        <Setter Property="Margin" Value="10,0,0,0"/>
+        <Setter Property="VerticalAlignment" Value="Center"/>
+        <Setter Property="HorizontalAlignment" Value="Left"/>
+        <Setter Property="IsHitTestVisible" Value="False"/>
+        <Style.Triggers>
+            <DataTrigger Binding="{Binding Text, ElementName=logTime}" Value="">
+                <Setter Property="Visibility" Value="Visible"/>
+            </DataTrigger>
+        </Style.Triggers>
+    </Style>
+
+
+    
+
+
+
+    <Style x:Key="AddLogBtn" TargetType="Button">
+        <Setter Property="Background" Value="#FFEDCB" />
+        <Setter Property="Foreground" Value="#FF8960" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <Border x:Name="Border" Width="70" Height="70" Margin="10" Background="{TemplateBinding Background}" HorizontalAlignment="Left" CornerRadius="50">
+                        <Grid>
+                            <Label x:Name="ButtonLabel" Content="+" FontWeight="Bold" FontFamily="./#Font Awesome 6 Free Regular" FontSize="50">
+                                <Label.Style>
+                                    <Style TargetType="Label">
+                                        <Setter Property="Foreground" Value="#FF8960" />
+                                        <Setter Property="HorizontalAlignment" Value="Center" />
+                                        <Setter Property="VerticalAlignment" Value="Center" />
+                                    </Style>
+                                </Label.Style>
+                            </Label>
+                        </Grid>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter TargetName="Border" Property="Background" Value="#FFCAA4" />
+                            <Setter TargetName="ButtonLabel" Property="Foreground" Value="#A26753" />
+                        </Trigger>
+                        <Trigger Property="IsPressed" Value="True">
+                            <Setter TargetName="Border" Property="Background" Value="#FFCAA4" />
+                            <Setter TargetName="ButtonLabel" Property="Foreground" Value="#A26753" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="EditTourBtn" TargetType="Button">
+        <Setter Property="Background" Value="#FFF7D0" />
+        <Setter Property="Foreground" Value="#71A37D" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <Border x:Name="Border" Width="100" Height="100" Margin="10" Background="{TemplateBinding Background}" HorizontalAlignment="Left" CornerRadius="50">
+                        <Grid>
+                            <Label x:Name="ButtonLabel" Content="&#xf044;" FontFamily="./#Font Awesome 6 Free Regular" FontSize="60">
+                                <Label.Style>
+                                    <Style TargetType="Label">
+                                        <Setter Property="Foreground" Value="#71A37D" />
+                                        <Setter Property="Margin" Value="5,0,0,4"/>
+                                        <Setter Property="HorizontalAlignment" Value="Center" />
+                                        <Setter Property="VerticalAlignment" Value="Center" />
+                                    </Style>
+                                </Label.Style>
+                            </Label>
+                        </Grid>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter TargetName="Border" Property="Background" Value="#C8C09B" />
+                            <Setter TargetName="ButtonLabel" Property="Foreground" Value="#3F6F4C" />
+                        </Trigger>
+                        <Trigger Property="IsPressed" Value="True">
+                            <Setter TargetName="Border" Property="Background" Value="#C8C09B" />
+                            <Setter TargetName="ButtonLabel" Property="Foreground" Value="#3F6F4C" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="DeleteTourBtn" TargetType="Button">
+        <Setter Property="Background" Value="#FFE3EB" />
+        <Setter Property="Foreground" Value="#C15F74" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <Border x:Name="Border" Width="100" Height="100" Margin="10" Background="{TemplateBinding Background}" HorizontalAlignment="Left" CornerRadius="50">
+                        <Grid>
+                            <Label x:Name="ButtonLabel" Content="&#xf057;" FontFamily="./#Font Awesome 6 Free Regular" FontSize="70">
+                                <Label.Style>
+                                    <Style TargetType="Label">
+                                        <Setter Property="Foreground" Value="#C15F74" />
+                                        <Setter Property="HorizontalAlignment" Value="Center" />
+                                        <Setter Property="VerticalAlignment" Value="Center" />
+                                    </Style>
+                                </Label.Style>
+                            </Label>
+                        </Grid>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter TargetName="Border" Property="Background" Value="#CE9EAD" />
+                            <Setter TargetName="ButtonLabel" Property="Foreground" Value="#80243E" />
+                        </Trigger>
+                        <Trigger Property="IsPressed" Value="True">
+                            <Setter TargetName="Border" Property="Background" Value="#CE9EAD" />
+                            <Setter TargetName="ButtonLabel" Property="Foreground" Value="#80243E" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
     </Style>
 
     <Style x:Key="AddTourCar" TargetType="RadioButton">

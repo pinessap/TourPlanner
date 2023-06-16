@@ -18,7 +18,7 @@
         </ResourceDictionary>
 
     </Window.Resources>
-        
+
     <Window.DataContext>
         <viewmodels:MainWindowVm></viewmodels:MainWindowVm>
     </Window.DataContext>

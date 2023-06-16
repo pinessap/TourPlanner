@@ -18,6 +18,14 @@
         <DataTemplate DataType="{x:Type viewModels:AddTourVm}">
             <views:AddTourView/>
         </DataTemplate>
+
+        <DataTemplate DataType="{x:Type viewModels:EditTourVm}">
+            <views:EditTourView/>
+        </DataTemplate>
+
+        <DataTemplate DataType="{x:Type viewModels:AddLogVm}">
+            <views:AddLogView/>
+        </DataTemplate>
     </Application.Resources>
 </Application>
 

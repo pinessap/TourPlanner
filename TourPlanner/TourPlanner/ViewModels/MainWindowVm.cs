@@ -160,6 +160,27 @@ namespace TourPlanner.ViewModels
 
 
             }
+            else if (message.ViewModelType == typeof(EditTourVm))
+            {
+                var selectedTour = message.SelectedTour;
+                var editTourVm = new EditTourVm();
+                editTourVm.SelectedTour = selectedTour;
+                var editTourView = new EditTourView();
+                editTourView.DataContext = editTourVm;
+                CurrentView = editTourView;
+
+            }
+            else if (message.ViewModelType == typeof(AddLogVm))
+            {
+                var selectedTour = message.SelectedTour;
+                var addLogVm = new AddLogVm();
+                addLogVm.SelectedTour = selectedTour;
+                var addLogView = new AddLogView();
+                addLogView.DataContext = addLogVm;
+                CurrentView = addLogView;
+
+
+            }
         }
 
         /*

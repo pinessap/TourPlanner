@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using TourPlanner.ViewModels;
 
 namespace TourPlanner.Views
 {
@@ -23,6 +24,56 @@ namespace TourPlanner.Views
         public TourDetailsView()
         {
             InitializeComponent();
+        }
+
+        private static T FindVisualParent<T>(DependencyObject child) where T : DependencyObject
+        {
+            var parentObject = VisualTreeHelper.GetParent(child);
+
+            if (parentObject == null)
+                return null;
+
+            if (parentObject is T parent)
+                return parent;
+
+            return FindVisualParent<T>(parentObject);
+        }
+
+        private void EditTour_Click(object sender, RoutedEventArgs e)
+        {
+            // Find the parent View
+            var tourDetailsView = FindVisualParent<TourDetailsView>((DependencyObject)sender);
+
+            // Retrieve the DataContext of the View (which should be an instance of TourDetailsVm)
+            var viewModel = (TourDetailsVm)tourDetailsView.DataContext;
+
+            // Execute the command in View1ViewModel to switch to AddTourView
+            viewModel.ExecuteWithTour(null);
+        }
+
+        private void AddLog_Click(object sender, RoutedEventArgs e)
+        {
+            // Find the parent View
+            var tourDetailsView = FindVisualParent<TourDetailsView>((DependencyObject)sender);
+
+            // Retrieve the DataContext of the View (which should be an instance of TourDetailsVm)
+            var viewModel = (TourDetailsVm)tourDetailsView.DataContext;
+
+            // Execute the command in View1ViewModel to switch to AddLogView
+            viewModel.ExecuteToAddLog(null);
+        }
+
+        private void ListBoxLogItem_DoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            
+            /*// Find the parent MainView
+            var mainView = FindVisualParent<MainView>((DependencyObject)sender);
+
+            // Retrieve the DataContext of the MainView (which should be an instance of MainVm)
+            var viewModel = (MainVm)mainView.DataContext;
+
+            // Execute the command in View1ViewModel to switch to EditLogView
+            viewModel.ExecuteWithTour(null);*/
         }
     }
 }
