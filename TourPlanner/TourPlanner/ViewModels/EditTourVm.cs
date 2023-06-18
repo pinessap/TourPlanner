@@ -21,10 +21,20 @@ namespace TourPlanner.ViewModels
         /// </summary>
         private readonly ITourFactory _tourFactory;
 
-        public Tour SelectedTour { get; set; }
+        private Tour _selectedTour;
+        public Tour SelectedTour
+        {
+            get { return _selectedTour; }
+            set
+            {
+                if (_selectedTour != value)
+                {
+                    _selectedTour = value;
+                    RaisePropertyChangedEvent();
+                }
+            }
+        }
 
-        //private Tour _currentTour = null!; // Diese dinger sind nur "= null!" um die warnungen im konstruktur zu unterbinden, hat keine programmrelevanz :)
-     
         private ICommand _editCommand = null!;
 
         /// <summary>
@@ -35,7 +45,7 @@ namespace TourPlanner.ViewModels
         /// <summary>
         /// The ICommand bound to the "Add dummy tour" button
         /// </summary>
-        public ICommand AddCommand => _editCommand ??= new RelayCommand(Edit);
+        public ICommand EditCommand => _editCommand ??= new RelayCommand(Edit);
 
         private string _tourName;
         public string TourName
@@ -150,7 +160,6 @@ namespace TourPlanner.ViewModels
         /// <param name="commandParameter">Gets automatically assigned by ICommand, dunno what's in there tbh but who cares</param>
         private void Edit(object commandParameter) //TODO: Edit should refer to a new view with input fields
         {
-
             try
             {
                 _tourFactory.Modify(SelectedTour);
@@ -167,7 +176,6 @@ namespace TourPlanner.ViewModels
             if (message.ViewModelType == typeof(TourDetailsVm))
             {
                 SelectedTour = message.SelectedTour;
-                // Handle the selected tour in TourDetailsView
             }
         }
     }

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Diagnostics;
 using System.Linq;
 using System.Net;
 using System.Text;
@@ -151,7 +152,9 @@ namespace TourPlanner.ViewModels
 
             //BUG: If the database is empty, but the autoincrement field is not at 0, the "new" first entry might f.ex. get the idValue 7 instead of the assumed value 1
             var newTourName = name + " " + (lastTourId + 1);*/
+            Trace.WriteLine("tour name: " + TourName);
 
+            
             var tourToAdd = new Tour
             {
                 Name = TourName,
@@ -163,16 +166,17 @@ namespace TourPlanner.ViewModels
                 TransportType = TourTransportType,
                 Logs = new List<TourLog>
                 {
-                    new()
+                    /*new()
                     {
                         Comment = "Help me pls I am dying",
                         Difficulty = 10,
                         Duration = new TimeSpan(99, 5, 0),
                         Rating = 5f,
                         Time = new DateTime(2000, 12, 31, 0, 0, 0, DateTimeKind.Utc)
-                    }
+                    }*/
                 }
             };
+            Trace.WriteLine("tour name of tourtoadd: " + tourToAdd.Name);
 
             try
             {
@@ -183,9 +187,6 @@ namespace TourPlanner.ViewModels
                 // TODO: Deal with different exceptions, probably display them in the UI somehow
             }
 
-            //var addedItems = _tourFactory.GetTours();
-
-            //FillListBox(addedItems);
         }
     }
 }

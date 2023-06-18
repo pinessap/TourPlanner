@@ -16,7 +16,7 @@
                 <ResourceDictionary Source="/Styles/Style.xaml" />
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
-        
+
     </UserControl.Resources>
 
     <Grid>
@@ -34,17 +34,13 @@
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
 
-        <TextBox  x:Name="tourName" Margin="10" Text="{Binding TourName}" Style="{StaticResource AddTourInput}"/>
-        <TextBlock Text="{Binding  SelectedTour.Name}" Style="{StaticResource AddTourName}"/>
+        <TextBox  x:Name="tourName" Margin="10" Text="{Binding SelectedTour.Name, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource EditTourInput}"/>
 
-        <TextBox x:Name="tourDescription" Grid.Row="0" Grid.RowSpan="4" Grid.Column="1" Margin="10" Text="{Binding TourDescription}" Style="{StaticResource AddTourInput}"/>
-        <TextBlock Text="{Binding  SelectedTour.Description}" Grid.Row="0" Grid.Column="1" Margin="10" Style="{StaticResource AddTourDescription}"/>
+        <TextBox x:Name="tourDescription" Grid.Row="0" Grid.RowSpan="4" Grid.Column="1" Margin="10" Text="{Binding SelectedTour.Description}" Style="{StaticResource EditTourInputDescr}"/>
 
-        <TextBox x:Name="tourFrom" Grid.Row="2" Margin="10" Text="{Binding TourFrom}" Style="{StaticResource AddTourInput}"/>
-        <TextBlock Text="{Binding  SelectedTour.FromLocation}" Grid.Row="2" Margin="10" Style="{StaticResource AddTourFrom}"/>
+        <TextBox x:Name="tourFrom" Grid.Row="2" Margin="10" Text="{Binding SelectedTour.FromLocation}" Style="{StaticResource EditTourInput}"/>
 
-        <TextBox x:Name="tourTo" Grid.Row="3" Margin="10" Text="{Binding TourTo}" Style="{StaticResource AddTourInput}"/>
-        <TextBlock Text="{Binding  SelectedTour.ToLocation}" Grid.Row="3" Margin="10" Style="{StaticResource AddTourTo}"/>
+        <TextBox x:Name="tourTo" Grid.Row="3" Margin="10" Text="{Binding SelectedTour.ToLocation}" Style="{StaticResource EditTourInput}"/>
 
         <StackPanel HorizontalAlignment="Center" Grid.Row="4" Orientation="Horizontal" Margin="10">
             <RadioButton Style="{StaticResource AddTourCar}" GroupName="TransportGroup" IsChecked="{Binding SelectedTour.TransportType, Converter={StaticResource RadioButtonCheckedConverter}, ConverterParameter=CAR}" Tag="CAR" />

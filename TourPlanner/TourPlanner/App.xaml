@@ -26,6 +26,10 @@
         <DataTemplate DataType="{x:Type viewModels:AddLogVm}">
             <views:AddLogView/>
         </DataTemplate>
+
+        <DataTemplate DataType="{x:Type viewModels:EditLogVm}">
+            <views:EditLogView/>
+        </DataTemplate>
     </Application.Resources>
 </Application>
 

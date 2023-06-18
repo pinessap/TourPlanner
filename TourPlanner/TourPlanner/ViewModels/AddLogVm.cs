@@ -8,6 +8,7 @@ using System.Windows.Input;
 using TourPlanner.BusinessLayer;
 using TourPlanner.Models;
 
+
 namespace TourPlanner.ViewModels
 {
     class AddLogVm : ViewModelBase
@@ -100,19 +101,17 @@ namespace TourPlanner.ViewModels
         /// <param name="commandParameter">Gets automatically assigned by ICommand, dunno what's in there tbh but who cares</param>
         private void AddLog(object commandParameter)
         {
-            TimeSpan duration = ConvertStringToTimeSpan(LogTime);
-
-            var logToAdd = new TourLog
-            {
-                Comment = LogComment,
-                Rating = LogRating,
-                Difficulty = LogDifficulty,
-                Duration = duration,
-                Time = LogDateTime,
-            };
-
             try
             {
+                var logToAdd = new TourLog
+                {
+                    Comment = LogComment,
+                    Rating = LogRating,
+                    Difficulty = LogDifficulty,
+                    Duration = (LogTime != null) ? TimeSpan.Parse(LogTime) : TimeSpan.Zero,
+                    Time = LogDateTime,
+                };
+
                 SelectedTour.Logs.Add(logToAdd);
                 _tourFactory.Modify(SelectedTour);
             }
@@ -121,36 +120,6 @@ namespace TourPlanner.ViewModels
                 // TODO: Deal with different exceptions, probably display them in the UI somehow
             }
 
-            //var addedItems = _tourFactory.GetTours();
-
-            //FillListBox(addedItems);
-        }
-
-        private TimeSpan ConvertStringToTimeSpan(string timeString)
-        {
-            string[] integerStrings = timeString.Split(',');
-
-            if (integerStrings.Length == 3)
-            {
-                if (int.TryParse(integerStrings[0], out int firstInteger) &&
-                    int.TryParse(integerStrings[1], out int secondInteger) &&
-                    int.TryParse(integerStrings[2], out int thirdInteger))
-                {
-                    return new TimeSpan(firstInteger, secondInteger, thirdInteger);
-                }
-                else
-                {
-                    // Parsing failed for one or more integers
-                    // Handle the error accordingly
-                    return TimeSpan.Zero;
-                }
-            }
-            else
-            {
-                // The input doesn't contain the expected number of integers
-                // Handle the error accordingly
-                return TimeSpan.Zero;
-            }
         }
 
     }

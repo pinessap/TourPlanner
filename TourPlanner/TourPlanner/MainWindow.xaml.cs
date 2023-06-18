@@ -61,8 +61,19 @@ namespace TourPlanner
             Application.Current.Shutdown();
         }
 
+        private static T FindVisualParent<T>(DependencyObject child) where T : DependencyObject
+        {
+            var parentObject = VisualTreeHelper.GetParent(child);
 
-        
+            if (parentObject == null)
+                return null;
+
+            if (parentObject is T parent)
+                return parent;
+
+            return FindVisualParent<T>(parentObject);
+        }
+
 
 
 

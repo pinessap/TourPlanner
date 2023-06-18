@@ -12,6 +12,10 @@ namespace TourPlanner.Messages
         public Type ViewModelType { get; }
         public Tour SelectedTour { get; } = null!;
 
+        public string SearchTerm { get; }
+
+        public TourLog SelectedLog { get; } = null!;
+
         public SwitchViewMessage(Type viewModelType)
         {
             ViewModelType = viewModelType;
@@ -23,6 +27,12 @@ namespace TourPlanner.Messages
             SelectedTour = selectedTour;
         }
 
+        public SwitchViewMessage(Type viewModelType, Tour selectedTour, TourLog selectedLog)
+        {
+            ViewModelType = viewModelType;
+            SelectedTour = selectedTour;
+            SelectedLog = selectedLog;
+        }
 
     }
 }

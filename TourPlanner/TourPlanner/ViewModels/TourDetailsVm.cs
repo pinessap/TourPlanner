@@ -23,7 +23,27 @@ namespace TourPlanner.ViewModels
         /// </summary>
         private readonly ITourFactory _tourFactory;
 
-        
+
+
+        /// <summary>
+        /// The Log currently selected
+        /// </summary>
+        ///
+        private TourLog _currentLog = null!;
+        public TourLog CurrentLog
+        {
+            get => _currentLog;
+            set
+            {
+                if (_currentLog != value)
+                {
+                    _currentLog = value;
+                    RaisePropertyChangedEvent();
+                }
+            }
+        }
+
+
         private ICommand _deleteCommand = null!;
 
         /// <summary>
@@ -100,6 +120,17 @@ namespace TourPlanner.ViewModels
             // Send a message to MainViewModel to switch to View
             Messenger.Default.Send(new SwitchViewMessage(typeof(AddLogVm), selectedTour));
         }
+
+        public void ExecuteToEditLog(object parameter)
+        {
+            // Retrieve the selected log and tour
+            var selectedLog = CurrentLog;
+            var selectedTour = SelectedTour;
+
+            // Send a message to MainViewModel to switch to View
+            Messenger.Default.Send(new SwitchViewMessage(typeof(EditLogVm), selectedTour, selectedLog));
+        }
+
         private void HandleSwitchViewMessage(SwitchViewMessage message)
         {
             if (message.ViewModelType == typeof(TourDetailsVm))

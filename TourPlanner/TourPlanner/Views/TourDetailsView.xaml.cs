@@ -65,15 +65,15 @@ namespace TourPlanner.Views
 
         private void ListBoxLogItem_DoubleClick(object sender, MouseButtonEventArgs e)
         {
-            
-            /*// Find the parent MainView
-            var mainView = FindVisualParent<MainView>((DependencyObject)sender);
 
-            // Retrieve the DataContext of the MainView (which should be an instance of MainVm)
-            var viewModel = (MainVm)mainView.DataContext;
+            // Find the parent View
+            var tourDetailsView = FindVisualParent<TourDetailsView>((DependencyObject)sender);
+
+            // Retrieve the DataContext of the View (which should be an instance of TourDetailsVm)
+            var viewModel = (TourDetailsVm)tourDetailsView.DataContext;
 
             // Execute the command in View1ViewModel to switch to EditLogView
-            viewModel.ExecuteWithTour(null);*/
+            viewModel.ExecuteToEditLog(null);
         }
     }
 }

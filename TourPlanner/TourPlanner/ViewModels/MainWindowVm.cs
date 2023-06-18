@@ -111,6 +111,40 @@ namespace TourPlanner.ViewModels
             }
         }*/
 
+        /// <summary>
+        /// The ICommand bound to the "Search" button
+        /// </summary>
+        ///
+        private ICommand _searchCommand = null!;
+        public ICommand SearchCommand => _searchCommand ??= new RelayCommand(Search);
+
+        private string _searchValue = null!;
+
+        /// <summary>
+        /// The two-way bound search string
+        /// </summary>
+        public string SearchValue
+        {
+            get => _searchValue;
+            set
+            {
+                if (_searchValue != value)
+                {
+                    _searchValue = value;
+                    RaisePropertyChangedEvent();
+                }
+            }
+        }
+
+        private void Search(object commandParameter)
+        {
+            var mainVm = new MainVm(SearchValue);
+            mainVm.SearchValue = SearchValue;
+            var mainView = new MainView();
+            mainView.DataContext = mainVm;
+            CurrentView = mainView;
+        }
+
         public MainWindowVm()
         {
             MainViewModel = new MainVm();
@@ -118,14 +152,7 @@ namespace TourPlanner.ViewModels
             CurrentView = MainViewModel;
 
             Messenger.Default.Register<SwitchViewMessage>(this, HandleSwitchViewMessage);
-            /*
-            _tourFactory = TourFactory.Instance;
-            Tours = new ObservableCollection<Tour>();
-            
-            // Fill list box with all tours in DB
-            var allTours = _tourFactory.GetTours();
-            
-            FillListBox(allTours);*/
+       
         }
 
         private void HandleSwitchViewMessage(SwitchViewMessage message)
@@ -178,110 +205,21 @@ namespace TourPlanner.ViewModels
                 var addLogView = new AddLogView();
                 addLogView.DataContext = addLogVm;
                 CurrentView = addLogView;
+            }
+            else if (message.ViewModelType == typeof(EditLogVm))
+            {
+                var selectedLog = message.SelectedLog;
+                var selectedTour = message.SelectedTour;
+                var editLogVm = new EditLogVm();
+                editLogVm.SelectedLog = selectedLog;
+                editLogVm.SelectedTour = selectedTour;
+                var editLogView = new EditLogView();
+                editLogView.DataContext = editLogVm;
+                CurrentView = editLogView;
 
 
             }
         }
 
-        /*
-        /// <summary>
-        /// Replaces ListBox content with all provided tours
-        /// </summary>
-        /// <param name="toursToDisplay">List of the tours we want our ListBox to display</param>
-        private void FillListBox(List<Tour> toursToDisplay)
-        {
-            Tours.Clear();
-            
-            foreach (var item in toursToDisplay)
-            {
-                Tours.Add(item);
-            }
-        }
-        
-        /// <summary>
-        /// Function called when "Search" button is pressed
-        /// </summary>
-        /// <param name="commandParameter">Gets automatically assigned by ICommand, dunno what's in there tbh but who cares</param>
-        private void Search(object commandParameter)
-        {
-            try
-            {
-                var foundItems = _tourFactory.Search(SearchValue);
-                FillListBox(foundItems);
-            }
-            catch (Exception ex)
-            {
-                // TODO: Deal with different exceptions, probably display them in the UI somehow
-            }
-        }
-        
-        /// <summary>
-        /// Function called when "Add dummy tour" button is pressed
-        /// </summary>
-        /// <param name="commandParameter">Gets automatically assigned by ICommand, dunno what's in there tbh but who cares</param>
-        private void Add(object commandParameter)
-        {
-            // Get existing tours and either set the lastTourId to 0 or whatever the last id in the DB is
-            var existingTours = _tourFactory.GetTours();
-            var lastTourId = existingTours.Count > 0 ? _tourFactory.GetTours().Last().TourId : 0;
-            
-            // BUG: If the database is empty, but the autoincrement field is not at 0, the "new" first entry might f.ex. get the idValue 7 instead of the assumed value 1
-            var newTourName = "Tour with Database-ID " + (lastTourId + 1);
-
-            var tourToAdd = new Tour
-            {
-                Name = newTourName,
-                Description = "Mc?",
-                FromLocation = "Productivity",
-                ToLocation = "Nati's Folterkeller",
-                EstimatedTime = new DateTime(2000, 12, 31, 0, 0, 0, DateTimeKind.Utc),
-                TourDistance = 12f,
-                TransportType = "White candy van",
-                Logs = new List<TourLog>
-                {
-                    new()
-                    {
-                        Comment = "Help me pls I am dying",
-                        Difficulty = 10,
-                        Duration = new TimeSpan(99, 5, 0),
-                        Rating = 5f,
-                        Time = new DateTime(2000, 12, 31, 0, 0, 0, DateTimeKind.Utc)
-                    }
-                }
-            };
-
-            try
-            {
-                _tourFactory.Add(tourToAdd);
-            }
-            catch (Exception ex)
-            {
-                // TODO: Deal with different exceptions, probably display them in the UI somehow
-            }
-
-            var addedItems = _tourFactory.GetTours();
-            
-            FillListBox(addedItems);
-        }
-        
-        /// <summary>
-        /// Function called when "Delete selected tour" button is pressed
-        /// </summary>
-        /// <param name="commandParameter">Gets automatically assigned by ICommand, dunno what's in there tbh but who cares</param>
-        private void Delete(object commandParameter)
-        {
-            try
-            {
-                _tourFactory.Delete(CurrentTour);
-            }
-            catch (Exception ex)
-            {
-                // TODO: Deal with different exceptions, probably display them in the UI somehow
-            }
-            
-            var remainingItems = _tourFactory.GetTours();
-            
-            FillListBox(remainingItems);
-        }*/
     }
 }
