@@ -163,6 +163,7 @@
             </Grid>
 
             <StackPanel Grid.Row="3" Orientation="Horizontal" HorizontalAlignment="Center">
+                <Button Content="Generate Report" Margin="20" Style="{StaticResource GenerateReportBtn}" Command="{Binding GenerateReportCommand}"/>
                 <Button Content="Edit Tour" Margin="20" Style="{StaticResource EditTourBtn}" Click="EditTour_Click"/>
                 <Button Content="Delete Tour" Margin="20" Style="{StaticResource DeleteTourBtn}" Command="{Binding DeleteCommand}"/>
             </StackPanel>

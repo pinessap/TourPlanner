@@ -16,8 +16,20 @@
 
     <ScrollViewer VerticalScrollBarVisibility="Auto">
         <StackPanel>
-            <Button Margin="60,0,0,0" Style="{StaticResource AddTourBtn}" Click="AddTour_Click">
-            </Button>
+            
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+
+            </Grid.ColumnDefinitions>
+                <Button Margin="60,0,0,0" Style="{StaticResource AddTourBtn}" Click="AddTour_Click"/>
+
+                <Button Grid.Column="1" Margin="10,0,0,0" Style="{StaticResource GenerateSumReportBtn}" Command="{Binding GenerateReportCommand}"/>
+            </Grid>
+               
+            
+           
 
 
             <ListBox Margin="60,0,0,0" HorizontalAlignment="Left" ScrollViewer.HorizontalScrollBarVisibility="Disabled" BorderThickness="0"  Background="Transparent" x:Name="ListTours" ItemsSource="{Binding Tours}" SelectedItem="{Binding CurrentTour}"  d:ItemsSource="{d:SampleData ItemCount=5}">

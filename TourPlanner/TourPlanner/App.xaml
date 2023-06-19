@@ -30,6 +30,10 @@
         <DataTemplate DataType="{x:Type viewModels:EditLogVm}">
             <views:EditLogView/>
         </DataTemplate>
+
+        <DataTemplate DataType="{x:Type viewModels:FilePopupWindowVm}">
+            <views:FilePopupWindow/>
+        </DataTemplate>
     </Application.Resources>
 </Application>
 

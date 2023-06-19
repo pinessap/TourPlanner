@@ -62,6 +62,9 @@ namespace TourPlanner.ViewModels
             }
         }
 
+        private ICommand _generateReportCommand = null!;
+        public ICommand GenerateReportCommand => _generateReportCommand ??= new RelayCommand(GenerateReport);
+
         public string SearchValue { get; set; }
         /*private string _searchValue = null!;
 
@@ -109,8 +112,6 @@ namespace TourPlanner.ViewModels
 
             Trace.WriteLine("mainvmm " + SearchValue);
 
-
-
         }
 
 
@@ -147,6 +148,17 @@ namespace TourPlanner.ViewModels
             }
         }
 
+        private void GenerateReport(object commandParameter) 
+        {
+            try
+            {
+                _tourFactory.GenerateSummarizedReport(_tourFactory.GetTours());
+            }
+            catch (Exception ex)
+            {
+                // TODO: Deal with different exceptions, probably display them in the UI somehow
+            }
+        }
 
 
     }

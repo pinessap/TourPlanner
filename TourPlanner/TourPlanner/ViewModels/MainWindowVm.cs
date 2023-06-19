@@ -39,13 +39,14 @@ namespace TourPlanner.ViewModels
             
         }
 
-        private void SwitchToMainView(object commandParameter)
+        public void SwitchToMainView(object commandParameter)
         {
             var mainVm = new MainVm();
             var mainView = new MainView();
             mainView.DataContext = mainVm;
             CurrentView = mainView;
         }
+
 
         /*
         /// <summary>

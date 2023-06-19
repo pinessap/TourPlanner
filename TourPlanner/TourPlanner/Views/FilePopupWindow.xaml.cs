@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -8,30 +9,21 @@ using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
+using System.Windows.Interop;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
-using TourPlanner.ViewModels;
-using System.Runtime.InteropServices;
-using System.Runtime;
-using System.Windows.Interop;
-using TourPlanner.Models;
-using TourPlanner.Views;
-using System.Windows.Controls.Primitives;
 
-namespace TourPlanner
+namespace TourPlanner.Views
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Interaction logic for FilePopupWindow.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class FilePopupWindow : Window
     {
-        public MainWindow()
+        public FilePopupWindow()
         {
             InitializeComponent();
-            this.MaxHeight = SystemParameters.MaximizedPrimaryScreenHeight;
-            DataContext = new MainWindowVm();
         }
 
         [DllImport("user32.dll")]
@@ -59,28 +51,17 @@ namespace TourPlanner
 
         private void BtnClose_Click(object sender, RoutedEventArgs e)
         {
-            Application.Current.Shutdown();
+            Window window = Window.GetWindow(this);
+            window.Closing += Window_Closing;
+            window.Close();
         }
 
-        private void fileBtn_Click(object sender, RoutedEventArgs e)
+        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            FilePopupWindow popupWindow = new FilePopupWindow();
-            popupWindow.MainReloadRequested += PopupWindow_MainReloadRequested;
-            popupWindow.ShowDialog();
+            // Raise a custom event to notify the main window to reload
+            MainReloadRequested?.Invoke(this, EventArgs.Empty);
         }
 
-        private void PopupWindow_MainReloadRequested(object sender, EventArgs e)
-        {
-            if (DataContext is MainWindowVm viewModel)
-            {
-                // Call the SwitchToMainView method on the view model
-                viewModel.SwitchToMainView(null); // You can pass the command parameter if needed
-            }
-        }
-
-
-
-
-
+        public event EventHandler MainReloadRequested;
     }
 }

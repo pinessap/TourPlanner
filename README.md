@@ -47,3 +47,4 @@ To start the database, make sure you follow these steps:
 | 15/06/2023 | 6        | added addtour view                                              |
 | 16/06/2023 | 8        | modified tourdetails view, added addlog & edittour view         |
 | 18/06/2023 | 6.5      | modified edittour view; added editlog view, delete log & search |
+| 19/06/2023 | 4        | added import/export and generate sum/single report to frontend  |

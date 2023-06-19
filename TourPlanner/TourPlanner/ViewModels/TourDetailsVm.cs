@@ -56,6 +56,10 @@ namespace TourPlanner.ViewModels
         /// </summary>
         public ObservableCollection<Tour> Tours { get; set; }
 
+        private ICommand _generateReportCommand = null!;
+
+        public ICommand GenerateReportCommand => _generateReportCommand ??= new RelayCommand(GenerateReport);
+
 
 
         public TourDetailsVm()
@@ -95,6 +99,20 @@ namespace TourPlanner.ViewModels
             try
             {
                 _tourFactory.Modify(SelectedTour);
+            }
+            catch (Exception ex)
+            {
+                // TODO: Deal with different exceptions, probably display them in the UI somehow
+            }
+
+        }
+
+        private void GenerateReport(object commandParameter)
+        {
+
+            try
+            {
+                _tourFactory.GenerateSingleReport(SelectedTour);
             }
             catch (Exception ex)
             {

@@ -7,6 +7,7 @@
     <!--<Style TargetType="TextBlock">
         <Setter Property="Foreground" Value="#DECCFC" />
     </Style>-->
+
     <Style TargetType="ListBox">
         <Setter Property="Foreground" Value="#DECCFC" />
     </Style>
@@ -254,6 +255,40 @@
                         <Trigger Property="IsPressed" Value="True">
                             <Setter TargetName="Border" Property="Background" Value="#CE9EAD" />
                             <Setter TargetName="ButtonLabel" Property="Foreground" Value="#80243E" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="GenerateReportBtn" TargetType="Button">
+        <Setter Property="Background" Value="#CBF5E5" />
+        <Setter Property="Foreground" Value="#5C9CBD" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <Border x:Name="Border" Width="100" Height="100" Margin="10" Background="{TemplateBinding Background}" HorizontalAlignment="Left" CornerRadius="50">
+                        <Grid>
+                            <Label x:Name="ButtonLabel" Content="&#xf15c;" FontFamily="./#Font Awesome 6 Free Regular" FontSize="70">
+                                <Label.Style>
+                                    <Style TargetType="Label">
+                                        <Setter Property="Foreground" Value="#5C9CBD" />
+                                        <Setter Property="HorizontalAlignment" Value="Center" />
+                                        <Setter Property="VerticalAlignment" Value="Center" />
+                                    </Style>
+                                </Label.Style>
+                            </Label>
+                        </Grid>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter TargetName="Border" Property="Background" Value="#81ADAE" />
+                            <Setter TargetName="ButtonLabel" Property="Foreground" Value="#1F6988" />
+                        </Trigger>
+                        <Trigger Property="IsPressed" Value="True">
+                            <Setter TargetName="Border" Property="Background" Value="#81ADAE" />
+                            <Setter TargetName="ButtonLabel" Property="Foreground" Value="#1F6988" />
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
@@ -645,7 +680,39 @@
     </Style>
 
 
-
+    <Style x:Key="GenerateSumReportBtn" TargetType="Button">
+        <Setter Property="Background" Value="#E0EDF2" />
+        <Setter Property="Foreground" Value="#3B889D" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <Border x:Name="Border" Width="100" Height="100" Margin="10" Background="{TemplateBinding Background}" HorizontalAlignment="Left" CornerRadius="20">
+                        <Grid>
+                            <Label x:Name="ButtonLabel" Content="&#xf15c;" FontFamily="./#Font Awesome 6 Free Regular" FontSize="75">
+                                <Label.Style>
+                                    <Style TargetType="Label">
+                                        <Setter Property="Foreground" Value="#3B889D" />
+                                        <Setter Property="HorizontalAlignment" Value="Center" />
+                                        <Setter Property="VerticalAlignment" Value="Center" />
+                                    </Style>
+                                </Label.Style>
+                            </Label>
+                        </Grid>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter TargetName="Border" Property="Background" Value="#C1CFDB" />
+                            <Setter TargetName="ButtonLabel" Property="Foreground" Value="#5D79AC" />
+                        </Trigger>
+                        <Trigger Property="IsPressed" Value="True">
+                            <Setter TargetName="Border" Property="Background" Value="#C1CFDB" />
+                            <Setter TargetName="ButtonLabel" Property="Foreground" Value="#5D79AC" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
 
 
     <Style x:Key="AddTourBtn" TargetType="Button">
@@ -681,6 +748,32 @@
             </Setter.Value>
         </Setter>
     </Style>
+
+    <Style x:Key="FileBtn" TargetType="Button">
+        <Setter Property="Background" Value="Transparent" />
+        <Setter Property="Foreground" Value="#DECCFC" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <Border x:Name="Border" Background="{TemplateBinding Background}" CornerRadius="1">
+                        <ContentPresenter HorizontalAlignment="Center"/>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter TargetName="Border" Property="Background" Value="#655680" />
+                            <Setter Property="Foreground" Value="#FFFFFF" />
+                        </Trigger>
+                        <Trigger Property="IsPressed" Value="True">
+                            <Setter TargetName="Border" Property="Background" Value="#655680" />
+                            <Setter Property="Foreground" Value="#FFFFFF" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+
 
 
     <Style x:Key="HomeBtn" TargetType="Button">
@@ -802,6 +895,108 @@
                         <Label.Style>
                             <Style TargetType="Label">
                                 <Setter Property="Foreground" Value="#A29FB5" />
+                            </Style>
+                        </Label.Style>
+                    </Label>
+                </DataTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="CtrlMinimizePopupBtn" TargetType="Button">
+        <Setter Property="Background" Value="Transparent" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <Border x:Name="Border" Background="{TemplateBinding Background}">
+                        <ContentPresenter />
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter TargetName="Border" Property="Background" Value="#6C4D6F" />
+                        </Trigger>
+                        <Trigger Property="IsPressed" Value="True">
+                            <Setter TargetName="Border" Property="Background" Value="#6C4D6F" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+        <Setter Property="ContentTemplate">
+            <Setter.Value>
+                <DataTemplate>
+                    <Label x:Name="ButtonLabel" Content="&#xf2d1;" FontFamily="./#Font Awesome 6 Free Regular">
+                        <Label.Style>
+                            <Style TargetType="Label">
+                                <Setter Property="Foreground" Value="#D6B5D9" />
+                            </Style>
+                        </Label.Style>
+                    </Label>
+                </DataTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="CtrlMaximizePopupBtn" TargetType="Button">
+        <Setter Property="Background" Value="Transparent" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <Border x:Name="Border" Background="{TemplateBinding Background}">
+                        <ContentPresenter />
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter TargetName="Border" Property="Background" Value="#6C4D6F" />
+                        </Trigger>
+                        <Trigger Property="IsPressed" Value="True">
+                            <Setter TargetName="Border" Property="Background" Value="#6C4D6F" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+        <Setter Property="ContentTemplate">
+            <Setter.Value>
+                <DataTemplate>
+                    <Label x:Name="ButtonLabel" Content="&#xf2d0;" FontFamily="./#Font Awesome 6 Free Regular">
+                        <Label.Style>
+                            <Style TargetType="Label">
+                                <Setter Property="Foreground" Value="#D6B5D9" />
+                            </Style>
+                        </Label.Style>
+                    </Label>
+                </DataTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="CtrlClosePopupBtn" TargetType="Button">
+        <Setter Property="Background" Value="Transparent" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <Border x:Name="Border" Background="{TemplateBinding Background}" CornerRadius="0,10,0,0">
+                        <ContentPresenter />
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter TargetName="Border" Property="Background" Value="#6C4D6F" />
+                        </Trigger>
+                        <Trigger Property="IsPressed" Value="True">
+                            <Setter TargetName="Border" Property="Background" Value="#6C4D6F" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+        <Setter Property="ContentTemplate">
+            <Setter.Value>
+                <DataTemplate>
+                    <Label x:Name="ButtonLabel" Content="&#xf410;" FontFamily="./#Font Awesome 6 Free Regular">
+                        <Label.Style>
+                            <Style TargetType="Label">
+                                <Setter Property="Foreground" Value="#D6B5D9" />
                             </Style>
                         </Label.Style>
                     </Label>

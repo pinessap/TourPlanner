@@ -22,7 +22,7 @@ namespace TourPlanner.Views
     {
         public EditTourView()
         {
-            InitializeComponent();
+           InitializeComponent();
         }
 
 
