@@ -36,11 +36,6 @@ namespace TourPlanner.DataAccessLayer
         {
             try
             {
-                var directoryPath = Path.GetDirectoryName(absoluteFilePath);
-
-                // Create the directory if it does not already exist
-                Directory.CreateDirectory(directoryPath!);
-
                 // If manual saving is enabled, open a dialogbox and let user save file himself
                 if (manualUserSave)
                 {

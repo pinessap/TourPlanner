@@ -48,18 +48,22 @@ namespace TourPlanner.BusinessLayer
         {
             AppLogger.Info("Adding new tour \"" + tourToAdd.Name + "\"");
             _tourDao.Add(tourToAdd);
+            AppLogger.Info("Add tour \"" + tourToAdd.Name + "\" successful");
         }
         
         public void Delete(Tour tourToDelete)
         {
             AppLogger.Info("Deleting tour \"" + tourToDelete.Name + "\"");
             _tourDao.Delete(tourToDelete);
+            AppLogger.Info("Delete tour \"" + tourToDelete.Name + "\" successful");
+
         }
         
         public void Modify(Tour modifiedTour)
         {
             AppLogger.Info("Modifying tour \"" + modifiedTour.Name + "\"");
             _tourDao.Modify(modifiedTour);
+            AppLogger.Info("Modify tour \"" + modifiedTour.Name + "\" successful");
         }
 
         public void Export(List<Tour> toursToExport)
@@ -74,8 +78,10 @@ namespace TourPlanner.BusinessLayer
             AppLogger.Info("Export to \"" + absolutePath + "\" successful");
         }
 
-        public void ImportOverride(string defaultAbsoluteLocationOfFile)
+        public void ImportOverride()
         {
+            var defaultAbsoluteLocationOfFile = Path.Combine(AppConfigManager.Settings.OutputDirectory, "importData.json");
+            
             AppLogger.Info("Try OverrideImport from \"" + defaultAbsoluteLocationOfFile + "\"");
             
             var jsonString = _tourDao.ReadFromFile(defaultAbsoluteLocationOfFile, true);
@@ -91,11 +97,13 @@ namespace TourPlanner.BusinessLayer
                 _tourDao.Add(tour);
             }
             
-            AppLogger.Info("OverrideImport from \"" + defaultAbsoluteLocationOfFile + "\" successful");
+            AppLogger.Info("OverrideImport successful");
         }
 
-        public void ImportAppend(string defaultAbsoluteLocationOfFile)
+        public void ImportAppend()
         {
+            var defaultAbsoluteLocationOfFile = Path.Combine(AppConfigManager.Settings.OutputDirectory, "importData.json");
+
             AppLogger.Info("Try AppendImport from \"" + defaultAbsoluteLocationOfFile + "\"");
 
             var jsonString = _tourDao.ReadFromFile(defaultAbsoluteLocationOfFile, true);
@@ -113,7 +121,7 @@ namespace TourPlanner.BusinessLayer
                 _tourDao.Add(tour);
             }
             
-            AppLogger.Info("AppendImport from \"" + defaultAbsoluteLocationOfFile + "\" successful");
+            AppLogger.Info("AppendImport successful");
         }
 
         public void GenerateSingleReport(Tour tourToGenerateReportFrom)

@@ -63,7 +63,7 @@ namespace TourPlanner.ViewModels
         {
             try
             {
-                _tourFactory.ImportAppend(PathValue);
+                _tourFactory.ImportAppend();
             }
             catch (Exception ex)
             {
@@ -75,7 +75,7 @@ namespace TourPlanner.ViewModels
         {
             try
             {
-                _tourFactory.ImportOverride(PathValue);
+                _tourFactory.ImportOverride();
             }
             catch (Exception ex)
             {

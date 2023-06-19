@@ -43,14 +43,12 @@ namespace TourPlanner.BusinessLayer
         /// <summary>
         /// Imports a given json file into the database, deletes all old entries. If file given is not found, opens File Explorer to let user select one.
         /// </summary>
-        /// <param name="defaultAbsoluteLocationOfFile">Absolute location of file, f.ex. "C:\\Users\\Samuel\\Downloads\\importMe.json"</param>
-        void ImportOverride(string defaultAbsoluteLocationOfFile);
+        void ImportOverride();
 
         /// <summary>
         /// Imports a given json file into the database by appending everything as a new entry. If file given is not found, opens File Explorer to let user select one.
         /// </summary>
-        /// <param name="defaultAbsoluteLocationOfFile">Absolute location of file, f.ex. "C:\\Users\\Samuel\\Downloads\\importMe.json"</param>
-        void ImportAppend(string defaultAbsoluteLocationOfFile);
+        void ImportAppend();
 
         /// <summary>
         /// Generates a PDF report from a given tour
