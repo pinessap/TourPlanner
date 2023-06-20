@@ -15,16 +15,10 @@ namespace TourPlanner.ViewModels
     public class FilePopupWindowVm : ViewModelBase
     {
 
-        /// <summary>
-        /// Connection to our business logic
-        /// </summary>
         private readonly ITourFactory _tourFactory;
 
-
-        /// <summary>
-        /// The ObservableCollection bound to the ListBox that lists the tour names
-        /// </summary>
         public ObservableCollection<Tour> Tours { get; set; }
+
 
         private ICommand _importCommand = null!;
         public ICommand ImportCommand => _importCommand ??= new RelayCommand(Import);
@@ -36,22 +30,6 @@ namespace TourPlanner.ViewModels
         public ICommand ExportCommand => _exportCommand ??= new RelayCommand(Export);
 
         private string _pathValue = null!;
-
-        /// <summary>
-        /// The two-way bound search string
-        /// </summary>
-        public string PathValue
-        {
-            get => _pathValue;
-            set
-            {
-                if (_pathValue != value)
-                {
-                    _pathValue = value;
-                    RaisePropertyChangedEvent();
-                }
-            }
-        }
         public FilePopupWindowVm()
         {
             _tourFactory = TourFactory.Instance;
@@ -61,39 +39,17 @@ namespace TourPlanner.ViewModels
 
         private void Import(object commandParameter)
         {
-            try
-            {
-                _tourFactory.ImportAppend();
-            }
-            catch (Exception ex)
-            {
-                // TODO: Deal with different exceptions, probably display them in the UI somehow
-            }
+            HandleException(() => _tourFactory.ImportAppend());
         }
 
         private void ImportOverride(object commandParameter)
         {
-            try
-            {
-                _tourFactory.ImportOverride();
-            }
-            catch (Exception ex)
-            {
-                // TODO: Deal with different exceptions, probably display them in the UI somehow
-            }
+            HandleException(() => _tourFactory.ImportOverride());
         }
 
         private void Export(object commandParameter)
         {
-            Trace.WriteLine("exporting ");
-            try
-            {
-                _tourFactory.Export(_tourFactory.GetTours());
-            }
-            catch (Exception ex)
-            {
-                // TODO: Deal with different exceptions, probably display them in the UI somehow
-            }
+            HandleException(() => _tourFactory.Export(_tourFactory.GetTours()));
         }
     }
 }

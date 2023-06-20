@@ -1,5 +1,6 @@
 ﻿using System;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.Runtime.CompilerServices;
 
 namespace TourPlanner.ViewModels
@@ -20,6 +21,46 @@ namespace TourPlanner.ViewModels
             if (TypeDescriptor.GetProperties(this)[propertyName] == null)
             {
                 throw new ArgumentException("Invalid propery name: " + propertyName);
+            }
+        }
+
+        private string _alertMessage = null!;
+        private bool _hasException;
+
+        public string AlertMessage
+        {
+            get => _alertMessage;
+            set
+            {
+                _alertMessage = value;
+                _hasException = !string.IsNullOrEmpty(_alertMessage);
+                RaisePropertyChangedEvent(nameof(HasException));
+                RaisePropertyChangedEvent(nameof(AlertMessage));
+            }
+        }
+
+        public bool HasException
+        {
+            get { return _hasException; }
+            set
+            {
+                _hasException = value;
+                RaisePropertyChangedEvent(nameof(HasException));
+            }
+        }
+
+        protected void HandleException(Action action)
+        {
+            AlertMessage = null;
+            try
+            {
+                action.Invoke();
+            }
+            catch (Exception ex)
+            {
+                AlertMessage = ex.Message;
+                Trace.WriteLine("Exceptiontestalert:");
+                Trace.WriteLine(AlertMessage);
             }
         }
     }

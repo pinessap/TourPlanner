@@ -158,17 +158,9 @@ namespace TourPlanner.ViewModels
         /// Function called when "Edit selected tour" button is pressed
         /// </summary>
         /// <param name="commandParameter">Gets automatically assigned by ICommand, dunno what's in there tbh but who cares</param>
-        private void Edit(object commandParameter) //TODO: Edit should refer to a new view with input fields
+        private void Edit(object commandParameter)
         {
-            try
-            {
-                _tourFactory.Modify(SelectedTour);
-            }
-            catch (Exception ex)
-            {
-                // TODO: Deal with different exceptions, probably display them in the UI somehow
-            }
-
+            HandleException(() => _tourFactory.Modify(SelectedTour));
         }
 
         private void HandleSwitchViewMessage(SwitchViewMessage message)

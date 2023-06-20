@@ -178,14 +178,7 @@ namespace TourPlanner.ViewModels
             };
             Trace.WriteLine("tour name of tourtoadd: " + tourToAdd.Name);
 
-            try
-            {
-                _tourFactory.Add(tourToAdd);
-            }
-            catch (Exception ex)
-            {
-                // TODO: Deal with different exceptions, probably display them in the UI somehow
-            }
+            HandleException(() => _tourFactory.Add(tourToAdd));
 
         }
     }

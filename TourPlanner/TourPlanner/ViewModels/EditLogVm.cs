@@ -59,15 +59,7 @@ namespace TourPlanner.ViewModels
         /// <param name="commandParameter">Gets automatically assigned by ICommand, dunno what's in there tbh but who cares</param>
         private void EditLog(object commandParameter)
         {
-            try
-            {
-                _tourFactory.Modify(SelectedTour);
-            }
-            catch (Exception ex)
-            {
-                // TODO: Deal with different exceptions, probably display them in the UI somehow
-            }
-
+            HandleException(() => _tourFactory.Modify(SelectedTour));
         }
 
         /// <summary>
@@ -76,16 +68,13 @@ namespace TourPlanner.ViewModels
         /// <param name="commandParameter">Gets automatically assigned by ICommand, dunno what's in there tbh but who cares</param>
         private void Delete(object commandParameter)
         {
-            try
+      
+            HandleException(() =>
             {
                 SelectedTour.Logs.Remove(SelectedLog);
-                
                 _tourFactory.Modify(SelectedTour);
-            }
-            catch (Exception ex)
-            {
-                // TODO: Deal with different exceptions, probably display them in the UI somehow
-            }
+            });
+
 
         }
         private void HandleSwitchViewMessage(SwitchViewMessage message)
@@ -95,8 +84,6 @@ namespace TourPlanner.ViewModels
                 SelectedTour = message.SelectedTour;
 
                 SelectedLog = message.SelectedLog;
-
-
             }
         }
     }

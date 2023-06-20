@@ -5,15 +5,24 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TourPlanner.Views"
         xmlns:viewmodels="clr-namespace:TourPlanner.ViewModels"
+        xmlns:converters="clr-namespace:TourPlanner.Converters"
+        xmlns:components="clr-namespace:TourPlanner.Components"
         mc:Ignorable="d"
         Title="FilePopupWindow" Height="300" Width="400"
         WindowStyle="None" Background="Transparent"  AllowsTransparency="True">
+
+    <WindowChrome.WindowChrome>
+        <WindowChrome 
+            CaptionHeight="0"
+            ResizeBorderThickness="5" />
+    </WindowChrome.WindowChrome>
 
     <Window.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="/Styles/Style.xaml" />
             </ResourceDictionary.MergedDictionaries>
+            <converters:CharacterCasingConverter x:Key="CharacterCasingConverter" />
         </ResourceDictionary>
 
     </Window.Resources>
@@ -37,13 +46,12 @@
                         <ColumnDefinition Width="*"></ColumnDefinition>
                     </Grid.ColumnDefinitions>
                     <Grid.RowDefinitions>
+                        <RowDefinition Height="*"></RowDefinition>
+                        <RowDefinition Height="Auto"></RowDefinition>
+                        <RowDefinition Height="Auto"></RowDefinition>
                         <RowDefinition Height="Auto"></RowDefinition>
                         <RowDefinition Height="*"></RowDefinition>
-                        <RowDefinition Height="*"></RowDefinition>
-                        <RowDefinition Height="*"></RowDefinition>
-                        <RowDefinition Height="*"></RowDefinition>
-                        <RowDefinition Height="*"></RowDefinition>
-                    </Grid.RowDefinitions>
+                </Grid.RowDefinitions>
 
                     <!--Control Bar-->
                     <Grid x:Name="ControlBar"
@@ -70,33 +78,40 @@
 
 
                             <!--<TextBlock Grid.Row="0" Grid.ColumnSpan="2" Text="Tour Planner" Margin="5,0,100,5" Foreground="#DECCFC"/>-->
-                        <TextBlock Grid.Row="0" Grid.ColumnSpan="2" Text="Tour Planner" FontWeight="Bold" Foreground="#DECCFC"/>
-                        <Button Grid.Column="5" Style="{StaticResource CtrlMinimizePopupBtn}"
-                                    Click="BtnMinimize_Click"></Button>
-                            <Button Grid.Column="6" Style="{StaticResource CtrlMaximizePopupBtn}"
-                                    Click="BtnMaximize_Click"></Button>
-                        <Button Grid.Column="7" Style="{StaticResource CtrlClosePopupBtn}"
-                                    Click="BtnClose_Click"></Button>
+                            <TextBlock FontFamily="Verdana" Grid.Row="0" Grid.ColumnSpan="2" Text="Tour Planner" FontWeight="Bold" Foreground="#DECCFC"/>
+                            <Button Grid.Column="5" Style="{StaticResource CtrlMinimizePopupBtn}"
+                                        Click="BtnMinimize_Click"/>
+                                <Button Grid.Column="6" Style="{StaticResource CtrlMaximizePopupBtn}"
+                                        Click="BtnMaximize_Click"/>
+                            <Button Grid.Column="7" Style="{StaticResource CtrlClosePopupBtn}"
+                                        Click="BtnClose_Click"/>
                         </Grid>
+                        
 
                     </Grid>
+                    <Border Margin="0,35,0,0" Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="6" BorderThickness="0,0,0,1" BorderBrush="#9A7CA8"/>
 
 
 
-                    <TextBlock Grid.Row="1" Grid.ColumnSpan="2" Text="Path:" Margin="5,20,5,0" 
-                               Foreground="#DECCFC" FontWeight="Bold" FontSize="15"/>
-                    <TextBox Grid.Column="0" Grid.ColumnSpan="6" Grid.Row="2" Margin="5" Name="TxtSearchTour" VerticalAlignment="Center" Text="{Binding PathValue, Mode=TwoWay}"/>
-                    <Button Grid.Column="0" Grid.ColumnSpan="6" Grid.Row="3" Margin="5" Command="{Binding ImportCommand}" CommandParameter="{Binding PathValue}">
-                        Import
-                    </Button>
-                    <Button Grid.Column="0" Grid.ColumnSpan="6" Grid.Row="4" Margin="5" Command="{Binding ImportOverrideCommand}" CommandParameter="{Binding PathValue}">
-                        Import (Override)
-                    </Button>
-                    <Button Grid.Column="0" Grid.ColumnSpan="6" Grid.Row="5" Margin="5" Command="{Binding ExportCommand}" CommandParameter="{Binding PathValue}">
-                        Export
-                    </Button>
+                    <Button Grid.Column="0" Grid.ColumnSpan="6" Grid.Row="1" Margin="20,40,20,10" Command="{Binding ImportCommand}" Style="{StaticResource ImportExportBtn}">
+                            Import
+                        </Button>
+                    <Button Grid.Column="0" Grid.ColumnSpan="6" Grid.Row="2" Command="{Binding ImportOverrideCommand}" Style="{StaticResource ImportExportBtn}">
+                            Import (Override)
+                        </Button>
+                    <Button Grid.Column="0" Grid.ColumnSpan="6" Grid.Row="3" Command="{Binding ExportCommand}" Style="{StaticResource ImportExportBtn}">
+                            Export
+                        </Button>
 
-                </Grid>
+                    <!--<Border Grid.Column="0" Margin="20,10,20,0" Grid.ColumnSpan="6" Grid.Row="4" Style="{StaticResource ExceptionBorder}">
+                        <TextBlock Style="{StaticResource ExceptionMessage}" Text="{Binding ExceptionMessage, Converter={StaticResource CharacterCasingConverter}}" />
+                    </Border>-->
+
+                <components:Alert Grid.Column="0" Margin="20,10,20,0" Grid.ColumnSpan="6" Grid.Row="4" 
+                                       Text="{Binding AlertMessage}"/>
+
+
+</Grid>
             </StackPanel>
 
     </Border>

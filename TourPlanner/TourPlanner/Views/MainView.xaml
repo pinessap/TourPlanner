@@ -4,6 +4,9 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:TourPlanner.Views"
+             xmlns:converters="clr-namespace:TourPlanner.Converters"
+             xmlns:viewModels="clr-namespace:TourPlanner.ViewModels"
+             xmlns:components="clr-namespace:TourPlanner.Components"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <UserControl.Resources>
@@ -11,11 +14,16 @@
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="/Styles/Style.xaml" />
             </ResourceDictionary.MergedDictionaries>
+            <converters:ZeroDecimalConverter x:Key="ZeroDecimalConverter" />
         </ResourceDictionary>
     </UserControl.Resources>
 
+
     <ScrollViewer VerticalScrollBarVisibility="Auto">
         <StackPanel>
+
+            <components:Alert Margin="50,5,50,10" Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="7" 
+                              Text="{Binding AlertMessage}"/>
             
             <Grid>
                 <Grid.ColumnDefinitions>
@@ -33,26 +41,67 @@
 
 
             <ListBox Margin="60,0,0,0" HorizontalAlignment="Left" ScrollViewer.HorizontalScrollBarVisibility="Disabled" BorderThickness="0"  Background="Transparent" x:Name="ListTours" ItemsSource="{Binding Tours}" SelectedItem="{Binding CurrentTour}"  d:ItemsSource="{d:SampleData ItemCount=5}">
-            <ListBox.ItemTemplate>
-                <DataTemplate>
-                    <Grid Width="200" Height="200" Margin="5"  >
-                        <Border Background="#E0EDF2" CornerRadius="20">
-                            <TextBlock Text="{Binding Name}" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="#3B889D" />
-                        </Border>
-                    </Grid>
-                </DataTemplate>
-            </ListBox.ItemTemplate>
-            <ListBox.ItemsPanel>
-                <ItemsPanelTemplate>
-                    <WrapPanel Orientation="Horizontal" />
-                </ItemsPanelTemplate>
-            </ListBox.ItemsPanel>
-            <ListBox.ItemContainerStyle>
-                <Style TargetType="ListBoxItem">
-                    <EventSetter Event="MouseDoubleClick" Handler="ListBoxItem_DoubleClick"/>
-                </Style>
-            </ListBox.ItemContainerStyle>
-        </ListBox>
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <Grid Width="200" Height="200" Margin="5">
+                            <Border Background="#E0EDF2" CornerRadius="20">
+                                <Grid >
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="*"/>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="Auto"/>
+                                    </Grid.RowDefinitions>
+                                        <Border Background="#E0EDF2" CornerRadius="10" HorizontalAlignment="Left" Height="30" Width="50" Margin="10,5,0,0">
+                                            <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="#3B889D">
+                                                <TextBlock.Text>
+                                                        <MultiBinding StringFormat="{}★ {0:N2}">
+                                                        <Binding Path="AverageRating" TargetNullValue="-" FallbackValue="-" />
+                                                    </MultiBinding>
+                                                </TextBlock.Text>
+                                            </TextBlock>
+                                        </Border>
+                                        <TextBlock Grid.Row="2" Grid.RowSpan="2" FontSize="16" Height="25" Text="{Binding Name}" Margin="6,0,0,10" HorizontalAlignment="Left" VerticalAlignment="Center" Foreground="#3B889D" />
+                                        <TextBlock Grid.Row="3" Grid.RowSpan="2" FontSize="12" Height="25" Margin="0,0,5,0" HorizontalAlignment="Right" VerticalAlignment="Bottom" Foreground="#3B889D">
+                                            <TextBlock.Text>
+                                                <Binding Path="TourDistance" StringFormat="{}{0} km" TargetNullValue="" FallbackValue="" />
+                                            </TextBlock.Text>
+                                        </TextBlock>
+                                </Grid>
+                            </Border>
+                        </Grid>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+                <ListBox.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <WrapPanel Orientation="Horizontal" />
+                    </ItemsPanelTemplate>
+                </ListBox.ItemsPanel>
+                <ListBox.ItemContainerStyle>
+                    <Style TargetType="ListBoxItem">
+                        <EventSetter Event="MouseDoubleClick" Handler="ListBoxItem_DoubleClick"/>
+                        <Setter Property="Background" Value="Transparent" />
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="ListBoxItem">
+                                    <Border Background="{TemplateBinding Background}"
+                                            BorderBrush="{TemplateBinding BorderBrush}"
+                                            BorderThickness="{TemplateBinding BorderThickness}"
+                                            SnapsToDevicePixels="True">
+                                        <ContentPresenter />
+                                    </Border>
+                                    <ControlTemplate.Triggers>
+                                        <Trigger Property="IsMouseOver" Value="True">
+                                            <Setter Property="Background" Value="#9890A8" />
+                                        </Trigger>
+                                    </ControlTemplate.Triggers>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                    </Style>
+                </ListBox.ItemContainerStyle>
+            </ListBox>
         </StackPanel>
         
 
