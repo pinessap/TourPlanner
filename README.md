@@ -30,7 +30,7 @@ To start the database, make sure you follow these steps:
 | 14/05/2023 | 2        | tourLog model                                                   |
 | 21/05/2023 | 1        | added data modifying                                            |
 | 21/05/2023 | 1        | added full text search                                          |
-| 22/05/2023 | 6        | ui modifications, added custom title bar                        |
+| 22/05/2023 | 6        | UI modifications, added custom title bar                        |
 | 24/05/2023 | 4        | json import/export                                              |
 | 28/05/2023 | 10       | single report generation                                        |
 | 29/05/2023 | 1        | calculated tour values                                          |
@@ -47,4 +47,5 @@ To start the database, make sure you follow these steps:
 | 15/06/2023 | 6        | added addtour view                                              |
 | 16/06/2023 | 8        | modified tourdetails view, added addlog & edittour view         |
 | 18/06/2023 | 6.5      | modified edittour view; added editlog view, delete log & search |
-| 19/06/2023 | 4        | added import/export and generate sum/single report to frontend  |
+| 19/06/2023 | 7        | added import/export and generate sum/single report to frontend  |
+| 20/06/2023 | 10       | added error alerts in frontend, UI modifications                |

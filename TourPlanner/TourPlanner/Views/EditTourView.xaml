@@ -5,6 +5,8 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:TourPlanner.Views"
              xmlns:converters="clr-namespace:TourPlanner.Converters"
+             xmlns:components="clr-namespace:TourPlanner.Components"
+             xmlns:viewModels="clr-namespace:TourPlanner.ViewModels"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
 
@@ -19,47 +21,54 @@
 
     </UserControl.Resources>
 
-    <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="*"/>
-        </Grid.RowDefinitions>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="*"/>
-        </Grid.ColumnDefinitions>
+    <ScrollViewer VerticalScrollBarVisibility="Auto">
 
-        <TextBox  x:Name="tourName" Margin="10" Text="{Binding SelectedTour.Name, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource EditTourInput}"/>
-
-        <TextBox x:Name="tourDescription" Grid.Row="0" Grid.RowSpan="4" Grid.Column="1" Margin="10" Text="{Binding SelectedTour.Description}" Style="{StaticResource EditTourInputDescr}"/>
-
-        <TextBox x:Name="tourFrom" Grid.Row="2" Margin="10" Text="{Binding SelectedTour.FromLocation}" Style="{StaticResource EditTourInput}"/>
-
-        <TextBox x:Name="tourTo" Grid.Row="3" Margin="10" Text="{Binding SelectedTour.ToLocation}" Style="{StaticResource EditTourInput}"/>
-
-        <StackPanel HorizontalAlignment="Center" Grid.Row="4" Orientation="Horizontal" Margin="10">
-            <RadioButton Style="{StaticResource AddTourCar}" GroupName="TransportGroup" IsChecked="{Binding SelectedTour.TransportType, Converter={StaticResource RadioButtonCheckedConverter}, ConverterParameter=CAR}" Tag="CAR" />
-            <RadioButton Style="{StaticResource AddTourBicycle}" GroupName="TransportGroup" IsChecked="{Binding SelectedTour.TransportType, Converter={StaticResource RadioButtonCheckedConverter}, ConverterParameter=BICYCLE}" Tag="BICYCLE" />
-            <RadioButton Style="{StaticResource AddTourWalking}" GroupName="TransportGroup" IsChecked="{Binding SelectedTour.TransportType, Converter={StaticResource RadioButtonCheckedConverter}, ConverterParameter=WALKING}" Tag="WALKING" />
-        </StackPanel>
-
-
-        <Grid Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="5">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
 
-            <Button Content="Generate Map" Margin="10" Command="{Binding GenerateMapCommand}"/>
-            <Button Grid.Column="1" Content="Edit Tour" Margin="10" Command="{Binding EditCommand}"/>
+            <TextBox  x:Name="tourName" Margin="10" Text="{Binding SelectedTour.Name, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource EditTourInput}"/>
+
+            <TextBox x:Name="tourDescription" Grid.Row="0" Grid.RowSpan="4" Grid.Column="1" Margin="10" Text="{Binding SelectedTour.Description}" Style="{StaticResource EditTourInputDescr}"/>
+
+            <TextBox x:Name="tourFrom" Grid.Row="2" Margin="10" Text="{Binding SelectedTour.FromLocation}" Style="{StaticResource EditTourInput}"/>
+
+            <TextBox x:Name="tourTo" Grid.Row="3" Margin="10" Text="{Binding SelectedTour.ToLocation}" Style="{StaticResource EditTourInput}"/>
+
+            <StackPanel HorizontalAlignment="Center" Grid.Row="4" Orientation="Horizontal" Margin="10">
+                <RadioButton Style="{StaticResource AddTourCar}" GroupName="TransportGroup" IsChecked="{Binding SelectedTour.TransportType, Converter={StaticResource RadioButtonCheckedConverter}, ConverterParameter=CAR}" Tag="CAR" />
+                <RadioButton Style="{StaticResource AddTourBicycle}" GroupName="TransportGroup" IsChecked="{Binding SelectedTour.TransportType, Converter={StaticResource RadioButtonCheckedConverter}, ConverterParameter=BICYCLE}" Tag="BICYCLE" />
+                <RadioButton Style="{StaticResource AddTourWalking}" GroupName="TransportGroup" IsChecked="{Binding SelectedTour.TransportType, Converter={StaticResource RadioButtonCheckedConverter}, ConverterParameter=WALKING}" Tag="WALKING" />
+            </StackPanel>
+
+
+            <Grid Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="5">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+                <Button Content="Generate Map" Margin="10" Command="{Binding GenerateMapCommand}" Style="{StaticResource SubmitBtn}"/>
+                <Button Grid.Column="1" Content="Edit Tour" Margin="10" Command="{Binding EditCommand}" Style="{StaticResource SubmitBtn}"/>
+
+            </Grid>
+
+            <components:Alert Margin="10,5,10,10" Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="7" 
+                              Text="{Binding AlertMessage}"/>
 
         </Grid>
-
-    </Grid>
+    </ScrollViewer>
 
 </UserControl>

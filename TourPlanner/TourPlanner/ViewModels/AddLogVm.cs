@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -101,7 +102,7 @@ namespace TourPlanner.ViewModels
         /// <param name="commandParameter">Gets automatically assigned by ICommand, dunno what's in there tbh but who cares</param>
         private void AddLog(object commandParameter)
         {
-            try
+            HandleException(() =>
             {
                 var logToAdd = new TourLog
                 {
@@ -114,11 +115,7 @@ namespace TourPlanner.ViewModels
 
                 SelectedTour.Logs.Add(logToAdd);
                 _tourFactory.Modify(SelectedTour);
-            }
-            catch (Exception ex)
-            {
-                // TODO: Deal with different exceptions, probably display them in the UI somehow
-            }
+            });
 
         }
 

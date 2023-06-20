@@ -32,6 +32,10 @@ namespace TourPlanner
             InitializeComponent();
             this.MaxHeight = SystemParameters.MaximizedPrimaryScreenHeight;
             DataContext = new MainWindowVm();
+
+            this.WindowStyle = WindowStyle.None;
+            this.AllowsTransparency = true;
+            this.ResizeMode = ResizeMode.CanResize;
         }
 
         [DllImport("user32.dll")]
@@ -74,10 +78,41 @@ namespace TourPlanner
             if (DataContext is MainWindowVm viewModel)
             {
                 // Call the SwitchToMainView method on the view model
-                viewModel.SwitchToMainView(null); // You can pass the command parameter if needed
+                viewModel.SwitchToMainView(null); 
             }
         }
 
+        private bool isResizing = false;
+        private Point resizeStartPoint;
+
+        private void MainWindow_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            if (e.LeftButton == MouseButtonState.Pressed)
+            {
+                isResizing = true;
+                resizeStartPoint = e.GetPosition(this);
+            }
+        }
+
+        private void MainWindow_MouseMove(object sender, MouseEventArgs e)
+        {
+            if (isResizing)
+            {
+                Point currentPoint = e.GetPosition(this);
+                double deltaX = currentPoint.X - resizeStartPoint.X;
+                double deltaY = currentPoint.Y - resizeStartPoint.Y;
+
+                this.Width += deltaX;
+                this.Height += deltaY;
+
+                resizeStartPoint = currentPoint;
+            }
+        }
+
+        private void MainWindow_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+        {
+            isResizing = false;
+        }
 
 
 

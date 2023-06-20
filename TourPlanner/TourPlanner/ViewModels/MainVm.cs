@@ -66,24 +66,8 @@ namespace TourPlanner.ViewModels
         public ICommand GenerateReportCommand => _generateReportCommand ??= new RelayCommand(GenerateReport);
 
         public string SearchValue { get; set; }
-        /*private string _searchValue = null!;
 
-         
-        /// <summary>
-        /// The two-way bound search string
-        /// </summary>
-        public string SearchValue
-        {
-            get => _searchValue;
-            set
-            {
-               // if (_searchValue != value)
-                //{
-                    _searchValue = value;
-                    RaisePropertyChangedEvent();
-                //}
-            }
-        }*/
+      
 
         public MainVm()
         {
@@ -137,27 +121,16 @@ namespace TourPlanner.ViewModels
         /// <param name="commandParameter">Gets automatically assigned by ICommand, dunno what's in there tbh but who cares</param>
         private void Search(string searchValue)
         {
-            try
-            {
-                var foundItems = _tourFactory.Search(searchValue);
-                FillListBox(foundItems);
-            }
-            catch (Exception ex)
-            {
-                // TODO: Deal with different exceptions, probably display them in the UI somehow
-            }
+             HandleException(() =>
+             {
+                 var foundItems = _tourFactory.Search(searchValue);
+                 FillListBox(foundItems);
+             });
         }
 
         private void GenerateReport(object commandParameter) 
         {
-            try
-            {
-                _tourFactory.GenerateSummarizedReport(_tourFactory.GetTours());
-            }
-            catch (Exception ex)
-            {
-                // TODO: Deal with different exceptions, probably display them in the UI somehow
-            }
+            HandleException(() => _tourFactory.GenerateSummarizedReport(_tourFactory.GetTours()));
         }
 
 
