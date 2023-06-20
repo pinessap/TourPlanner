@@ -32,4 +32,9 @@ public class AppConfigSettings
      /// The layout of log messages. Consult Log4Net documentation for syntax.
      /// </summary>
      public string LogLayout { get; set; }
+     
+     /// <summary>
+     /// The secret ApiKey for MapQuest API calls.
+     /// </summary>
+     public string MapQuestApiKey { get; set; }
 }

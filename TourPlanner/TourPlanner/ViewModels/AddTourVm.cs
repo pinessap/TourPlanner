@@ -78,8 +78,8 @@ namespace TourPlanner.ViewModels
             }
         }
 
-        private string _transportType;
-        public string TourTransportType
+        private Tour.TransportTypes _transportType;
+        public Tour.TransportTypes TourTransportType
         {
             get { return _transportType; }
             set
@@ -99,7 +99,7 @@ namespace TourPlanner.ViewModels
                 RaisePropertyChangedEvent();
 
                 if (value)
-                    TourTransportType = "CAR";
+                    TourTransportType = Tour.TransportTypes.Car;
             }
         }
 
@@ -113,7 +113,7 @@ namespace TourPlanner.ViewModels
                 RaisePropertyChangedEvent();
 
                 if (value)
-                    TourTransportType = "WALKING";
+                    TourTransportType = Tour.TransportTypes.Walking;
             }
         }
 
@@ -127,7 +127,7 @@ namespace TourPlanner.ViewModels
                 RaisePropertyChangedEvent();
 
                 if (value)
-                    TourTransportType = "BICYCLE";
+                    TourTransportType = Tour.TransportTypes.Bicycle;
             }
         }
 
@@ -142,7 +142,7 @@ namespace TourPlanner.ViewModels
         /// Function called when "Add dummy tour" button is pressed
         /// </summary>
         /// <param name="commandParameter">Gets automatically assigned by ICommand, dunno what's in there tbh but who cares</param>
-        private void Add(object commandParameter)
+        private async void Add(object commandParameter)
         {
             // Get existing tours and either set the lastTourId to 0 or whatever the last id in the DB is
             /*var existingTours = _tourFactory.GetTours();
@@ -161,8 +161,8 @@ namespace TourPlanner.ViewModels
                 Description = TourDescription,
                 FromLocation = TourFrom,
                 ToLocation = TourTo,
-                EstimatedTime = new DateTime(2000, 12, 31, 0, 0, 0, DateTimeKind.Utc),
-                TourDistance = 12f,
+                EstimatedTime = null,
+                TourDistance = null,
                 TransportType = TourTransportType,
                 Logs = new List<TourLog>
                 {

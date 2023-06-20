@@ -2,8 +2,10 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.IO;
 using System.Linq;
 using System.Windows.Documents;
+using TourPlanner.Configuration;
 
 namespace TourPlanner.Models
 {
@@ -22,13 +24,18 @@ namespace TourPlanner.Models
         public string? Description { get; set; }
         public string FromLocation { get; set; } = null!;
         public string ToLocation { get; set; } = null!;
-        public string? TransportType { get; set; }
+
+        public enum TransportTypes
+        {
+            Car,
+            Walking,
+            Bicycle
+        }
+        public TransportTypes TransportType { get; set; }
 
         //the image, the distance, and the time should be retrieved by a REST request using the MapQuest Directions and Static Map APIs
         public float? TourDistance { get; set; }
-        public DateTime? EstimatedTime { get; set; }
-        
-        // public string RouteInfo { get; set; } //image with the tour map (We professionally ignore that for now yes? Yes.)
+        public TimeSpan? EstimatedTime { get; set; }
 
         // List of tour logs
         public List<TourLog> Logs { get; set; } = new List<TourLog>();
@@ -37,6 +44,8 @@ namespace TourPlanner.Models
         // -------------------------------------------------------
         // ----------------- CALCULATED VALUES -------------------
         // -------------------------------------------------------
+        public string PathToRouteImage => Path.Combine(AppConfigManager.Settings.PictureDirectory, TourId + "_Route.png");
+
         public int? Popularity => Logs.Count != 0 ? Logs.Count : null;
 
         // TODO: Check if this calculation makes any sense (it probably doesn't)

@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 using TourPlanner.Models;
 
 namespace TourPlanner.BusinessLayer
@@ -61,5 +62,7 @@ namespace TourPlanner.BusinessLayer
         /// </summary>
         /// <param name="toursToGenerateFrom">List of tours used to create the report</param>
         void GenerateSummarizedReport(List<Tour> toursToGenerateFrom);
+
+        Task AddApiInformation(Tour tourWithoutApiValues);
     }
 }

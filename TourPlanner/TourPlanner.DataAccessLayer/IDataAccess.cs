@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.IO;
 using TourPlanner.Models;
 
 namespace TourPlanner.DataAccessLayer
@@ -26,6 +27,8 @@ namespace TourPlanner.DataAccessLayer
         /// <param name="modifiedTour">Tour object with modifications</param>
         public void Modify(Tour modifiedTour);
 
+        public IEnumerable<string> GetModifiedProperties(Tour modifiedTour);
+
         /// <summary>
         /// Saves a string to a file.
         /// </summary>
@@ -33,6 +36,14 @@ namespace TourPlanner.DataAccessLayer
         /// <param name="fileContent">The full content of the file</param>
         /// <param name="manualUserSave">If true, explorer window pops up letting user save file manually.</param>
         public void SaveToFile(string absoluteFilePath, string fileContent, bool manualUserSave = false);
+        
+        /// <summary>
+        /// Saves a string to a file.
+        /// </summary>
+        /// <param name="absoluteFilePath">The full path of the file, f.ex. "C:\Downloads\myfile.png"</param>
+        /// <param name="fileContent">A stream with the file contents</param>
+        /// <param name="manualUserSave">If true, explorer window pops up letting user save file manually.</param>
+        public void SaveToFile(string absoluteFilePath, Stream fileContent, bool manualUserSave = false);
 
         /// <summary>
         /// Reads string contents from a file. Throws an FileNotFoundException if file is not found and manual selection is disabled.

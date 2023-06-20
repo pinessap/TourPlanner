@@ -18,6 +18,7 @@ public static class AppConfigManager
             Settings.OutputDirectory = ConfigurationManager.AppSettings["OutputDirectory"]!;
             Settings.LogfilePath = ConfigurationManager.AppSettings["LogfilePath"]!;
             Settings.LogLayout = ConfigurationManager.AppSettings["LogLayout"]!;
+            Settings.MapQuestApiKey = ConfigurationManager.AppSettings["MapQuestApiKey"]!;
         }
         catch (NullReferenceException ex)
         {
@@ -50,6 +51,7 @@ public static class AppConfigManager
         configuration.AppSettings.Settings["OutputDirectory"].Value = Settings.OutputDirectory;
         configuration.AppSettings.Settings["LogfilePath"].Value = Settings.LogfilePath;
         configuration.AppSettings.Settings["LogLayout"].Value = Settings.LogLayout;
+        configuration.AppSettings.Settings["MapQuestApiKey"].Value = Settings.MapQuestApiKey;
 
         configuration.Save(ConfigurationSaveMode.Full, true); 
         

@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using Microsoft.EntityFrameworkCore;
 using TourPlanner.Models;
@@ -82,7 +83,25 @@ namespace TourPlanner.DataAccessLayer
             }
         }
 
+        public IEnumerable<string> GetModifiedProperties(Tour modifiedTour)
+        {
+            // Get the EntityEntry for the entity
+            var entityEntry = _context.Entry(modifiedTour);
+                
+            // Get the modified properties
+            var modifiedProperties = entityEntry.Properties
+                .Where(p => p.IsModified)
+                .Select(p => p.Metadata.Name);
+
+            return modifiedProperties;
+        }
+
         public void SaveToFile(string absoluteFilePath, string fileContent, bool manualUserSave = false)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void SaveToFile(string absoluteFilePath, Stream fileContent, bool manualUserSave = false)
         {
             throw new NotImplementedException();
         }

@@ -33,8 +33,8 @@ namespace TourPlanner.DataAccessLayer.Migrations
                     b.Property<string>("Description")
                         .HasColumnType("text");
 
-                    b.Property<DateTime?>("EstimatedTime")
-                        .HasColumnType("timestamp with time zone");
+                    b.Property<TimeSpan?>("EstimatedTime")
+                        .HasColumnType("interval");
 
                     b.Property<string>("FromLocation")
                         .IsRequired()
@@ -97,7 +97,8 @@ namespace TourPlanner.DataAccessLayer.Migrations
                 {
                     b.HasOne("TourPlanner.Models.Tour", null)
                         .WithMany("Logs")
-                        .HasForeignKey("TourId");
+                        .HasForeignKey("TourId")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("TourPlanner.Models.Tour", b =>

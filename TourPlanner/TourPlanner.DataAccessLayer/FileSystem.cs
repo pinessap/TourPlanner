@@ -32,7 +32,32 @@ namespace TourPlanner.DataAccessLayer
             throw new NotImplementedException();
         }
 
+        public IEnumerable<string> GetModifiedProperties(Tour modifiedTour)
+        {
+            throw new NotImplementedException();
+        }
+
         public void SaveToFile(string absoluteFilePath, string fileContent, bool manualUserSave = false)
+        {
+            try
+            {
+                // If manual saving is enabled, open a dialogbox and let user save file himself
+                if (manualUserSave)
+                {
+                    SaveFile(absoluteFilePath, fileContent, SaveFileWithExplorer(absoluteFilePath));
+                }
+                else
+                {
+                    SaveFile(absoluteFilePath, fileContent);
+                }
+            }
+            catch (Exception ex)
+            {
+                AppLogger.ThrowError("SaveToFile error:", ex);
+            }
+        }
+
+        public void SaveToFile(string absoluteFilePath, Stream fileContent, bool manualUserSave = false)
         {
             try
             {
@@ -158,6 +183,36 @@ namespace TourPlanner.DataAccessLayer
                 using var writer = new StreamWriter(fs);
                 writer.Write(fileContent);
                 writer.Close();
+            }
+            
+            AppLogger.Info("\"" + fs.Name + "\" saved.");
+            
+            fs.Close();
+        }
+        
+        /// <summary>
+        /// Saves the fileContent into the given FileStream.
+        /// </summary>
+        /// <param name="absoluteFilePath">Absolute path to file, used as location if no FileStream is provided</param>
+        /// <param name="fileContent">Stream containing the content to save</param>
+        /// <param name="fs">A fileStream that points to the file that gets saved. If null, absoluteFilePath is used as fileLocation.</param>
+        private void SaveFile(string absoluteFilePath, Stream fileContent, FileStream? fs = null)
+        {
+            fs ??= new FileStream(absoluteFilePath, FileMode.Create);
+
+            // If file to save is a pdf, a special conversion function to save needs to be called
+            if (Path.GetExtension(absoluteFilePath) == ".pdf")
+            {
+                var converterProperties = new ConverterProperties();
+                converterProperties.SetBaseUri(AppConfigManager.Settings.PictureDirectory);
+                HtmlConverter.ConvertToPdf(fileContent, fs, converterProperties);
+            }
+            // Otherwise a normal file gets created
+            else
+            {
+                fileContent.CopyTo(fs);
+                fileContent.Close();
+                fileContent.Dispose();
             }
             
             AppLogger.Info("\"" + fs.Name + "\" saved.");

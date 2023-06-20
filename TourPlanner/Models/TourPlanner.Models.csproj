@@ -10,4 +10,8 @@
     <PackageReference Include="Extended.Wpf.Toolkit" Version="4.5.0" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\TourPlanner.Configuration\TourPlanner.Configuration.csproj" />
+  </ItemGroup>
+
 </Project>
