@@ -4,7 +4,12 @@
 
 https://github.com/pinessap/TourPlanner
 
-## Design
+## Architecture Design
+For the basic project architecture, a 3 layer model was chosen. PresentationLayer, BusinessLayer and DataAccessLayer are all represented via seperate projects in the application solution. In addition, the MVVM pattern was used to further seperate responsibilities. The PresentationLayer contains Views and ViewModels, and a seperate project models (since models are used throughout the entire application).
+
+The BusinessLayer is reachable via the TourPlannerBlFactory class. The returned interface implementation contains all functions the BusinessLayer offers. A similar approach is used in the DataAccessLayer, where a single class is used to expose its functionality to the outside, while the interal project organization doesn't concern outsiders. All data has the same flow, going from PresentationLayer to BusinessLayer to DataAccessLayer and back up in reverse order. Therefore the PresentationLayer does not reference the DataAccessLayer and is completely independent from it.
+
+Lastly, the Logging and ConfigurationManager classes exist as external projects, to enable full encapsulation and use in different projects. The singleton pattern and static classes are used to further simplify usage.
 
 ### Database
 
@@ -18,8 +23,10 @@ To start the database, make sure you follow these steps:
 6. After successfully starting the database, you can import all tables by running the "import_db.cmd" file while the database is running.
 
 ## Testing
+The tests were written at the end of the project. This presented challenges, since we realized that we did not create a well-testable application. Therefore we had to resort to testing less critical parts and classes. The only classes that we could test without having to drastically change our architecture were the Tour, Configuration & data conversion classes. The tests we chose aim to make sure the model and especially its calculated properties work as expected, and all data is presented in a correct manner.
 
 ## Lessons Learned
+The first major lesson learned concern unit tests. Implementing them only after being done with the rest of the project was a mistake. We should have implemented unit tests continously during development. This would have enabled us to create a testable project from the start, and not force us to restructure our architecture drastically.
 
 ## Time spent:
 
