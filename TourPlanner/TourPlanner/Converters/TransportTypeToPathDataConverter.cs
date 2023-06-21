@@ -9,7 +9,7 @@ using System.Windows.Data;
 
 namespace TourPlanner.Converters
 {
-    class TransportTypeToPathDataConverter : IValueConverter
+    public class TransportTypeToPathDataConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
