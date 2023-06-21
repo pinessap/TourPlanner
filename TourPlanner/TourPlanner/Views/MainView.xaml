@@ -14,7 +14,6 @@
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="/Styles/Style.xaml" />
             </ResourceDictionary.MergedDictionaries>
-            <converters:ZeroDecimalConverter x:Key="ZeroDecimalConverter" />
         </ResourceDictionary>
     </UserControl.Resources>
 
