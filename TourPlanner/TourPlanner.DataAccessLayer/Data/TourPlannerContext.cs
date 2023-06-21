@@ -28,5 +28,10 @@ public class TourPlannerContext : DbContext
             .HasMany(t => t.Logs)
             .WithOne()
             .OnDelete(DeleteBehavior.Cascade);
+
+        // Makes sure that the transportType enum is saved as a string in the database
+        modelBuilder.Entity<Tour>()
+            .Property(e => e.TransportType)
+            .HasConversion<string>();
     }
 }

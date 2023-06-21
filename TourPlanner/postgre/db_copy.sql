@@ -63,7 +63,7 @@ CREATE TABLE public."Tours" (
     "ToLocation" text NOT NULL,
     "TransportType" text,
     "TourDistance" real,
-    "EstimatedTime" timestamp with time zone
+    "EstimatedTime" interval
 );
 
 
@@ -108,9 +108,7 @@ COPY public."TourLogs" ("TourLogId", "Time", "Comment", "Difficulty", "Duration"
 --
 
 COPY public."Tours" ("TourId", "Name", "Description", "FromLocation", "ToLocation", "TransportType", "TourDistance", "EstimatedTime") FROM stdin;
-25	Tour with Database-ID 1	Mc?	Productivity	Nati's Folterkeller	\N	\N	\N
-26	Tour with Database-ID 26	Mc?	Productivity	Nati's Folterkeller	\N	\N	\N
-27	Tour with Database-ID 27	Mc?	Productivity	Nati's Folterkeller	\N	\N	\N
+50	Great	Tour	Vienna	Mönchhof	Car	69.5	00:48:35
 \.
 
 
@@ -127,14 +125,14 @@ COPY public."__EFMigrationsHistory" ("MigrationId", "ProductVersion") FROM stdin
 -- Name: TourLog_TourLogId_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('public."TourLog_TourLogId_seq"', 1, false);
+SELECT pg_catalog.setval('public."TourLog_TourLogId_seq"', 10, true);
 
 
 --
 -- Name: Tours_TourId_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('public."Tours_TourId_seq"', 27, true);
+SELECT pg_catalog.setval('public."Tours_TourId_seq"', 50, true);
 
 
 --

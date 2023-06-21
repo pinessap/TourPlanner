@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Threading.Tasks;
 using Newtonsoft.Json;
 using TourPlanner.Configuration;
 using TourPlanner.DataAccessLayer.DataAccessObjects;
@@ -16,6 +17,8 @@ namespace TourPlanner.BusinessLayer
         /// The object containing all Tour Data information
         /// </summary>
         private readonly TourDao _tourDao = new TourDao();
+        
+        private readonly DirectionsApi _directions = DirectionsApi.Instance;
 
         public List<Tour> GetTours()
         {
@@ -44,10 +47,14 @@ namespace TourPlanner.BusinessLayer
             return foundTours;
         }
         
-        public void Add(Tour tourToAdd)
+        public async void Add(Tour tourToAdd)
         {
             AppLogger.Info("Adding new tour \"" + tourToAdd.Name + "\"");
+            
             _tourDao.Add(tourToAdd);
+            await AddApiInformation(tourToAdd);
+            Modify(tourToAdd);
+            
             AppLogger.Info("Add tour \"" + tourToAdd.Name + "\" successful");
         }
         
@@ -59,9 +66,18 @@ namespace TourPlanner.BusinessLayer
 
         }
         
-        public void Modify(Tour modifiedTour)
+        public async void Modify(Tour modifiedTour)
         {
-            AppLogger.Info("Modifying tour \"" + modifiedTour.Name + "\"");
+            var modifiedProperties = _tourDao.GetModifiedProperties(modifiedTour);
+            
+            AppLogger.Info("Modifying " + modifiedProperties.Count() + " properties of tour \"" + modifiedTour.Name + "\"");
+
+            if (modifiedProperties.Contains(nameof(modifiedTour.FromLocation)) ||
+                modifiedProperties.Contains(nameof(modifiedTour.ToLocation)))
+            {
+                await AddApiInformation(modifiedTour);
+            }
+            
             _tourDao.Modify(modifiedTour);
             AppLogger.Info("Modify tour \"" + modifiedTour.Name + "\" successful");
         }
@@ -160,6 +176,11 @@ namespace TourPlanner.BusinessLayer
             _tourDao.SaveToFile(absolutePath, fullHtml, true);
         }
 
+        public async Task AddApiInformation(Tour tourWithoutApiValues)
+        {
+            await _directions.AddApiInformation(tourWithoutApiValues);
+        }
+
         /// <summary>
         /// Searches tour for given searchValue
         /// </summary>
@@ -178,7 +199,7 @@ namespace TourPlanner.BusinessLayer
                 tourToSearch.Description ?? "",
                 tourToSearch.ToLocation,
                 tourToSearch.FromLocation,
-                tourToSearch.TransportType ?? "",
+                tourToSearch.TransportType.ToString() ?? "",
                 (tourToSearch.ChildFriendliness == null ? tourToSearch.ChildFriendliness.ToString() : "")!,
                 (tourToSearch.Popularity == null ? tourToSearch.Popularity.ToString() : "")!
             };

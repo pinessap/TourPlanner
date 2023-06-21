@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
+using System.Linq;
 using TourPlanner.Logging;
 using TourPlanner.Models;
 
@@ -65,7 +67,32 @@ namespace TourPlanner.DataAccessLayer.DataAccessObjects
             }
         }
         
+        public List<string> GetModifiedProperties(Tour modifiedTour)
+        {
+            try
+            {
+                return _databaseAccess.GetModifiedProperties(modifiedTour).ToList();
+            }
+            catch (NotImplementedException ex)
+            {
+                AppLogger.ThrowFatal("GetModifiedProperties DAO error:", ex);
+                return null!;
+            }
+        }
+        
         public void SaveToFile(string absoluteFilePath, string fileContent, bool manualUserSave = false)
+        {
+            try
+            {
+                _filesystemAccess.SaveToFile(absoluteFilePath, fileContent, manualUserSave);
+            }
+            catch (NotImplementedException ex)
+            {
+                AppLogger.ThrowFatal("SaveToFile DAO error:", ex);
+            }
+        }
+        
+        public void SaveToFile(string absoluteFilePath, Stream fileContent, bool manualUserSave = false)
         {
             try
             {
