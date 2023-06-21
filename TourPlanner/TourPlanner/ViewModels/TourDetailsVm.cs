@@ -21,7 +21,7 @@ namespace TourPlanner.ViewModels
         /// <summary>
         /// Connection to our business logic
         /// </summary>
-        private readonly ITourFactory _tourFactory;
+        private readonly ITourPlannerBl _tourPlannerBl;
 
 
 
@@ -67,7 +67,7 @@ namespace TourPlanner.ViewModels
             // Subscribe to the SwitchViewMessage
             Messenger.Default.Register<SwitchViewMessage>(this, HandleSwitchViewMessage);
 
-            _tourFactory = TourFactory.Instance;
+            _tourPlannerBl = TourPlannerBlFactory.Instance;
             Tours = new ObservableCollection<Tour>();
         }
 
@@ -77,14 +77,14 @@ namespace TourPlanner.ViewModels
         /// <param name="commandParameter">Gets automatically assigned by ICommand, dunno what's in there tbh but who cares</param>
         private void Delete(object commandParameter)
         {
-            HandleException(() => _tourFactory.Delete(SelectedTour));
+            HandleException(() => _tourPlannerBl.Delete(SelectedTour));
         }
 
 
         private void GenerateReport(object commandParameter)
         {
 
-            HandleException(() => _tourFactory.GenerateSingleReport(SelectedTour));
+            HandleException(() => _tourPlannerBl.GenerateSingleReport(SelectedTour));
 
         }
 

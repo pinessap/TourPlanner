@@ -36,7 +36,7 @@ namespace TourPlanner.ViewModels
         /// <summary>
         /// Connection to our business logic
         /// </summary>
-        private readonly ITourFactory _tourFactory;
+        private readonly ITourPlannerBl _tourPlannerBl;
 
         private Tour _currentTour = null!;
 
@@ -71,12 +71,12 @@ namespace TourPlanner.ViewModels
 
         public MainVm()
         {
-            _tourFactory = TourFactory.Instance;
+            _tourPlannerBl = TourPlannerBlFactory.Instance;
             Tours = new ObservableCollection<Tour>();
 
 
             // Fill list box with all tours in DB
-            var allTours = _tourFactory.GetTours();
+            var allTours = _tourPlannerBl.GetTours();
 
             FillListBox(allTours);
             Trace.WriteLine("mainvmm " + SearchValue);
@@ -86,7 +86,7 @@ namespace TourPlanner.ViewModels
 
         public MainVm(string searchValue)
         {
-            _tourFactory = TourFactory.Instance;
+            _tourPlannerBl = TourPlannerBlFactory.Instance;
             Tours = new ObservableCollection<Tour>();
 
             Trace.WriteLine("mainvm " + SearchValue);
@@ -123,14 +123,14 @@ namespace TourPlanner.ViewModels
         {
              HandleException(() =>
              {
-                 var foundItems = _tourFactory.Search(searchValue);
+                 var foundItems = _tourPlannerBl.Search(searchValue);
                  FillListBox(foundItems);
              });
         }
 
         private void GenerateReport(object commandParameter) 
         {
-            HandleException(() => _tourFactory.GenerateSummarizedReport(_tourFactory.GetTours()));
+            HandleException(() => _tourPlannerBl.GenerateSummarizedReport(_tourPlannerBl.GetTours()));
         }
 
 

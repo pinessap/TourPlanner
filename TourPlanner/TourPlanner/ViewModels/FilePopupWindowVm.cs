@@ -15,7 +15,7 @@ namespace TourPlanner.ViewModels
     public class FilePopupWindowVm : ViewModelBase
     {
 
-        private readonly ITourFactory _tourFactory;
+        private readonly ITourPlannerBl _tourPlannerBl;
 
         public ObservableCollection<Tour> Tours { get; set; }
 
@@ -32,24 +32,24 @@ namespace TourPlanner.ViewModels
         private string _pathValue = null!;
         public FilePopupWindowVm()
         {
-            _tourFactory = TourFactory.Instance;
+            _tourPlannerBl = TourPlannerBlFactory.Instance;
             Tours = new ObservableCollection<Tour>();
 
         }
 
         private void Import(object commandParameter)
         {
-            HandleException(() => _tourFactory.ImportAppend());
+            HandleException(() => _tourPlannerBl.ImportAppend());
         }
 
         private void ImportOverride(object commandParameter)
         {
-            HandleException(() => _tourFactory.ImportOverride());
+            HandleException(() => _tourPlannerBl.ImportOverride());
         }
 
         private void Export(object commandParameter)
         {
-            HandleException(() => _tourFactory.Export(_tourFactory.GetTours()));
+            HandleException(() => _tourPlannerBl.Export(_tourPlannerBl.GetTours()));
         }
     }
 }

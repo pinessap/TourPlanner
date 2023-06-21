@@ -52,7 +52,7 @@ namespace TourPlanner.ViewModels
         /// <summary>
         /// Connection to our business logic
         /// </summary>
-        private readonly ITourFactory _tourFactory;
+        private readonly ITourPlannerBl _tourFactory;
         
         private Tour _currentTour = null!; // Diese dinger sind nur "= null!" um die warnungen im konstruktur zu unterbinden, hat keine programmrelevanz :)
         private string _searchValue = null!;

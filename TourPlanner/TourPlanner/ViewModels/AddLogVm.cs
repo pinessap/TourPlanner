@@ -19,7 +19,7 @@ namespace TourPlanner.ViewModels
         /// <summary>
         /// Connection to our business logic
         /// </summary>
-        private readonly ITourFactory _tourFactory;
+        private readonly ITourPlannerBl _tourPlannerBl;
 
 
         private ICommand _addLogCommand = null!;
@@ -92,7 +92,7 @@ namespace TourPlanner.ViewModels
         public AddLogVm()
         {
             LogDateTime = DateTime.UtcNow;
-            _tourFactory = TourFactory.Instance;
+            _tourPlannerBl = TourPlannerBlFactory.Instance;
             Tours = new ObservableCollection<Tour>();
         }
 
@@ -114,7 +114,7 @@ namespace TourPlanner.ViewModels
                 };
 
                 SelectedTour.Logs.Add(logToAdd);
-                _tourFactory.Modify(SelectedTour);
+                _tourPlannerBl.Modify(SelectedTour);
             });
 
         }

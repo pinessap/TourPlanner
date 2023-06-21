@@ -4,7 +4,7 @@ using TourPlanner.Models;
 
 namespace TourPlanner.BusinessLayer
 {
-    public interface ITourFactory
+    public interface ITourPlannerBl
     {
         /// <summary>
         /// Get all tours in the database
@@ -14,26 +14,26 @@ namespace TourPlanner.BusinessLayer
         /// <summary>
         /// Search for a string in all tour names
         /// </summary>
-        /// <param searchValue="searchValue">The string to search for</param>
-        /// <param searchValue="caseSensitive">Default search is not case sensitive (false)</param>
+        /// <param name="searchValue">The string to search for</param>
+        /// <param name="caseSensitive">Default search is not case sensitive (false)</param>
         /// <returns>List of tours which contain the search string in their searchValue</returns>
         List<Tour> Search(string searchValue, bool caseSensitive = false);
 
         /// <summary>
         /// Adds a dummy tour to the database
         /// </summary>
-        void Add(Tour tourToAdd);
+        Task Add(Tour tourToAdd);
         
         /// <summary>
         /// Deletes the given tour from the database
         /// </summary>
         void Delete(Tour tourToDelete);
-        
+
         /// <summary>
         /// Saves the changes in the given tour to the database
         /// </summary>
-        /// <param searchValue="modifiedTour">Tour object with modifications</param>
-        void Modify(Tour modifiedTour);
+        /// <param name="modifiedTour">Tour object with modifications</param>
+        Task Modify(Tour modifiedTour);
 
         /// <summary>
         /// Exports a given list of tours to a json file. File Explorer opens and lets user save file.
@@ -62,7 +62,5 @@ namespace TourPlanner.BusinessLayer
         /// </summary>
         /// <param name="toursToGenerateFrom">List of tours used to create the report</param>
         void GenerateSummarizedReport(List<Tour> toursToGenerateFrom);
-
-        Task AddApiInformation(Tour tourWithoutApiValues);
     }
 }

@@ -18,7 +18,7 @@ namespace TourPlanner.ViewModels
         /// <summary>
         /// Connection to our business logic
         /// </summary>
-        private readonly ITourFactory _tourFactory;
+        private readonly ITourPlannerBl _tourPlannerBl;
 
         private Tour _currentTour = null!; // Diese dinger sind nur "= null!" um die warnungen im konstruktur zu unterbinden, hat keine programmrelevanz :)
      
@@ -134,7 +134,7 @@ namespace TourPlanner.ViewModels
 
         public AddTourVm()
         {
-            _tourFactory = TourFactory.Instance;
+            _tourPlannerBl = TourPlannerBlFactory.Instance;
             Tours = new ObservableCollection<Tour>();
         }
 
@@ -145,8 +145,8 @@ namespace TourPlanner.ViewModels
         private async void Add(object commandParameter)
         {
             // Get existing tours and either set the lastTourId to 0 or whatever the last id in the DB is
-            /*var existingTours = _tourFactory.GetTours();
-            var lastTourId = existingTours.Count > 0 ? _tourFactory.GetTours().Last().TourId : 0;
+            /*var existingTours = _tourPlannerBl.GetTours();
+            var lastTourId = existingTours.Count > 0 ? _tourPlannerBl.GetTours().Last().TourId : 0;
 
             string name = TourName;
 
@@ -178,7 +178,7 @@ namespace TourPlanner.ViewModels
             };
             Trace.WriteLine("tour name of tourtoadd: " + tourToAdd.Name);
 
-            HandleException(() => _tourFactory.Add(tourToAdd));
+            HandleException(() => _tourPlannerBl.Add(tourToAdd));
 
         }
     }
