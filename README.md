@@ -51,4 +51,5 @@ To start the database, make sure you follow these steps:
 | 20/06/2023 | 10       | added error alerts in frontend, UI modifications                |
 | 20/06/2023 | 8        | Added API calls                                                 |
 | 21/06/2023 | 4        | Refactor BusinessLayer                                          |
+| 21/06/2023 | 4        | Added unit-tests                                                |
 
