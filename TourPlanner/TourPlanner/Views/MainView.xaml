@@ -67,9 +67,6 @@
                                                 <ImageBrush x:Name="myImage" ImageSource="{Binding PathToRouteImage}" />
                                             </Rectangle.Fill>
                                         </Rectangle>
-                                    
-                                    
-
                                     <Border Grid.Row="2"  Panel.ZIndex="5" Background="#9890A8" CornerRadius="0,0,20,20">
                                         <Grid >
                                             <Grid.RowDefinitions>
@@ -85,9 +82,7 @@
                                                 </TextBlock.Text>
                                             </TextBlock>
                                         </Grid>
-
                                     </Border>
-                                            
                                 </Grid>
                             </Border>
                         </Grid>

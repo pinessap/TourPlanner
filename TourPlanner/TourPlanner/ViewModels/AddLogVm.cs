@@ -5,8 +5,10 @@ using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Input;
 using TourPlanner.BusinessLayer;
+using TourPlanner.Components;
 using TourPlanner.Models;
 
 
@@ -94,7 +96,22 @@ namespace TourPlanner.ViewModels
             LogDateTime = DateTime.UtcNow;
             _tourPlannerBl = TourPlannerBlFactory.Instance;
             Tours = new ObservableCollection<Tour>();
+            
         }
+
+        private string _message = null!;
+
+        public new string Message
+        {
+            get => _message;
+            set
+            {
+                _message = value;
+                RaisePropertyChangedEvent(nameof(Message));
+            }
+        }
+
+    
 
         /// <summary>
         /// Function called when "Add dummy tour" button is pressed
@@ -102,20 +119,34 @@ namespace TourPlanner.ViewModels
         /// <param name="commandParameter">Gets automatically assigned by ICommand, dunno what's in there tbh but who cares</param>
         private void AddLog(object commandParameter)
         {
-            HandleException(() =>
-            {
-                var logToAdd = new TourLog
-                {
-                    Comment = LogComment,
-                    Rating = LogRating,
-                    Difficulty = LogDifficulty,
-                    Duration = (LogTime != null) ? TimeSpan.Parse(LogTime) : TimeSpan.Zero,
-                    Time = LogDateTime,
-                };
+            Message = null;
 
-                SelectedTour.Logs.Add(logToAdd);
-                _tourPlannerBl.Modify(SelectedTour);
-            });
+            if (!string.IsNullOrEmpty(LogComment) && !string.IsNullOrEmpty(LogTime) && LogRating != null && LogDifficulty != null && LogTime != null)
+            {
+
+                HandleException(() =>
+                {
+                    var logToAdd = new TourLog
+                    {
+                        Comment = LogComment,
+                        Rating = LogRating,
+                        Difficulty = LogDifficulty,
+                        Duration = TimeSpan.Parse(LogTime),
+                        Time = LogDateTime,
+                    };
+
+                    SelectedTour.Logs.Add(logToAdd);
+                    _tourPlannerBl.Modify(SelectedTour);
+                });
+            }
+            else
+            {
+                Trace.WriteLine("ALERT");
+                AlertMessage = "Please fill in all the required values.";
+                Trace.WriteLine(AlertMessage);
+            }
+
+
 
         }
 

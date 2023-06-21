@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -59,7 +60,15 @@ namespace TourPlanner.ViewModels
         /// <param name="commandParameter">Gets automatically assigned by ICommand, dunno what's in there tbh but who cares</param>
         private void EditLog(object commandParameter)
         {
-            HandleException(() => _tourPlannerBl.Modify(SelectedTour));
+            if (!string.IsNullOrEmpty(SelectedLog.Comment) && SelectedLog.Duration != TimeSpan.Zero &&
+                SelectedLog.Rating != null && SelectedLog.Difficulty != null && SelectedLog.Time != null)
+            {
+                HandleException(() => _tourPlannerBl.Modify(SelectedTour));
+            }
+            else
+            {
+                AlertMessage = "Please fill in all the required values.";
+            }
         }
 
         /// <summary>

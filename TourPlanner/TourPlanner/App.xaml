@@ -34,6 +34,11 @@
         <DataTemplate DataType="{x:Type viewModels:FilePopupWindowVm}">
             <views:FilePopupWindow/>
         </DataTemplate>
+
+        <DataTemplate DataType="{x:Type viewModels:ConfigSettingsWindowVm}">
+            <views:ConfigSettingsWindow/>
+        </DataTemplate>
+
     </Application.Resources>
 </Application>
 

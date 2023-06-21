@@ -73,6 +73,12 @@ namespace TourPlanner
             popupWindow.ShowDialog();
         }
 
+        private void configBtn_Click(object sender, RoutedEventArgs e)
+        {
+            ConfigSettingsWindow popupWindow = new ConfigSettingsWindow();
+            popupWindow.ShowDialog();
+        }
+
         private void PopupWindow_MainReloadRequested(object sender, EventArgs e)
         {
             if (DataContext is MainWindowVm viewModel)

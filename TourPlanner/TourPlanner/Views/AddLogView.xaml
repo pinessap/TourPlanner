@@ -6,7 +6,7 @@
              xmlns:local="clr-namespace:TourPlanner.Views"
              xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
              xmlns:viewModels="clr-namespace:TourPlanner.ViewModels"
-             xmlns:components="clr-namespace:TourPlanner.Components"
+             xmlns:components="clr-namespace:TourPlanner.Components" d:DataContext="{d:DesignInstance Type=viewModels:AddLogVm}"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <UserControl.Resources>
@@ -27,7 +27,7 @@
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
-                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
@@ -111,8 +111,9 @@
                 <Button Grid.Column="1" Content="Add Log" Margin="10" Command="{Binding AddLogCommand}" Style="{StaticResource SubmitBtn }"/>
             </Grid>
 
-            <components:Alert Margin="10,5,10,10" Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="7" 
+            <components:Alert Margin="10,5,10,10" Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="6" 
                               Text="{Binding AlertMessage}"/>
+
 
         </Grid>
     </ScrollViewer>

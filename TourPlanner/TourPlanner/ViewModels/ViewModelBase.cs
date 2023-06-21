@@ -2,6 +2,7 @@
 using System.ComponentModel;
 using System.Diagnostics;
 using System.Runtime.CompilerServices;
+using System.Threading.Tasks;
 
 namespace TourPlanner.ViewModels
 {
@@ -55,6 +56,21 @@ namespace TourPlanner.ViewModels
             try
             {
                 action.Invoke();
+            }
+            catch (Exception ex)
+            {
+                AlertMessage = ex.Message;
+                Trace.WriteLine("Exceptiontestalert:");
+                Trace.WriteLine(AlertMessage);
+            }
+        }
+
+        protected async Task HandleExceptionAsync(Func<Task> action)
+        {
+            AlertMessage = null;
+            try
+            {
+                await action.Invoke();
             }
             catch (Exception ex)
             {

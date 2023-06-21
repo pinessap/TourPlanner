@@ -165,7 +165,16 @@ namespace TourPlanner.ViewModels
         /// <param name="commandParameter">Gets automatically assigned by ICommand, dunno what's in there tbh but who cares</param>
         private void Edit(object commandParameter)
         {
-            HandleException(() => _tourPlannerBl.Modify(SelectedTour));
+            if (!string.IsNullOrEmpty(SelectedTour.Name) && !string.IsNullOrEmpty(SelectedTour.FromLocation) &&
+                !string.IsNullOrEmpty(SelectedTour.ToLocation) &&
+                SelectedTour.TransportType != null)
+            {
+                HandleException(() => _tourPlannerBl.Modify(SelectedTour));
+            }
+            else
+            {
+                AlertMessage = "Please fill in all the required values.";
+            }
         }
 
         private void HandleSwitchViewMessage(SwitchViewMessage message)

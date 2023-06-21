@@ -167,46 +167,45 @@ namespace TourPlanner.ViewModels
             var newTourName = name + " " + (lastTourId + 1);*/
             Trace.WriteLine("tour name: " + TourName);
 
-            
-            var tourToAdd = new Tour
+            AlertMessage = null;
+
+            if (!string.IsNullOrEmpty(TourName) && !string.IsNullOrEmpty(TourFrom) && !string.IsNullOrEmpty(TourTo) &&
+                TourTransportType != null)
             {
-                Name = TourName,
-                Description = TourDescription,
-                FromLocation = TourFrom,
-                ToLocation = TourTo,
-                EstimatedTime = null,
-                TourDistance = null,
-                TransportType = TourTransportType,
-                Logs = new List<TourLog>
+                var tourToAdd = new Tour
                 {
-                    /*new()
+                    Name = TourName,
+                    Description = TourDescription,
+                    FromLocation = TourFrom,
+                    ToLocation = TourTo,
+                    EstimatedTime = null,
+                    TourDistance = null,
+                    TransportType = TourTransportType,
+                    Logs = new List<TourLog>
                     {
-                        Comment = "Help me pls I am dying",
-                        Difficulty = 10,
-                        Duration = new TimeSpan(99, 5, 0),
-                        Rating = 5f,
-                        Time = new DateTime(2000, 12, 31, 0, 0, 0, DateTimeKind.Utc)
-                    }*/
-                }
-            };
+                        /*new()
+                        {
+                            Comment = "Help me pls I am dying",
+                            Difficulty = 10,
+                            Duration = new TimeSpan(99, 5, 0),
+                            Rating = 5f,
+                            Time = new DateTime(2000, 12, 31, 0, 0, 0, DateTimeKind.Utc)
+                        }*/
+                    }
+                };
 
-                
-            HandleException(async () =>
-            {
 
-                _tourFactory.Add(tourToAdd);
-
-                await Task.Delay(4000); //wait 5 seconds so the image gets downloaded
+                await HandleExceptionAsync(() => _tourPlannerBl.Add(tourToAdd));
 
                 TourImageSource = tourToAdd.PathToRouteImage;
 
-            });
-
-
-
-
-
-            HandleException(() => _tourFactory.Add(tourToAdd));
+            }
+            else
+            {
+                AlertMessage = "Please fill in all the required values.";
+            }
+            
+            
 
         }
     }
