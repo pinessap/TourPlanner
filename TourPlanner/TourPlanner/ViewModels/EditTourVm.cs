@@ -11,11 +11,16 @@ using GalaSoft.MvvmLight.Messaging;
 using TourPlanner.BusinessLayer;
 using TourPlanner.Messages;
 using TourPlanner.Models;
+using static TourPlanner.Models.Tour;
 
 namespace TourPlanner.ViewModels
 {
     public class EditTourVm : ViewModelBase
     {
+        public TransportTypes Car => TransportTypes.Car;
+        public TransportTypes Bicycle => TransportTypes.Bicycle;
+        public TransportTypes Walking => TransportTypes.Walking;
+
         /// <summary>
         /// Connection to our business logic
         /// </summary>
@@ -91,8 +96,8 @@ namespace TourPlanner.ViewModels
             }
         }
 
-        private string _transportType;
-        public string TourTransportType
+        private Tour.TransportTypes _transportType;
+        public Tour.TransportTypes TransportType
         {
             get { return _transportType; }
             set
@@ -112,7 +117,7 @@ namespace TourPlanner.ViewModels
                 RaisePropertyChangedEvent();
 
                 if (value)
-                    TourTransportType = "CAR";
+                    TransportType = TransportTypes.Car;
             }
         }
 
@@ -126,7 +131,7 @@ namespace TourPlanner.ViewModels
                 RaisePropertyChangedEvent();
 
                 if (value)
-                    TourTransportType = "WALKING";
+                    TransportType = TransportTypes.Walking;
             }
         }
 
@@ -140,7 +145,7 @@ namespace TourPlanner.ViewModels
                 RaisePropertyChangedEvent();
 
                 if (value)
-                    TourTransportType = "BICYCLE";
+                    TransportType = TransportTypes.Bicycle;
             }
         }
 

@@ -9,6 +9,6 @@ if not defined PGUSER set PGUSER=postgres
 echo.
 echo Importing from db_copy.sql...
 
-"%PGSQL%\bin\psql" --port=%PGPORT% --dbname="%PGDATABASE%" --username="%PGUSER%" -v ON_ERROR_STOP=1 -v ECHO=all < db_copy.sql
+"%PGSQL%\bin\psql" --port=%PGPORT% --dbname="%PGDATABASE%" --username="%PGUSER%" -v ON_ERROR_STOP=1 --echo-errors -v ECHO=all < db_copy.sql
 
 set /p=Hit ENTER to continue...

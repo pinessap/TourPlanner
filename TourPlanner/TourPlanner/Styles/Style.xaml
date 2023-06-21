@@ -269,30 +269,25 @@
                         BorderBrush="{TemplateBinding BorderBrush}"
                         BorderThickness="{TemplateBinding BorderThickness}"
                         CornerRadius="10">
-                        <ScrollViewer HorizontalScrollBarVisibility="Disabled"
-                                  VerticalScrollBarVisibility="Hidden"
-                                  Padding="5" Margin="10">
-                            <Grid>
-                                <TextBlock Text="{TemplateBinding Text}"
-                                       Background="Transparent"
-                                       Foreground="{TemplateBinding Foreground}"
-                                       FontWeight="{TemplateBinding FontWeight}"
-                                       FontSize="{TemplateBinding FontSize}"
-                                       TextWrapping="Wrap"/>
-                            </Grid>
+                        <ScrollViewer x:Name="PART_ContentHost" HorizontalScrollBarVisibility="Disabled"
+                                      VerticalScrollBarVisibility="Hidden"
+                                      Padding="5" Margin="10">
                         </ScrollViewer>
                     </Border>
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Background" Value="#DDCFE7" />
                             <Setter Property="BorderBrush" Value="#867990" />
                             <Setter Property="Cursor" Value="IBeam" />
                             <!-- Add this line to set the cursor -->
                         </Trigger>
                         <Trigger Property="IsKeyboardFocused" Value="True">
+                            <Setter Property="Background" Value="#DDCFE7" />
                             <Setter Property="BorderBrush" Value="#867990" />
                             <Setter Property="Cursor" Value="IBeam" />
                         </Trigger>
                         <Trigger Property="IsFocused" Value="True">
+                            <Setter Property="Background" Value="#DDCFE7" />
                             <Setter Property="Background" Value="#DDCFE7" />
                             <Setter Property="BorderBrush" Value="#867990" />
                             <Setter Property="Cursor" Value="IBeam" />
@@ -609,10 +604,12 @@
                     </Border>
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Background" Value="#DDCFE7" />
                             <Setter Property="BorderBrush" Value="#867990" />
                             <Setter Property="Cursor" Value="IBeam" />
                         </Trigger>
                         <Trigger Property="IsKeyboardFocused" Value="True">
+                            <Setter Property="Background" Value="#DDCFE7" />
                             <Setter Property="BorderBrush" Value="#867990" />
                             <Setter Property="Cursor" Value="IBeam" />
                         </Trigger>
@@ -648,14 +645,17 @@
                     </Border>
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Background" Value="#DDCFE7" />
                             <Setter Property="BorderBrush" Value="#867990" />
                             <Setter Property="Cursor" Value="IBeam" />
                         </Trigger>
                         <Trigger Property="IsKeyboardFocused" Value="True">
+                            <Setter Property="Background" Value="#DDCFE7" />
                             <Setter Property="BorderBrush" Value="#867990" />
                             <Setter Property="Cursor" Value="IBeam" />
                         </Trigger>
                         <Trigger Property="IsFocused" Value="True">
+                            <Setter Property="Background" Value="#DDCFE7" />
                             <Setter Property="Background" Value="#DDCFE7" />
                             <Setter Property="BorderBrush" Value="#867990" />
                             <Setter Property="Cursor" Value="IBeam" />

@@ -44,7 +44,10 @@ namespace TourPlanner.Models
         // -------------------------------------------------------
         // ----------------- CALCULATED VALUES -------------------
         // -------------------------------------------------------
+
         public string PathToRouteImage => Path.Combine(AppConfigManager.Settings.PictureDirectory, TourId + "_Route.png");
+
+
 
         public int? Popularity => Logs.Count != 0 ? Logs.Count : null;
 

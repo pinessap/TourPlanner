@@ -3,11 +3,13 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using TourPlanner.BusinessLayer;
+using TourPlanner.Configuration;
 using TourPlanner.Logging;
 using TourPlanner.Messages;
 using TourPlanner.Models;
@@ -69,6 +71,8 @@ namespace TourPlanner.ViewModels
 
             _tourPlannerBl = TourPlannerBlFactory.Instance;
             Tours = new ObservableCollection<Tour>();
+
+          
         }
 
         /// <summary>
@@ -121,6 +125,12 @@ namespace TourPlanner.ViewModels
             if (message.ViewModelType == typeof(TourDetailsVm))
             {
                 SelectedTour = message.SelectedTour;
+                Trace.WriteLine("PATH:");
+                Trace.WriteLine(SelectedTour.PathToRouteImage);
+                //SelectedTour.PathToRouteImage = "C:\\Users\\inesp\\OneDrive - FH Technikum Wien\\INFORMATIK\\Semester 4\\SWEN2\\project\\TourPlanner\\Pictures\\50_Route.png";
+               
+                Trace.WriteLine("PATH:");
+                Trace.WriteLine(SelectedTour.PathToRouteImage);
                 // Handle the selected tour in TourDetailsView
             }
         }

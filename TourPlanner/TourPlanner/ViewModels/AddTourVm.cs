@@ -34,6 +34,18 @@ namespace TourPlanner.ViewModels
         /// </summary>
         public ICommand AddCommand => _addCommand ??= new RelayCommand(Add);
 
+        private string _tourImageSource;
+        public string TourImageSource
+        {
+            get { return _tourImageSource; }
+            set
+            {
+                _tourImageSource = value;
+                RaisePropertyChangedEvent();
+            }
+        }
+
+
         private string _tourName;
         public string TourName
         {
@@ -136,6 +148,7 @@ namespace TourPlanner.ViewModels
         {
             _tourPlannerBl = TourPlannerBlFactory.Instance;
             Tours = new ObservableCollection<Tour>();
+            
         }
 
         /// <summary>
@@ -176,9 +189,24 @@ namespace TourPlanner.ViewModels
                     }*/
                 }
             };
-            Trace.WriteLine("tour name of tourtoadd: " + tourToAdd.Name);
 
-            HandleException(() => _tourPlannerBl.Add(tourToAdd));
+                
+            HandleException(async () =>
+            {
+
+                _tourFactory.Add(tourToAdd);
+
+                await Task.Delay(4000); //wait 5 seconds so the image gets downloaded
+
+                TourImageSource = tourToAdd.PathToRouteImage;
+
+            });
+
+
+
+
+
+            HandleException(() => _tourFactory.Add(tourToAdd));
 
         }
     }

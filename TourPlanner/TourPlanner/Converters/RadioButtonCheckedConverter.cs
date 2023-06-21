@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Data;
+using static TourPlanner.Models.Tour;
 
 namespace TourPlanner.Converters
 {
@@ -12,20 +13,20 @@ namespace TourPlanner.Converters
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            if (value == null || parameter == null)
+            if (value == null || parameter == null || !(value is TransportTypes) || !(parameter is TransportTypes))
                 return false;
 
-            return value.ToString() == parameter.ToString();
+            return (TransportTypes)value == (TransportTypes)parameter;
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            if (value is bool isChecked && isChecked)
+            if (value is bool isChecked && isChecked && parameter is TransportTypes)
             {
-                return parameter?.ToString();
+                return parameter;
             }
 
-            return Binding.DoNothing; // Return Binding.DoNothing if the conversion back is not supported
+            return Binding.DoNothing;
         }
     }
 }

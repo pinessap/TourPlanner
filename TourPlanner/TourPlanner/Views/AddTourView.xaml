@@ -6,6 +6,7 @@
              xmlns:local="clr-namespace:TourPlanner.Views"
              xmlns:viewModels="clr-namespace:TourPlanner.ViewModels"
              xmlns:components="clr-namespace:TourPlanner.Components"
+             xmlns:sys="clr-namespace:System;assembly=System.Runtime"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
 
@@ -59,9 +60,22 @@
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
 
-                <Button Content="Generate Map" Margin="10" Command="{Binding GenerateMapCommand}" Style="{StaticResource SubmitBtn}"/>
-                <Button Grid.Column="1" Content="Create Tour" Margin="10" Command="{Binding AddCommand}" Style="{StaticResource SubmitBtn}"/>
+                <!--<Button Content="Generate Map" Margin="10" Command="{Binding GenerateMapCommand}" Style="{StaticResource SubmitBtn}"/>
+                -->
+                <Button Grid.Column="0" Grid.ColumnSpan="2" Content="Create Tour" Margin="10" Command="{Binding AddCommand}" Style="{StaticResource SubmitBtn}"/>
             </Grid>
+
+
+            <Grid Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="6" Background="Transparent"  HorizontalAlignment="Center" Margin="0,20">
+                <Rectangle RadiusX="20" RadiusY="20"
+                           Width="350"
+                           Height="350">
+                    <Rectangle.Fill>
+                        <ImageBrush x:Name="myImage" ImageSource="{Binding TourImageSource}"/>
+                    </Rectangle.Fill>
+                </Rectangle>
+            </Grid>
+
 
             <components:Alert Margin="10,5,10,10" Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="7" 
                               Text="{Binding AlertMessage}"/>

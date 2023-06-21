@@ -7,6 +7,7 @@
              xmlns:converters="clr-namespace:TourPlanner.Converters"
              xmlns:components="clr-namespace:TourPlanner.Components"
              xmlns:viewModels="clr-namespace:TourPlanner.ViewModels"
+             xmlns:models="clr-namespace:TourPlanner.Models;assembly=TourPlanner.Models"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
 
@@ -48,9 +49,12 @@
             <TextBox x:Name="tourTo" Grid.Row="3" Margin="10" Text="{Binding SelectedTour.ToLocation}" Style="{StaticResource EditTourInput}"/>
 
             <StackPanel HorizontalAlignment="Center" Grid.Row="4" Orientation="Horizontal" Margin="10">
-                <RadioButton Style="{StaticResource AddTourCar}" GroupName="TransportGroup" IsChecked="{Binding SelectedTour.TransportType, Converter={StaticResource RadioButtonCheckedConverter}, ConverterParameter=CAR}" Tag="CAR" />
-                <RadioButton Style="{StaticResource AddTourBicycle}" GroupName="TransportGroup" IsChecked="{Binding SelectedTour.TransportType, Converter={StaticResource RadioButtonCheckedConverter}, ConverterParameter=BICYCLE}" Tag="BICYCLE" />
-                <RadioButton Style="{StaticResource AddTourWalking}" GroupName="TransportGroup" IsChecked="{Binding SelectedTour.TransportType, Converter={StaticResource RadioButtonCheckedConverter}, ConverterParameter=WALKING}" Tag="WALKING" />
+                <RadioButton Style="{StaticResource AddTourCar}" GroupName="TransportGroup"
+                             IsChecked="{Binding SelectedTour.TransportType, Converter={StaticResource RadioButtonCheckedConverter}, ConverterParameter={x:Static models:Tour+TransportTypes.Car}}" />
+                <RadioButton Style="{StaticResource AddTourBicycle}" GroupName="TransportGroup"
+                             IsChecked="{Binding SelectedTour.TransportType, Converter={StaticResource RadioButtonCheckedConverter}, ConverterParameter={x:Static models:Tour+TransportTypes.Bicycle}}" />
+                <RadioButton Style="{StaticResource AddTourWalking}" GroupName="TransportGroup"
+                             IsChecked="{Binding SelectedTour.TransportType, Converter={StaticResource RadioButtonCheckedConverter}, ConverterParameter={x:Static models:Tour+TransportTypes.Walking}}" />
             </StackPanel>
 
 

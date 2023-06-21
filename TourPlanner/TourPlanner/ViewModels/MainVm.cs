@@ -11,6 +11,7 @@ using TourPlanner.Models;
 using GalaSoft.MvvmLight.Messaging;
 using TourPlanner.Messages;
 using System.Diagnostics;
+using System.Windows.Controls;
 
 namespace TourPlanner.ViewModels
 {

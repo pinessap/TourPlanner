@@ -23,10 +23,13 @@ namespace TourPlanner.Views
     public partial class MainView : UserControl
     {
 
+
+
         public MainView()
         {
             InitializeComponent();
         }
+
 
         private void ListBoxItem_DoubleClick(object sender, MouseButtonEventArgs e)
         {
@@ -36,8 +39,11 @@ namespace TourPlanner.Views
             // Retrieve the DataContext of the MainView (which should be an instance of MainVm)
             var viewModel = (MainVm)mainView.DataContext;
 
+
             // Execute the command in View1ViewModel to switch to TourDetailsView
             viewModel.ExecuteWithTour(null);
+
+           
         }
 
         private static T FindVisualParent<T>(DependencyObject child) where T : DependencyObject
@@ -64,6 +70,8 @@ namespace TourPlanner.Views
             // Execute the command in View1ViewModel to switch to AddTourView
             viewModel.Execute(null);
         }
+
+        
 
 
 

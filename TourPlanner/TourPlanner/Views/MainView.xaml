@@ -8,6 +8,7 @@
              xmlns:viewModels="clr-namespace:TourPlanner.ViewModels"
              xmlns:components="clr-namespace:TourPlanner.Components"
              mc:Ignorable="d" 
+             
              d:DesignHeight="450" d:DesignWidth="800">
     <UserControl.Resources>
         <ResourceDictionary>
@@ -43,17 +44,15 @@
                 <ListBox.ItemTemplate>
                     <DataTemplate>
                         <Grid Width="200" Height="200" Margin="5">
-                            <Border Background="#E0EDF2" CornerRadius="20">
+                            <Border Background="#9890A8" CornerRadius="20">
                                 <Grid >
                                     <Grid.RowDefinitions>
                                         <RowDefinition Height="Auto"/>
                                         <RowDefinition Height="*"/>
                                         <RowDefinition Height="Auto"/>
-                                        <RowDefinition Height="Auto"/>
-                                        <RowDefinition Height="Auto"/>
                                     </Grid.RowDefinitions>
-                                        <Border Background="#E0EDF2" CornerRadius="10" HorizontalAlignment="Left" Height="30" Width="50" Margin="10,5,0,0">
-                                            <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="#3B889D">
+                                    <Border Grid.Row="0" Background="#83C588" CornerRadius="10" HorizontalAlignment="Left" Height="30" Width="50" Margin="10,5,0,0" Panel.ZIndex="5">
+                                        <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="#233236">
                                                 <TextBlock.Text>
                                                         <MultiBinding StringFormat="{}★ {0:N2}">
                                                         <Binding Path="AverageRating" TargetNullValue="-" FallbackValue="-" />
@@ -61,12 +60,34 @@
                                                 </TextBlock.Text>
                                             </TextBlock>
                                         </Border>
-                                        <TextBlock Grid.Row="2" Grid.RowSpan="2" FontSize="16" Height="25" Text="{Binding Name}" Margin="6,0,0,10" HorizontalAlignment="Left" VerticalAlignment="Center" Foreground="#3B889D" />
-                                        <TextBlock Grid.Row="3" Grid.RowSpan="2" FontSize="12" Height="25" Margin="0,0,5,0" HorizontalAlignment="Right" VerticalAlignment="Bottom" Foreground="#3B889D">
-                                            <TextBlock.Text>
-                                                <Binding Path="TourDistance" StringFormat="{}{0} km" TargetNullValue="" FallbackValue="" />
-                                            </TextBlock.Text>
-                                        </TextBlock>
+                                    <Rectangle  x:Name="myImageRectangle" Grid.Row="0" Grid.RowSpan="2" VerticalAlignment="Top" RadiusX="20" RadiusY="20"
+                                                Width="200"
+                                                Height="200">
+                                            <Rectangle.Fill>
+                                                <ImageBrush x:Name="myImage" ImageSource="{Binding PathToRouteImage}" />
+                                            </Rectangle.Fill>
+                                        </Rectangle>
+                                    
+                                    
+
+                                    <Border Grid.Row="2"  Panel.ZIndex="5" Background="#9890A8" CornerRadius="0,0,20,20">
+                                        <Grid >
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="Auto"/>
+                                                <RowDefinition Height="*"/>
+                                                <RowDefinition Height="Auto"/>
+                                                
+                                            </Grid.RowDefinitions>
+                                            <TextBlock Grid.Row="0" Grid.RowSpan="2" FontSize="16" Height="25" Text="{Binding Name}" FontWeight="SemiBold" Margin="6,2,0,20" HorizontalAlignment="Left" VerticalAlignment="Center" Foreground="#372935" />
+                                            <TextBlock Grid.Row="1" Grid.RowSpan="2" FontSize="12" Height="25" Margin="0,0,5,0" HorizontalAlignment="Right" VerticalAlignment="Bottom" Foreground="#372935">
+                                                <TextBlock.Text>
+                                                    <Binding Path="TourDistance" StringFormat="{}{0} km" TargetNullValue="" FallbackValue="" />
+                                                </TextBlock.Text>
+                                            </TextBlock>
+                                        </Grid>
+
+                                    </Border>
+                                            
                                 </Grid>
                             </Border>
                         </Grid>
@@ -92,7 +113,7 @@
                                     </Border>
                                     <ControlTemplate.Triggers>
                                         <Trigger Property="IsMouseOver" Value="True">
-                                            <Setter Property="Background" Value="#9890A8" />
+                                            <Setter Property="Background" Value="#BBB7C7" />
                                         </Trigger>
                                     </ControlTemplate.Triggers>
                                 </ControlTemplate>

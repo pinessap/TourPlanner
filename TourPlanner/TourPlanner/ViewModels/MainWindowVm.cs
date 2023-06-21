@@ -41,9 +41,15 @@ namespace TourPlanner.ViewModels
 
         public void SwitchToMainView(object commandParameter)
         {
+            // Close the current user control
+            CurrentView = null;
+
+            // Create the new MainView and MainVm instances
             var mainVm = new MainVm();
             var mainView = new MainView();
             mainView.DataContext = mainVm;
+
+            // Set the new MainView as the current view
             CurrentView = mainView;
         }
 
@@ -139,6 +145,8 @@ namespace TourPlanner.ViewModels
 
         private void Search(object commandParameter)
         {
+            CurrentView = null;
+
             var mainVm = new MainVm(SearchValue);
             mainVm.SearchValue = SearchValue;
             var mainView = new MainView();
@@ -158,6 +166,7 @@ namespace TourPlanner.ViewModels
 
         private void HandleSwitchViewMessage(SwitchViewMessage message)
         {
+            CurrentView = null;
             if (message.ViewModelType == typeof(TourDetailsVm))
             {
 
