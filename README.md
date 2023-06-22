@@ -16,6 +16,8 @@ Lastly, the Logging and ConfigurationManager classes exist as external projects,
 
 ### Presentation Layer
 
+![Wireframes](https://github.com/pinessap/TourPlanner/blob/main/docs/Wireframes.png?raw=true)
+
 Since we use the MVVM pattern, we have Views and ViewModels in our Presentation Layer. The View makes use of data binding to bind the properties of UI elements to the ViewModel. By using data binding, any changes in the ViewModel properties are automatically reflected in the corresponding UI elements, and vice versa.
 
 In our Presentation Layer we have on MainViewWindow. It includes a ContentControl Element that switches between different Views. By updating the value of the CurrentView property in our MainViewWindow ViewModel, we can dynamically change the content displayed within the ContentControl. We make use of messages to switch views, since in our Application often one Usercontrol Component (and therefore the included View in our MainViewWindow) has to tell our MainViewWindow ViewModel to change the CurrentView Property to another View. Sometimes we also pass along parameters, like a Tour Instance of our Tour Object (e.g. when switching to the TourDetail Window, which displays all Information of a Selected Tour, we pass that Selected Tour along to the next ViewModel).
