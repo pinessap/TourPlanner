@@ -100,6 +100,9 @@ ALTER TABLE public."__EFMigrationsHistory" OWNER TO postgres;
 --
 
 COPY public."TourLogs" ("TourLogId", "Time", "Comment", "Difficulty", "Duration", "Rating", "TourId") FROM stdin;
+12	2023-06-21 10:59:50.829+00	Wow such a cool drive! So fast too!	4	00:01:00	4	52
+13	2023-06-22 11:01:29.499+00	You didn't mention the traffic jam on the motorway! I had to wait 2h!! Worst tour ever, you should be ashamed of posting it!	10	00:03:24	0	52
+14	2023-06-19 11:07:48.829+00	The best walk through Vienna I know. 10/10 would walk again.	2	00:30:00	5	53
 \.
 
 
@@ -108,7 +111,9 @@ COPY public."TourLogs" ("TourLogId", "Time", "Comment", "Difficulty", "Duration"
 --
 
 COPY public."Tours" ("TourId", "Name", "Description", "FromLocation", "ToLocation", "TransportType", "TourDistance", "EstimatedTime") FROM stdin;
-50	Great	Tour	Vienna	Mönchhof	Car	69.5	00:48:35
+52	Weekly drive	This is my weekly drive home to my hometown.	Vienna	Neusiedl am See	Car	54.9	00:41:24
+53	Scenic walk in Vienna	This is a walk me and my friends like to do. It's not too long, and the buildings are just breathtaking. I hope you enjoy!	Stephansplatz 3, Vienna	Karlsplatz 10, Vienna	Walking	1.4	00:23:23
+54	Brand new cycling road	The state of Vienna just finished building this new cyling road, check it out!	Vienna	Hinterbrühl	Bicycle	17.8	01:21:46
 \.
 
 
@@ -125,14 +130,14 @@ COPY public."__EFMigrationsHistory" ("MigrationId", "ProductVersion") FROM stdin
 -- Name: TourLog_TourLogId_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('public."TourLog_TourLogId_seq"', 10, true);
+SELECT pg_catalog.setval('public."TourLog_TourLogId_seq"', 14, true);
 
 
 --
 -- Name: Tours_TourId_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('public."Tours_TourId_seq"', 50, true);
+SELECT pg_catalog.setval('public."Tours_TourId_seq"', 54, true);
 
 
 --
