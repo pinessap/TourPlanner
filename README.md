@@ -45,9 +45,9 @@ The unique feature we chose to implement was something that helped us during dev
 
 The first major lesson learned concern unit tests. Implementing them only after being done with the rest of the project was a mistake. We should have implemented unit tests continously during development. This would have enabled us to create a testable project from the start, and not force us to restructure our architecture drastically.
 
-Another big lesson concerning the Presentation Layer and Views was the use of reusable UI Components. We only had the realizaton that we could reuse certain Components towards the end of the project. It turns out that thinking about which Elements and Components will be used several times beforehand could save time and also prevent a lot of duplicate code. Since we only came to that relaization towards the end, we did not manage to make use of the possibility of defining reusable UI Components, however we did manage to use one for the Display of Error Alerts.
+Another big lesson concerning the Presentation Layer and Views was the use of reusable UI Components. We only had the realization that we could reuse certain Components towards the end of the project. It turns out that thinking about which Elements and Components will be used several times beforehand could save time and also prevent a lot of duplicate code. Since we only came to that realization towards the end, we did not manage to make use of the possibility of defining reusable UI Components, however we did manage to use one for the Display of Error Alerts.
 
-Furthermore we learned that it's also worth thinling about the Design of your Application and the Presentation Layer beforehand to prevent having to change the Design and therefore Code later on.
+Furthermore we learned that it's also worth thinking about the Design of your Application and the Presentation Layer beforehand to prevent having to change the Design and therefore Code later on.
 
 ## Time spent:
 
