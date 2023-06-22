@@ -191,18 +191,9 @@ namespace TourPlanner.ViewModels
             };
 
                 
-            HandleException(async () =>
-            {
+            await HandleExceptionAsync( () => _tourPlannerBl.Add(tourToAdd));
 
-                _tourFactory.Add(tourToAdd);
-
-                await Task.Delay(4000); //wait 5 seconds so the image gets downloaded
-
-                TourImageSource = tourToAdd.PathToRouteImage;
-
-            });
-
-
+            TourImageSource = tourToAdd.PathToRouteImage;
 
 
 
