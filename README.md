@@ -12,11 +12,15 @@ The BusinessLayer is reachable via the TourPlannerBlFactory class. The returned 
 
 Lastly, the Logging and ConfigurationManager classes exist as external projects, to enable full encapsulation and use in different projects. The singleton pattern and static classes are used to further simplify usage.
 
+![Class Diagram](https://github.com/pinessap/TourPlanner/blob/main/docs/ClassDiagram.png?raw=true)
+
 ### Presentation Layer
 
 Since we use the MVVM pattern, we have Views and ViewModels in our Presentation Layer. The View makes use of data binding to bind the properties of UI elements to the ViewModel. By using data binding, any changes in the ViewModel properties are automatically reflected in the corresponding UI elements, and vice versa.
 
 In our Presentation Layer we have on MainViewWindow. It includes a ContentControl Element that switches between different Views. By updating the value of the CurrentView property in our MainViewWindow ViewModel, we can dynamically change the content displayed within the ContentControl. We make use of messages to switch views, since in our Application often one Usercontrol Component (and therefore the included View in our MainViewWindow) has to tell our MainViewWindow ViewModel to change the CurrentView Property to another View. Sometimes we also pass along parameters, like a Tour Instance of our Tour Object (e.g. when switching to the TourDetail Window, which displays all Information of a Selected Tour, we pass that Selected Tour along to the next ViewModel).
+
+![Use Case Diagram](https://github.com/pinessap/TourPlanner/blob/main/docs/UseCase.drawio.png?raw=true)
 
 ### Database
 
@@ -34,6 +38,8 @@ To start the database, make sure you follow these steps:
 The tests were written at the end of the project. This presented challenges, since we realized that we did not create a well-testable application. Therefore we had to resort to testing less critical parts and classes. The only classes that we could test without having to drastically change our architecture were the Tour, Configuration & data conversion classes. The tests we chose aim to make sure the model and especially its calculated properties work as expected, and all data is presented in a correct manner.
 
 ## Unique Feature
+
+The unique feature we chose to implement was something that helped us during development a lot: A simple way to change the App.config file in the UI. Pressing the "Settings" button at the top of the Application window opens a dialog box that enables users to change different config settings and have them saved in the .config file(s). One thing to note here, the changed settings are reflected in the actual build .config file(s), so the App.config file located in the Configuration project will not be affected and remain unchanged!
 
 ## Lessons Learned
 
