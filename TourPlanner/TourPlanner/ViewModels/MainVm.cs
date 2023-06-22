@@ -132,6 +132,7 @@ namespace TourPlanner.ViewModels
         private void GenerateReport(object commandParameter) 
         {
             HandleException(() => _tourPlannerBl.GenerateSummarizedReport(_tourPlannerBl.GetTours()));
+            SuccessMessage = "Generating Report was successul!";
         }
 
 

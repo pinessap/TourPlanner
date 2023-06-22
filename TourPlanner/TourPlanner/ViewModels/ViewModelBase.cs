@@ -26,7 +26,9 @@ namespace TourPlanner.ViewModels
         }
 
         private string _alertMessage = null!;
+        private string _successMessage = null!;
         private bool _hasException;
+        private bool _isSuccess;
 
         public string AlertMessage
         {
@@ -40,6 +42,18 @@ namespace TourPlanner.ViewModels
             }
         }
 
+        public string SuccessMessage
+        {
+            get => _successMessage;
+            set
+            {
+                _successMessage = value;
+                _isSuccess = !string.IsNullOrEmpty(_successMessage);
+                RaisePropertyChangedEvent(nameof(IsSuccess));
+                RaisePropertyChangedEvent(nameof(SuccessMessage));
+            }
+        }
+
         public bool HasException
         {
             get { return _hasException; }
@@ -47,6 +61,16 @@ namespace TourPlanner.ViewModels
             {
                 _hasException = value;
                 RaisePropertyChangedEvent(nameof(HasException));
+            }
+        }
+
+        public bool IsSuccess
+        {
+            get { return _isSuccess; }
+            set
+            {
+                _isSuccess = value;
+                RaisePropertyChangedEvent(nameof(IsSuccess));
             }
         }
 
@@ -59,6 +83,7 @@ namespace TourPlanner.ViewModels
             }
             catch (Exception ex)
             {
+                SuccessMessage = null;
                 AlertMessage = ex.Message;
                 Trace.WriteLine("Exceptiontestalert:");
                 Trace.WriteLine(AlertMessage);
@@ -74,6 +99,7 @@ namespace TourPlanner.ViewModels
             }
             catch (Exception ex)
             {
+                SuccessMessage = null;
                 AlertMessage = ex.Message;
                 Trace.WriteLine("Exceptiontestalert:");
                 Trace.WriteLine(AlertMessage);

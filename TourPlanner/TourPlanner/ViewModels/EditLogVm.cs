@@ -64,9 +64,11 @@ namespace TourPlanner.ViewModels
                 SelectedLog.Rating != null && SelectedLog.Difficulty != null && SelectedLog.Time != null)
             {
                 HandleException(() => _tourPlannerBl.Modify(SelectedTour));
+                SuccessMessage = "Editing Log was successful!";
             }
             else
             {
+                SuccessMessage = null;
                 AlertMessage = "Please fill in all the required values.";
             }
         }
@@ -82,7 +84,10 @@ namespace TourPlanner.ViewModels
             {
                 SelectedTour.Logs.Remove(SelectedLog);
                 _tourPlannerBl.Modify(SelectedTour);
+                SuccessMessage = null;
+                SuccessMessage = "Deleting Log was successful!";
             });
+
 
 
         }

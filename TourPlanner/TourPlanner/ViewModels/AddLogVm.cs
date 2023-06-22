@@ -138,10 +138,12 @@ namespace TourPlanner.ViewModels
                     SelectedTour.Logs.Add(logToAdd);
                     _tourPlannerBl.Modify(SelectedTour);
                 });
+                SuccessMessage = "Adding Log was successful!";
             }
             else
             {
                 Trace.WriteLine("ALERT");
+                SuccessMessage = null;
                 AlertMessage = "Please fill in all the required values.";
                 Trace.WriteLine(AlertMessage);
             }

@@ -150,7 +150,7 @@ namespace TourPlanner.Views
                     // User clicked the "OK" button
                     // Perform actions for the selected directory
                     // Handle the selected directory path
-                    string selectedDirectory = dialog.SelectedPath;
+                    string selectedDirectory = dialog.SelectedPath + "/main.log";
 
                     // Update the corresponding setting
                     AppConfigManager.Settings.LogfilePath = selectedDirectory;

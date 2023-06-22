@@ -119,6 +119,9 @@
             <components:Alert Margin="10,5,10,10" Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="7" 
                               Text="{Binding AlertMessage}"/>
 
+            <components:SuccessAlert Margin="10,5,10,10" Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="7" 
+                              Text="{Binding SuccessMessage}"/>
+
         </Grid>
     </ScrollViewer>
 

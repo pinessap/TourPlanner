@@ -81,14 +81,22 @@ namespace TourPlanner.ViewModels
         /// <param name="commandParameter">Gets automatically assigned by ICommand, dunno what's in there tbh but who cares</param>
         private void Delete(object commandParameter)
         {
-            HandleException(() => _tourPlannerBl.Delete(SelectedTour));
+            HandleException(() =>
+            {
+                _tourPlannerBl.Delete(SelectedTour);
+                SuccessMessage = "Deleting Tour was successful!";
+            });
         }
 
 
         private void GenerateReport(object commandParameter)
         {
 
-            HandleException(() => _tourPlannerBl.GenerateSingleReport(SelectedTour));
+            HandleException(() =>
+            {
+                _tourPlannerBl.GenerateSingleReport(SelectedTour);
+                SuccessMessage = "Generating Report was successful!";
+            });
 
         }
 

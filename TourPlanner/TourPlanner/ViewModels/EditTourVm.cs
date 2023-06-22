@@ -170,9 +170,11 @@ namespace TourPlanner.ViewModels
                 SelectedTour.TransportType != null)
             {
                 HandleException(() => _tourPlannerBl.Modify(SelectedTour));
+                SuccessMessage = "Editing Tour was successul!";
             }
             else
             {
+                SuccessMessage = null;
                 AlertMessage = "Please fill in all the required values.";
             }
         }

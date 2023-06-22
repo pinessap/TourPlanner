@@ -97,6 +97,32 @@
         </Style.Triggers>
     </Style>
 
+    <Style x:Key="SuccessMessage" TargetType="TextBlock">
+        <Setter Property="FontSize" Value="15"/>
+        <Setter Property="FontWeight" Value="Bold"/>
+        <Setter Property="Foreground" Value="White"/>
+        <Setter Property="Background" Value="#778B58"/>
+        <Setter Property="TextAlignment" Value="Center"/>
+        <Setter Property="Padding" Value="5"/>
+      
+    </Style>
+
+    <Style x:Key="SuccessBorder" TargetType="Border">
+        <Setter Property="BorderBrush" Value="#778B58" />
+        <Setter Property="BorderThickness" Value="2" />
+        <Setter Property="CornerRadius" Value="5" />
+  
+        <Setter Property="Visibility" Value="Collapsed" />
+        <Style.Triggers>
+            <DataTrigger Binding="{Binding IsSuccess}" Value="True">
+                <Setter Property="Visibility" Value="Visible" />
+            </DataTrigger>
+            <DataTrigger Binding="{Binding IsSuccess}" Value="False">
+                <Setter Property="Visibility" Value="Collapsed" />
+            </DataTrigger>
+        </Style.Triggers>
+    </Style>
+
 
     <Style TargetType="ScrollBar">
         <Setter Property="Background" Value="#6A6375" />
@@ -154,17 +180,10 @@
                         BorderBrush="{TemplateBinding BorderBrush}"
                         BorderThickness="{TemplateBinding BorderThickness}"
                         CornerRadius="10">
-                        <ScrollViewer HorizontalScrollBarVisibility="Disabled"
-                                  VerticalScrollBarVisibility="Hidden"
-                                  Padding="5" Margin="10">
-                            <Grid>
-                                <TextBlock Text="{TemplateBinding Text}"
-                                       Background="Transparent"
-                                       Foreground="{TemplateBinding Foreground}"
-                                       FontWeight="{TemplateBinding FontWeight}"
-                                       FontSize="{TemplateBinding FontSize}"
-                                       TextWrapping="Wrap"/>
-                            </Grid>
+                        <ScrollViewer x:Name="PART_ContentHost" HorizontalScrollBarVisibility="Disabled"
+                                      VerticalScrollBarVisibility="Hidden"
+                                      Padding="5" Margin="10">
+                            
                         </ScrollViewer>
                     </Border>
                     <ControlTemplate.Triggers>

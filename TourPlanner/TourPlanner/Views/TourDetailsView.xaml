@@ -269,8 +269,11 @@
                 <Button Content="Delete Tour" Margin="20" Style="{StaticResource DeleteTourBtn}" Command="{Binding DeleteCommand}"/>
             </StackPanel>
 
-            <components:Alert Margin="10,5,10,10" Grid.Row="4"
+            <components:Alert Margin="10,5,10,10" Grid.Row="4" HorizontalAlignment="Stretch"
                               Text="{Binding AlertMessage}"/>
+
+            <components:SuccessAlert Margin="10,5,10,10" Grid.Row="4" HorizontalAlignment="Stretch"
+                              Text="{Binding SuccessMessage}"/>
 
         </Grid>
 

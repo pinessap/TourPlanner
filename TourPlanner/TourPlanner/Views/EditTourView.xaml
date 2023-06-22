@@ -64,13 +64,15 @@
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
 
-                <Button Content="Generate Map" Margin="10" Command="{Binding GenerateMapCommand}" Style="{StaticResource SubmitBtn}"/>
-                <Button Grid.Column="1" Content="Edit Tour" Margin="10" Command="{Binding EditCommand}" Style="{StaticResource SubmitBtn}"/>
+                <Button Grid.Column="0" Grid.ColumnSpan="2" Content="Edit Tour" Margin="10" Command="{Binding EditCommand}" Style="{StaticResource SubmitBtn}"/>
 
             </Grid>
 
             <components:Alert Margin="10,5,10,10" Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="7" 
                               Text="{Binding AlertMessage}"/>
+
+            <components:SuccessAlert Margin="10,5,10,10" Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="7" 
+                              Text="{Binding SuccessMessage}"/>
 
         </Grid>
     </ScrollViewer>
