@@ -31,7 +31,7 @@ The first major lesson learned concern unit tests. Implementing them only after 
 ## Time spent:
 
 | date       | time (h) | comment                                                         |
-|------------|----------|-----------------------------------------------------------------|
+| ---------- | -------- | --------------------------------------------------------------- |
 | 11/03/2023 | 3        | project and repo setup                                          |
 | 17/03/2023 | 7        | database setup                                                  |
 | 14/05/2023 | 2        | tourLog model                                                   |
@@ -55,7 +55,7 @@ The first major lesson learned concern unit tests. Implementing them only after 
 | 16/06/2023 | 8        | modified tourdetails view, added addlog & edittour view         |
 | 18/06/2023 | 6.5      | modified edittour view; added editlog view, delete log & search |
 | 19/06/2023 | 7        | added import/export and generate sum/single report to frontend  |
-| 20/06/2023 | 10       | added error alerts in frontend, UI modifications                |
+| 20/06/2023 | 11       | added error alerts in frontend, UI modifications                |
 | 20/06/2023 | 8        | Added API calls                                                 |
 | 21/06/2023 | 4        | Refactor BusinessLayer                                          |
 | 21/06/2023 | 4        | Added unit-tests                                                |
