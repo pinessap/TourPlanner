@@ -61,7 +61,7 @@ namespace TourPlanner.Models
             {
                 // If any necessary data is null, this calculated field is null too
                 if (TourDistance == null || AverageTime == null || AverageDifficulty == null) return null;
-
+                
                 // TODO: Replace these values with data from config file
                 const int maxTotalHours = 3;
                 const int maxAverageDifficulty = 8;
@@ -71,9 +71,9 @@ namespace TourPlanner.Models
                 const int weightAverageDifficulty = 3;
                 const int weightTourDistance = 1;
 
-                var normedTotalHours = 1 - MapFloatToRange((float)AverageTime.Value.TotalHours, 0, maxTotalHours);
-                var normedAverageDifficulty = 1 - MapFloatToRange(AverageDifficulty.Value, 1, maxAverageDifficulty);
-                var normedTourDistance = 1 - MapFloatToRange(TourDistance.Value, 0, maxTourDistance);
+                var normedTotalHours = MapFloatToRange((float) AverageTime.Value.TotalHours, 0, maxTotalHours);
+                var normedAverageDifficulty = MapFloatToRange(AverageDifficulty.Value, 1, maxAverageDifficulty);
+                var normedTourDistance = MapFloatToRange(TourDistance.Value, 0, maxTourDistance);
 
                 var weightedTotalHours = normedTotalHours * weightTotalHours;
                 var weightedAverageDifficulty = normedAverageDifficulty * weightAverageDifficulty;
@@ -88,7 +88,6 @@ namespace TourPlanner.Models
                 var normedSum = MapFloatToRange(weightedSum, minValuePossible, maxValuePossible);
 
                 return normedSum;
-
             }
         }
 
