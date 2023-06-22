@@ -189,9 +189,23 @@ namespace TourPlanner.ViewModels
                     }*/
                 }
             };
-            Trace.WriteLine("tour name of tourtoadd: " + tourToAdd.Name);
 
-            HandleException(() => _tourFactory.Add(tourToAdd));
+                
+            HandleException(async () =>
+            {
+
+                _tourFactory.Add(tourToAdd);
+
+                await Task.Delay(4000); //wait 5 seconds so the image gets downloaded
+
+                TourImageSource = tourToAdd.PathToRouteImage;
+
+            });
+
+
+
+
+
 
         }
     }
