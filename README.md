@@ -39,6 +39,8 @@ The tests were written at the end of the project. This presented challenges, sin
 
 ## Unique Feature
 
+The unique feature we chose to implement was something that helped us during development a lot: A simple way to change the App.config file in the UI. Pressing the "Settings" button at the top of the Application window opens a dialog box that enables users to change different config settings and have them saved in the .config file(s). One thing to note here, the changed settings are reflected in the actual build .config file(s), so the App.config file located in the Configuration project will not be affected and remain unchanged!
+
 ## Lessons Learned
 
 The first major lesson learned concern unit tests. Implementing them only after being done with the rest of the project was a mistake. We should have implemented unit tests continously during development. This would have enabled us to create a testable project from the start, and not force us to restructure our architecture drastically.
