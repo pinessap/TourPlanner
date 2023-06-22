@@ -100,7 +100,7 @@ public class ConverterTests
     public void TestInvalidTransportTypeToPathDataConversion()
     {
         var converter = new TransportTypeToPathDataConverter();
-        var transportType = "Rocket";
+        var transportType = 5;
 
         var convertedTime = converter.Convert(transportType, typeof(string), "nothing", CultureInfo.CurrentCulture);
         
